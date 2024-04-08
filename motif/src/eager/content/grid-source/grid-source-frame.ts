@@ -17,7 +17,6 @@ import {
     ErrorCode,
     GridField,
     GridLayoutOrReferenceDefinition,
-    GridRowOrderDefinition,
     Integer,
     JsonElement,
     JsonElementErr,
@@ -37,7 +36,7 @@ import {
     TableRecordSourceFactory,
     TableRecordStore
 } from '@motifmarkets/motif-core';
-import { RevFieldCustomHeadingsService, RevGridLayout, RevGridLayoutOrReferenceDefinition, RevRecordDataServer } from '@xilytix/rev-data-source';
+import { RevFieldCustomHeadingsService, RevGridLayout, RevGridLayoutOrReferenceDefinition, RevGridRowOrderDefinition, RevRecordDataServer } from '@xilytix/rev-data-source';
 import { Subgrid } from '@xilytix/revgrid';
 import { ToastService } from '../../component-services/toast-service';
 import { ContentFrame } from '../content-frame';
@@ -61,7 +60,7 @@ export abstract class GridSourceFrame extends ContentFrame {
     private _openedTable: Table | undefined;
 
     private _privateNameSuffixId: GridSourceFrame.PrivateNameSuffixId | undefined;
-    private _keptRowOrderDefinition: GridRowOrderDefinition | undefined;
+    private _keptRowOrderDefinition: RevGridRowOrderDefinition | undefined;
     private _keptGridRowAnchor: RecordGrid.ViewAnchor | undefined;
 
     private _autoSizeAllColumnWidthsOnFirstUsable: boolean;
