@@ -15,14 +15,20 @@
 
     #toolbar {
         @include centeredToolbarGroupMixin;
+        flex: 0 0 auto;
 
         #okCancelReturnButtons {
             @include svg-icon-button-size.okCancelReturnMixin;
         }
     }
 
-    #existingListsGrids {
-        flex-grow: 1;
-        min-height: 0;
+    #existingLists {
+        flex: 1 1 0;
+    }
+
+    #selectedBar {
+        flex: 0 0 auto;
+        display: flex;
+        gap: 3em;
     }
 }

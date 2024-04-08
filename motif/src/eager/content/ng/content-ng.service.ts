@@ -42,6 +42,7 @@ export class ContentNgService {
             coreNgService.adiService,
             coreNgService.symbolsService,
             coreNgService.notificationChannelsService,
+            coreNgService.scansService,
             coreNgService.textFormatterService,
             coreNgService.revFieldCustomHeadingsService,
             coreNgService.referenceableGridLayoutsService,
@@ -148,6 +149,10 @@ export class ContentNgService {
 
     createGridLayoutEditorColumnsFrame(columnList: EditableGridLayoutDefinitionColumnList) {
         return this._content.createGridLayoutEditorColumnsFrame(columnList);
+    }
+
+    createSymbolListDirectoryGridFrame(opener: LockOpenListItem.Opener) {
+        return this._content.createSymbolListDirectoryGridFrame(opener);
     }
 
     createDepthSideFrame(hostElement: HTMLElement) {

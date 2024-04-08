@@ -55,7 +55,7 @@ import { LockOpenNotificationChannelPropertiesNgComponent, LockOpenNotificationC
 import { MarketsNgComponent } from '../markets/ng-api';
 import { MultiColorPickerNgComponent } from '../multi-color-picker/ng/multi-color-picker-ng.component';
 import { NameableGridLayoutEditorDialogNgComponent } from '../nameable-grid-layout-editor-dialog/ng-api';
-import { OpenWatchlistDialogNgComponent } from '../open-watchlist/ng-api';
+import { OpenWatchlistDialogNgComponent, SymbolListDirectoryGridNgComponent } from '../open-watchlist/ng-api';
 import { OrderAuthoriseNgComponent } from '../order-authorise/ng-api';
 import {
     PadOrderRequestStepNgComponent,
@@ -219,6 +219,7 @@ import { ZenithStatusNgComponent } from '../zenith-status/ng-api';
         SearchSymbolsNgComponent,
         StatusSummaryNgComponent,
         StringOverlapsScanFieldConditionOperandsEditorNgComponent,
+        SymbolListDirectoryGridNgComponent,
         TextContainsScanFieldConditionOperandsEditorNgComponent,
         TextValueScanFieldConditionOperandsEditorNgComponent,
         TradesNgComponent,

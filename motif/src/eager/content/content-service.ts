@@ -16,6 +16,7 @@ import {
     ReferenceableDataSourceDefinitionsStoreService,
     ReferenceableDataSourcesService,
     ReferenceableGridLayoutsService,
+    ScansService,
     SessionInfoService,
     SettingsService,
     SymbolsService,
@@ -35,6 +36,7 @@ import { HoldingsFrame } from './holdings/internal-api';
 import { LitIvemIdListFrame } from './lit-ivem-id-list/lit-ivem-id-list-frame';
 import { LockOpenNotificationChannelsGridFrame } from './lock-open-notification-channels/internal-api';
 import { MarketsFrame } from './markets/internal-api';
+import { SymbolListDirectoryGridFrame } from './open-watchlist/internal-api';
 import { OrderAuthoriseFrame } from './order-authorise/internal-api';
 import { PadOrderRequestStepFrame, ResultOrderRequestStepFrame, ReviewOrderRequestStepFrame } from './order-request-step/internal-api';
 import { OrdersFrame } from './orders/internal-api';
@@ -53,6 +55,7 @@ export class ContentService {
         private readonly _adiService: AdiService,
         private readonly _symbolsService: SymbolsService,
         private readonly _notificationChannelsService: NotificationChannelsService,
+        private readonly _scansService: ScansService,
         private readonly _textFormatterService: TextFormatterService,
         private readonly _gridFieldCustomHeadingsService: RevFieldCustomHeadingsService,
         private readonly _referenceableGridLayoutsService: ReferenceableGridLayoutsService,
@@ -325,6 +328,22 @@ export class ContentService {
             this._cellPainterFactoryService,
             this._toastService,
             columnList,
+        );
+    }
+
+    createSymbolListDirectoryGridFrame(opener: LockOpenListItem.Opener) {
+        return new SymbolListDirectoryGridFrame(
+            this._settingsService,
+            this._scansService,
+            this._gridFieldCustomHeadingsService,
+            this._referenceableGridLayoutsService,
+            this._tableFieldSourceDefinitionCachingFactoryService,
+            this._tableRecordSourceDefinitionFactoryService,
+            this._tableRecordSourceFactory,
+            this._referenceableDataSourcesService,
+            this._cellPainterFactoryService,
+            this._toastService,
+            opener,
         );
     }
 

@@ -4,6 +4,5 @@
  * License: motionite.trade/license/motif
  */
 
-export * from './dialog/ng-api';
-export * from './symbol-list-directory-grid/ng-api';
+export * from './symbol-list-directory-grid/internal-api';
 
