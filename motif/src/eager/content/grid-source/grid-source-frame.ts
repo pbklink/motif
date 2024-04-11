@@ -4,7 +4,6 @@
  * License: motionite.trade/license/motif
  */
 
-import { ValueProvider as AngularValueProvider, InjectionToken } from '@angular/core';
 import {
     AdaptedRevgrid,
     AdaptedRevgridBehavioredColumnSettings,
@@ -1407,21 +1406,5 @@ export namespace GridSourceFrame {
             existsInLayoutConfigLoaded = layoutConfigLoadedNewPrivateNameSuffixIds.includes(nextNewPrivateNameSuffixId);
         } while (existsInLayoutConfigLoaded);
         return nextNewPrivateNameSuffixId;
-    }
-
-    export interface GridCreationParameters {
-        gridHostElement: HTMLElement,
-        customGridSettings: AdaptedRevgrid.CustomGridSettings,
-        customiseSettingsForNewColumnEventer: AdaptedRevgrid.CustomiseSettingsForNewColumnEventer,
-        getMainCellPainterEventer: Subgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
-        getHeaderCellPainterEventer: Subgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
-    }
-
-    export namespace GridCreationParameters {
-        const tokenName = 'gridCreationParameters';
-        export const injectionToken = new InjectionToken<GridCreationParameters>(tokenName);
-        export interface ValueProvider extends AngularValueProvider {
-            useValue: GridCreationParameters;
-        }
     }
 }
