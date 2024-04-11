@@ -34,7 +34,7 @@ import {
 } from '@motifmarkets/motif-core';
 import { AssertInternalError } from '@xilytix/sysutils';
 import { CommandRegisterNgService, CoreInjectionTokens, ScansNgService } from 'component-services-ng-api';
-import { ButtonInputNgComponent, SvgButtonNgComponent, TabListNgComponent, TextInputNgComponent } from 'controls-ng-api';
+import { ButtonInputNgComponent, CaptionLabelNgComponent, SvgButtonNgComponent, TabListNgComponent, TextInputNgComponent } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
 import { SymbolListDirectoryGridNgComponent } from '../../symbol-list-directory-grid/ng-api';
 
@@ -52,6 +52,7 @@ export class OpenWatchlistDialogNgComponent extends ContentComponentBaseNgDirect
     @ViewChild('cancelButton', { static: true }) private _cancelButtonComponent: SvgButtonNgComponent;
     @ViewChild('tabList', { static: true }) private _tabListComponent: TabListNgComponent;
     @ViewChild('symbolListDirectoryComponent', { static: true }) private _symbolListDirectoryComponent: SymbolListDirectoryGridNgComponent;
+    @ViewChild('listNameLabel', { static: true }) private _listNameLabelComponent: CaptionLabelNgComponent;
     @ViewChild('listNameControl', { static: true }) private _listNameControlComponent: TextInputNgComponent;
     @ViewChild('openButton', { static: true }) private _openButtonComponent: ButtonInputNgComponent;
 
@@ -147,6 +148,7 @@ export class OpenWatchlistDialogNgComponent extends ContentComponentBaseNgDirect
     private initialiseComponents() {
         this._okButtonComponent.initialise(this._okUiAction);
         this._cancelButtonComponent.initialise(this._cancelUiAction);
+        this._listNameLabelComponent.initialise(this._listNameUiAction);
         this._listNameControlComponent.initialise(this._listNameUiAction);
         this._openButtonComponent.initialise(this._okUiAction);
 
