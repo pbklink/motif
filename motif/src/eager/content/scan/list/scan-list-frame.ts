@@ -1,7 +1,6 @@
 import {
     AdaptedRevgridBehavioredColumnSettings,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     GridField,
     Integer,
@@ -72,9 +71,8 @@ export class ScanListFrame extends DelayedBadnessGridSourceFrame {
         return this.createDefaultLayoutGridSourceOrReferenceDefinition();
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        this._recordSource = table.recordSource as ScanTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        this._recordSource = this.grid.openedRecordSource as ScanTableRecordSource;
         this._scanList = this._recordSource.recordList;
         if (this.gridSourceOpenedEventer !== undefined) {
             this.gridSourceOpenedEventer();

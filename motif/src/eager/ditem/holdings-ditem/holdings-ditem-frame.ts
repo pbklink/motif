@@ -178,13 +178,13 @@ export class HoldingsDitemFrame extends BuiltinDitemFrame {
             throw new AssertInternalError('HDFAGLDH22298');
         } else {
             const gridLayoutOrReferenceDefinition = new RevGridLayoutOrReferenceDefinition(layouts.holdings);
-            this._holdingsFrame.applyGridLayoutDefinition(gridLayoutOrReferenceDefinition);
+            this._holdingsFrame.applyGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition);
         }
         if (this._balancesFrame === undefined) {
             throw new AssertInternalError('HDFAGLDB22298');
         } else {
             const gridLayoutOrReferenceDefinition = new RevGridLayoutOrReferenceDefinition(layouts.balances);
-            this._balancesFrame.applyGridLayoutDefinition(gridLayoutOrReferenceDefinition);
+            this._balancesFrame.applyGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition);
         }
     }
 

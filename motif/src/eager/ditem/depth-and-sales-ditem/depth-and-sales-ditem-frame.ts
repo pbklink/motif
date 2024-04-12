@@ -238,7 +238,7 @@ export class DepthAndSalesDitemFrame extends BuiltinDitemFrame {
     applyGridLayoutDefinitions(layouts: DepthAndSalesDitemFrame.GridLayoutDefinitions) {
         this._depthFrame.applyGridLayoutDefinitions(layouts.depth);
         const watchlistGridLayoutOrReferenceDefinition = new RevGridLayoutOrReferenceDefinition(layouts.watchlist);
-        this._watchlistFrame.applyGridLayoutDefinition(watchlistGridLayoutOrReferenceDefinition);
+        this._watchlistFrame.applyGridLayoutOrReferenceDefinition(watchlistGridLayoutOrReferenceDefinition);
         this._tradesFrame.applyGridLayoutDefinition(layouts.trades);
     }
 

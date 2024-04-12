@@ -12,7 +12,6 @@ import {
     CheckboxRenderValueRecordGridCellEditor,
     CheckboxRenderValueRecordGridCellPainter,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     GridField,
     Integer,
@@ -28,13 +27,13 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
+import { RevFieldCustomHeadingsService, RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { CellEditor, DatalessViewCell, Subgrid, ViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../../table-record-source-definition-factory-service';
 import { LockOpenNotificationChannelListTableRecordSource } from './lock-open-notification-channel-list-table-record-source';
 import { LockOpenNotificationChannelListTableRecordSourceDefinition } from './lock-open-notification-channel-list-table-record-source-definition';
-import { RevFieldCustomHeadingsService, RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 
 export class LockOpenNotificationChannelsGridFrame extends GridSourceFrame {
     recordFocusedEventer: LockOpenNotificationChannelsGridFrame.RecordFocusedEventer | undefined
@@ -135,9 +134,8 @@ export class LockOpenNotificationChannelsGridFrame extends GridSourceFrame {
         return this.createListGridSourceOrReferenceDefinition(undefined);
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        const recordSource = table.recordSource as LockOpenNotificationChannelListTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        const recordSource = this.grid.openedRecordSource as LockOpenNotificationChannelListTableRecordSource;
         this._list = recordSource.recordList;
     }
 

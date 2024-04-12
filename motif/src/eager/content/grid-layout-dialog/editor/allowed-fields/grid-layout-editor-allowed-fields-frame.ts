@@ -10,7 +10,6 @@ import {
     Badness,
     CellPainterFactoryService,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     EditableGridLayoutDefinitionColumnList,
     GridField,
@@ -161,9 +160,8 @@ export class GridLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
         return this.createDefaultLayoutGridSourceOrReferenceDefinition();
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        const recordSource = table.recordSource as GridFieldTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        const recordSource = this.grid.openedRecordSource as GridFieldTableRecordSource;
         this._records = recordSource.records;
     }
 

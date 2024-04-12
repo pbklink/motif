@@ -7,7 +7,6 @@
 import {
     AdaptedRevgridBehavioredColumnSettings,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     Feed,
     FeedTableRecordSource,
@@ -55,9 +54,8 @@ export class FeedsFrame extends DelayedBadnessGridSourceFrame {
         return this.createDefaultLayoutGridSourceOrReferenceDefinition();
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        this._recordSource = table.recordSource as FeedTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        this._recordSource = this.grid.openedRecordSource as FeedTableRecordSource;
         this._recordList = this._recordSource.recordList;
     }
 

@@ -12,7 +12,6 @@ import {
     CheckboxRenderValueRecordGridCellEditor,
     CheckboxRenderValueRecordGridCellPainter,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     EditableGridLayoutDefinitionColumn,
     EditableGridLayoutDefinitionColumnList,
@@ -209,9 +208,8 @@ export class GridLayoutEditorColumnsFrame extends GridSourceFrame {
         return this.createDefaultLayoutGridSourceOrReferenceDefinition();
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        const recordSource = table.recordSource as EditableGridLayoutDefinitionColumnTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        const recordSource = this.grid.openedRecordSource as EditableGridLayoutDefinitionColumnTableRecordSource;
         this._recordList = recordSource.list;
     }
 

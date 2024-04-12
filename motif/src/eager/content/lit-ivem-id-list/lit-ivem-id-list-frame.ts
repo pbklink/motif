@@ -3,7 +3,6 @@ import {
     AdaptedRevgridGridSettings,
     CellPainterFactoryService,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     GridField,
     Integer,
@@ -20,11 +19,11 @@ import {
     TextRenderValueCellPainter,
     UiComparableList
 } from '@motifmarkets/motif-core';
+import { RevFieldCustomHeadingsService, RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { DatalessViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { DelayedBadnessGridSourceFrame } from '../delayed-badness-grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../table-record-source-definition-factory-service';
-import { RevFieldCustomHeadingsService, RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 
 export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
     getListEventer: LitIvemIdListFrame.GetListEventer | undefined;
@@ -152,9 +151,8 @@ export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
         return this.createListGridSourceOrReferenceDefinition(list, undefined);
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        this._recordSource = table.recordSource as LitIvemIdComparableListTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        this._recordSource = this.grid.openedRecordSource as LitIvemIdComparableListTableRecordSource;
         this._list = this._recordSource.list;
         if (this.gridSourceOpenedEventer !== undefined) {
             this.gridSourceOpenedEventer();

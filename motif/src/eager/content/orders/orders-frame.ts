@@ -8,7 +8,6 @@ import {
     AdaptedRevgridBehavioredColumnSettings,
     BrokerageAccountGroup,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     GridField,
     Integer,
@@ -91,9 +90,8 @@ export class OrdersFrame extends DelayedBadnessGridSourceFrame {
         return this.createDefaultLayoutGridSourceOrReferenceDefinition(OrdersFrame.defaultBrokerageAccountGroup);
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        this._recordSource = table.recordSource as OrderTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        this._recordSource = this.grid.openedRecordSource as OrderTableRecordSource;
         this._recordList = this._recordSource.recordList;
         const brokerageAccountGroup = this._recordSource.brokerageAccountGroup;
         if (this.gridSourceOpenedEventer !== undefined) {

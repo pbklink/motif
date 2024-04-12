@@ -9,7 +9,6 @@ import {
     AdaptedRevgridBehavioredColumnSettings,
     BrokerageAccountTableRecordSource,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     GridField,
     Integer,
@@ -51,9 +50,8 @@ export class BrokerageAccountsFrame extends DelayedBadnessGridSourceFrame {
         return this.createDefaultLayoutGridSourceOrReferenceDefinition();
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        this._recordSource = table.recordSource as BrokerageAccountTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        this._recordSource = this.grid.openedRecordSource as BrokerageAccountTableRecordSource;
         this._recordList = this._recordSource.recordList;
     }
 

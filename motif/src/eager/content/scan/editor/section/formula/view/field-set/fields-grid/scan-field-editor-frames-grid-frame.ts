@@ -12,7 +12,6 @@ import {
     CheckboxRenderValueRecordGridCellEditor,
     CheckboxRenderValueRecordGridCellPainter,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     GridField,
     Integer,
@@ -84,9 +83,8 @@ export class ScanFieldEditorFramesGridFrame extends GridSourceFrame {
         return this.createListGridSourceOrReferenceDefinition(list, undefined);
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        const recordSource = table.recordSource as ScanFieldEditorFrameComparableListTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        const recordSource = this.grid.openedRecordSource as ScanFieldEditorFrameComparableListTableRecordSource;
         this._list = recordSource.list;
     }
 

@@ -10,7 +10,6 @@ import {
     Badness,
     CellPainterFactoryService,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     GridField,
     Integer,
@@ -115,9 +114,8 @@ export class SymbolListDirectoryGridFrame extends GridSourceFrame {
         return this.createListGridSourceOrReferenceDefinition(undefined);
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        const recordSource = table.recordSource as RankedLitIvemIdListDirectoryItemTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        const recordSource = this.grid.openedRecordSource as RankedLitIvemIdListDirectoryItemTableRecordSource;
         this._listDirectory = recordSource.recordList;
     }
 

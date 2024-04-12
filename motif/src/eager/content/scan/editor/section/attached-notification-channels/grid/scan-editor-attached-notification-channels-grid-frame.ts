@@ -12,7 +12,6 @@ import {
     CheckboxRenderValueRecordGridCellEditor,
     CheckboxRenderValueRecordGridCellPainter,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     GridField,
     Integer,
@@ -28,13 +27,13 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
+import { RevFieldCustomHeadingsService, RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { CellEditor, DatalessViewCell, Subgrid, ViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../../../../grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../../../../../table-record-source-definition-factory-service';
 import { ScanEditorAttachedNotificationChannelComparableListTableRecordSource } from './scan-editor-attached-notification-channel-comparable-list-table-record-source';
 import { ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition } from './scan-editor-attached-notification-channel-comparable-list-table-record-source-definition';
-import { RevFieldCustomHeadingsService, RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 
 export class ScanEditorAttachedNotificationChannelsGridFrame extends GridSourceFrame {
     recordFocusedEventer: ScanEditorAttachedNotificationChannelsGridFrame.RecordFocusedEventer | undefined
@@ -122,9 +121,8 @@ export class ScanEditorAttachedNotificationChannelsGridFrame extends GridSourceF
         return this.createListGridSourceOrReferenceDefinition(list, undefined);
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        const recordSource = table.recordSource as ScanEditorAttachedNotificationChannelComparableListTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        const recordSource = this.grid.openedRecordSource as ScanEditorAttachedNotificationChannelComparableListTableRecordSource;
         this._list = recordSource.list;
     }
 

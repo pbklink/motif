@@ -8,7 +8,6 @@ import {
     AdaptedRevgridBehavioredColumnSettings,
     AssertInternalError,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     GridField,
     Integer,
@@ -74,9 +73,8 @@ export class SearchSymbolsFrame extends DelayedBadnessGridSourceFrame {
         return new DataSourceOrReferenceDefinition(''); // Invalid definition - should never be returned
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        const recordSource = table.recordSource as LitIvemDetailFromSearchSymbolsTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        const recordSource = this.grid.openedRecordSource as LitIvemDetailFromSearchSymbolsTableRecordSource;
         this._recordList = recordSource.recordList;
         const dataDefinition = recordSource.dataDefinition;
         if (this.gridSourceOpenedEventer !== undefined) {

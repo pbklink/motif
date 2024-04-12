@@ -112,8 +112,7 @@ export class TopShareholdersDitemFrame extends BuiltinDitemFrame {
                     if (openResult.isErr()) {
                         this._toastService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.TopShareholders]}: ${openResult.error}`);
                     } else {
-                        const table = this._gridSourceFrame.openedTable;
-                        this._recordSource = table.recordSource as TopShareholderTableRecordSource;
+                        this._recordSource = this._gridSourceFrame.grid.openedRecordSource as TopShareholderTableRecordSource;
                         this._recordList = this._recordSource.recordList;
                     }
                 },

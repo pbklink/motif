@@ -8,7 +8,6 @@ import {
     AdaptedRevgridBehavioredColumnSettings,
     AssertInternalError,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     GridField,
     Integer,
@@ -235,9 +234,8 @@ export class WatchlistFrame extends DelayedBadnessGridSourceFrame {
         return this.createGridSourceOrReferenceDefinitionFromLitIvemIds([]);
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        this._recordSource = table.recordSource as RankedLitIvemIdListTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        this._recordSource = this.grid.openedRecordSource as RankedLitIvemIdListTableRecordSource;
         const litIvemIdList = this._recordSource.lockedRankedLitIvemIdList;
         this._litIvemIdList = litIvemIdList;
         if (this.gridSourceOpenedEventer !== undefined) {

@@ -10,7 +10,6 @@ import {
     BalancesTableRecordSource,
     BrokerageAccountGroup,
     DataSourceDefinition,
-    DataSourceOrReference,
     DataSourceOrReferenceDefinition,
     GridField,
     Integer,
@@ -58,9 +57,8 @@ export class BalancesFrame extends DelayedBadnessGridSourceFrame {
         return this.createDefaultLayoutGridSourceOrReferenceDefinition(BalancesFrame.defaultBrokerageAccountGroup);
     }
 
-    protected override processGridSourceOpenedEvent(_gridSourceOrReference: DataSourceOrReference) {
-        const table = this.openedTable;
-        this._recordSource = table.recordSource as BalancesTableRecordSource;
+    protected override processGridSourceOpenedEvent() {
+        this._recordSource = this.grid.openedRecordSource as BalancesTableRecordSource;
         this._recordList = this._recordSource.recordList;
         const brokerageAccountGroup = this._recordSource.brokerageAccountGroup;
         if (this.gridSourceOpenedEventer !== undefined) {
