@@ -23,7 +23,7 @@ import {
     TextRenderValueCellPainter,
     compareInteger
 } from '@motifmarkets/motif-core';
-import { RevDataSourceOrReferenceDefinition, RevGridLayoutOrReferenceDefinition, RevGridRowOrderDefinition } from '@xilytix/rev-data-source';
+import { RevDataSourceOrReferenceDefinition, RevGridLayoutOrReferenceDefinition, RevRecordRowOrderDefinition } from '@xilytix/rev-data-source';
 import { DatalessViewCell } from '@xilytix/revgrid';
 import { DelayedBadnessGridSourceFrame } from '../delayed-badness-grid-source/internal-api';
 
@@ -84,7 +84,7 @@ export class WatchlistFrame extends DelayedBadnessGridSourceFrame {
     createGridSourceOrReferenceDefinitionFromList(
         listDefinition: RankedLitIvemIdListDefinition,
         gridLayoutOrReferenceDefinition: RevGridLayoutOrReferenceDefinition | undefined,
-        rowOrderDefinition: RevGridRowOrderDefinition | undefined,
+        rowOrderDefinition: RevRecordRowOrderDefinition | undefined,
     ) {
         const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createRankedLitIvemIdList(
             listDefinition
@@ -109,7 +109,7 @@ export class WatchlistFrame extends DelayedBadnessGridSourceFrame {
         const newLitIvemIds = rankedLitIvemIds.map((rankedLitIvemId) => rankedLitIvemId.litIvemId);
 
         let gridLayoutOrReferenceDefinition: RevGridLayoutOrReferenceDefinition | undefined;
-        let rowOrderDefinition: RevGridRowOrderDefinition | undefined;
+        let rowOrderDefinition: RevRecordRowOrderDefinition | undefined;
         if (as.tableRecordSourceOnly) {
             gridLayoutOrReferenceDefinition = undefined;
             rowOrderDefinition = undefined;
