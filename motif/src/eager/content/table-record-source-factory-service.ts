@@ -50,6 +50,7 @@ import {
     UnreachableCaseError,
     WatchmakerService
 } from '@motifmarkets/motif-core';
+import { RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { LockOpenNotificationChannelListTableRecordSource, LockOpenNotificationChannelListTableRecordSourceDefinition } from './lock-open-notification-channels/internal-api';
 import {
     ScanEditorAttachedNotificationChannelComparableListTableRecordSource,
@@ -57,7 +58,6 @@ import {
     ScanFieldEditorFrameComparableListTableRecordSource,
     ScanFieldEditorFrameComparableListTableRecordSourceDefinition,
 } from './scan/internal-api';
-import { RevFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 
 /** @public */
 export class TableRecordSourceFactoryService implements TableRecordSourceFactory {
@@ -69,7 +69,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
         private readonly _notificationChannelsService: NotificationChannelsService,
         private readonly _scansService: ScansService,
         private readonly _textFormatterService: TextFormatterService,
-        private readonly _gridFieldCustomHeadingsService: RevFieldCustomHeadingsService,
+        private readonly _gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         private readonly _tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
     ) { }
 

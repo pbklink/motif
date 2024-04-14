@@ -27,7 +27,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevFieldCustomHeadingsService, RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevGridLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { CellEditor, DatalessViewCell, Subgrid, ViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../grid-source/internal-api';
@@ -50,7 +50,7 @@ export class LockOpenNotificationChannelsGridFrame extends GridSourceFrame {
     constructor(
         settingsService: SettingsService,
         notificationChannelsService: NotificationChannelsService,
-        gridFieldCustomHeadingsService: RevFieldCustomHeadingsService,
+        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         referenceableGridLayoutsService: ReferenceableGridLayoutsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,

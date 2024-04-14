@@ -11,12 +11,12 @@ import {
     TableFieldSourceDefinitionCachingFactoryService,
     TableRecordSourceDefinition
 } from '@motifmarkets/motif-core';
-import { RevFieldCustomHeadingsService, RevGridLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevGridLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { LockOpenNotificationChannelTableFieldSourceDefinition } from './lock-open-notification-channel-table-field-source-definition';
 
 export class LockOpenNotificationChannelListTableRecordSourceDefinition extends TableRecordSourceDefinition {
     constructor(
-        customHeadingsService: RevFieldCustomHeadingsService,
+        customHeadingsService: RevSourcedFieldCustomHeadingsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
     ) {
         super(
@@ -81,7 +81,7 @@ export namespace LockOpenNotificationChannelListTableRecordSourceDefinition {
     // }
 
     // export function tryCreateDefinition(
-    //     customHeadingsService: RevFieldCustomHeadingsService,
+    //     customHeadingsService: RevSourcedFieldCustomHeadingsService,
     //     tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
     //     element: JsonElement,
     // ): Result<ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition> {
@@ -97,7 +97,7 @@ export namespace LockOpenNotificationChannelListTableRecordSourceDefinition {
     // }
 
     export function create(
-        customHeadingsService: RevFieldCustomHeadingsService,
+        customHeadingsService: RevSourcedFieldCustomHeadingsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
     ) {
         return new LockOpenNotificationChannelListTableRecordSourceDefinition(

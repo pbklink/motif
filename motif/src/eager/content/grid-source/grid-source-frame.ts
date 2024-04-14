@@ -32,7 +32,7 @@ import {
     TableRecordSourceDefinition,
     TableRecordSourceFactory
 } from '@motifmarkets/motif-core';
-import { RevFieldCustomHeadingsService, RevGridLayout, RevGridLayoutOrReferenceDefinition, RevRecordDataServer } from '@xilytix/rev-data-source';
+import { RevGridLayout, RevGridLayoutOrReferenceDefinition, RevRecordDataServer, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { Subgrid } from '@xilytix/revgrid';
 import { ToastService } from '../../component-services/toast-service';
 import { ContentFrame } from '../content-frame';
@@ -54,7 +54,7 @@ export abstract class GridSourceFrame extends ContentFrame {
 
     constructor(
         protected readonly settingsService: SettingsService,
-        protected readonly gridFieldCustomHeadingsService: RevFieldCustomHeadingsService,
+        protected readonly gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         private readonly _referenceableGridLayoutsService: ReferenceableGridLayoutsService,
         protected readonly tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         protected readonly tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,

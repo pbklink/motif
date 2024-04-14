@@ -24,7 +24,7 @@ import {
     TableRecordSourceFactory,
     TextFormatterService
 } from '@motifmarkets/motif-core';
-import { RevFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { ToastService } from 'component-services-internal-api';
 import { BalancesFrame } from './balances/internal-api';
 import { BrokerageAccountsFrame } from './brokerage-accounts/internal-api';
@@ -57,7 +57,7 @@ export class ContentService {
         private readonly _notificationChannelsService: NotificationChannelsService,
         private readonly _scansService: ScansService,
         private readonly _textFormatterService: TextFormatterService,
-        private readonly _gridFieldCustomHeadingsService: RevFieldCustomHeadingsService,
+        private readonly _gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         private readonly _referenceableGridLayoutsService: ReferenceableGridLayoutsService,
         private readonly _tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         private readonly _tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,

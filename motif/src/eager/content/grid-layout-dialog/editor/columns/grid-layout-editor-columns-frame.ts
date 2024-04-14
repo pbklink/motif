@@ -30,7 +30,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { CellEditor, CellPainter, DatalessViewCell, Subgrid, ViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../../grid-source/internal-api';
@@ -49,7 +49,7 @@ export class GridLayoutEditorColumnsFrame extends GridSourceFrame {
 
     constructor(
         settingsService: SettingsService,
-        gridFieldCustomHeadingsService: RevFieldCustomHeadingsService,
+        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         namedGridLayoutsService: ReferenceableGridLayoutsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,

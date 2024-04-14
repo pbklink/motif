@@ -19,7 +19,7 @@ import {
     TextRenderValueCellPainter,
     UiComparableList
 } from '@motifmarkets/motif-core';
-import { RevFieldCustomHeadingsService, RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevGridLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { DatalessViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { DelayedBadnessGridSourceFrame } from '../delayed-badness-grid-source/internal-api';
@@ -44,7 +44,7 @@ export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
 
     constructor(
         settingsService: SettingsService,
-        gridFieldCustomHeadingsService: RevFieldCustomHeadingsService,
+        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         referenceableGridLayoutsService: ReferenceableGridLayoutsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,

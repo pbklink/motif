@@ -20,10 +20,10 @@ import {
     TextFormatterService,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
+import { RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { LockOpenNotificationChannelListTableRecordSourceDefinition } from './lock-open-notification-channel-list-table-record-source-definition';
 import { LockOpenNotificationChannelTableRecordDefinition } from './lock-open-notification-channel-table-record-definition';
 import { LockOpenNotificationChannelTableValueSource } from './lock-open-notification-channel-table-value-source';
-import { RevFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 
 export class LockOpenNotificationChannelListTableRecordSource extends LockOpenListTableRecordSource<LockOpenNotificationChannel, LockOpenNotificationChannelList> {
     declare readonly definition: LockOpenNotificationChannelListTableRecordSourceDefinition;
@@ -31,7 +31,7 @@ export class LockOpenNotificationChannelListTableRecordSource extends LockOpenLi
     constructor(
         private readonly _notificationChannelsService: NotificationChannelsService,
         textFormatterService: TextFormatterService,
-        gridFieldCustomHeadingsService: RevFieldCustomHeadingsService,
+        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         correctnessBadness: CorrectnessBadness,
         definition: LockOpenNotificationChannelListTableRecordSourceDefinition,

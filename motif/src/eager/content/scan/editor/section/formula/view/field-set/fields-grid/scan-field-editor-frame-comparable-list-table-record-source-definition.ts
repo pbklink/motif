@@ -12,7 +12,7 @@ import {
     TableFieldSourceDefinitionCachingFactoryService,
     TableRecordSourceDefinition
 } from '@motifmarkets/motif-core';
-import { RevFieldCustomHeadingsService, RevGridLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevGridLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { ScanFieldEditorFrame } from '../field/internal-api';
 import { ScanFieldEditorFrameTableFieldSourceDefinition } from './scan-field-editor-frame-table-field-source-definition';
 
@@ -20,7 +20,7 @@ export class ScanFieldEditorFrameComparableListTableRecordSourceDefinition exten
     declare list: BadnessComparableList<ScanFieldEditorFrame>;
 
     constructor(
-        customHeadingsService: RevFieldCustomHeadingsService,
+        customHeadingsService: RevSourcedFieldCustomHeadingsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         list: BadnessComparableList<ScanFieldEditorFrame>,
     ) {
@@ -87,7 +87,7 @@ export namespace ScanFieldEditorFrameComparableListTableRecordSourceDefinition {
     // }
 
     // export function tryCreateDefinition(
-    //     customHeadingsService: RevFieldCustomHeadingsService,
+    //     customHeadingsService: RevSourcedFieldCustomHeadingsService,
     //     tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
     //     element: JsonElement,
     // ): Result<ScanFieldEditorFrameComparableListTableRecordSourceDefinition> {
@@ -103,7 +103,7 @@ export namespace ScanFieldEditorFrameComparableListTableRecordSourceDefinition {
     // }
 
     export function create(
-        customHeadingsService: RevFieldCustomHeadingsService,
+        customHeadingsService: RevSourcedFieldCustomHeadingsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         list: BadnessComparableList<ScanFieldEditorFrame>,
     ) {

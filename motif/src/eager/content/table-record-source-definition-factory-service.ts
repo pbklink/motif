@@ -40,20 +40,20 @@ import {
     SearchSymbolsDataDefinition,
     TableFieldSourceDefinitionCachingFactoryService,
     TableRecordSourceDefinition,
-    TopShareholderTableRecordSourceDefinition,
     TableRecordSourceDefinitionFromJsonFactory,
+    TopShareholderTableRecordSourceDefinition,
     UiComparableList,
     UnreachableCaseError,
     WatchlistTableRecordSourceDefinition,
 } from '@motifmarkets/motif-core';
-import { RevFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 
 /** @public */
 export class TableRecordSourceDefinitionFactoryService implements TableRecordSourceDefinitionFromJsonFactory {
 
     constructor(
         private readonly _litIvemIdListDefinitionFactoryService: RankedLitIvemIdListDefinitionFactoryService,
-        readonly gridFieldCustomHeadingsService: RevFieldCustomHeadingsService,
+        readonly gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         readonly tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
     ) {
     }

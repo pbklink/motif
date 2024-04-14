@@ -13,14 +13,14 @@ import {
     TableFieldSourceDefinitionCachingFactoryService,
     TableRecordSourceDefinition
 } from '@motifmarkets/motif-core';
-import { RevFieldCustomHeadingsService, RevGridLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevGridLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { LockerScanAttachedNotificationChannelTableFieldSourceDefinition } from './locker-scan-attached-notification-channel-table-field-source-definition';
 
 export class ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition extends BadnessListTableRecordSourceDefinition<LockerScanAttachedNotificationChannel> {
     declare list: LockerScanAttachedNotificationChannelList;
 
     constructor(
-        customHeadingsService: RevFieldCustomHeadingsService,
+        customHeadingsService: RevSourcedFieldCustomHeadingsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         list: LockerScanAttachedNotificationChannelList,
     ) {
@@ -87,7 +87,7 @@ export namespace ScanEditorAttachedNotificationChannelComparableListTableRecordS
     // }
 
     // export function tryCreateDefinition(
-    //     customHeadingsService: RevFieldCustomHeadingsService,
+    //     customHeadingsService: RevSourcedFieldCustomHeadingsService,
     //     tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
     //     element: JsonElement,
     // ): Result<ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition> {
@@ -103,7 +103,7 @@ export namespace ScanEditorAttachedNotificationChannelComparableListTableRecordS
     // }
 
     export function create(
-        customHeadingsService: RevFieldCustomHeadingsService,
+        customHeadingsService: RevSourcedFieldCustomHeadingsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         list: LockerScanAttachedNotificationChannelList,
     ) {

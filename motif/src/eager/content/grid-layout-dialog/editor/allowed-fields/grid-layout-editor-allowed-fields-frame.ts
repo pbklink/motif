@@ -29,7 +29,7 @@ import {
     UsableListChangeTypeId,
     delay1Tick
 } from '@motifmarkets/motif-core';
-import { RevFieldCustomHeadingsService, RevRecord } from '@xilytix/rev-data-source';
+import { RevRecord, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { DatalessViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../../grid-source/internal-api';
@@ -47,7 +47,7 @@ export class GridLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
 
     constructor(
         settingsService: SettingsService,
-        gridFieldCustomHeadingsService: RevFieldCustomHeadingsService,
+        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         namedGridLayoutsService: ReferenceableGridLayoutsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,

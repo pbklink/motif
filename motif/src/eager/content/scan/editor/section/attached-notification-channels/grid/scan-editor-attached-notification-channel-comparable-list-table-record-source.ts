@@ -16,10 +16,10 @@ import {
     TextFormatterService,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
+import { RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { LockerScanAttachedNotificationChannelTableRecordDefinition } from './locker-scan-attached-notification-channel-table-record-definition';
 import { LockerScanAttachedNotificationChannelTableValueSource } from './locker-scan-attached-notification-channel-table-value-source';
 import { ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition } from './scan-editor-attached-notification-channel-comparable-list-table-record-source-definition';
-import { RevFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 
 export class ScanEditorAttachedNotificationChannelComparableListTableRecordSource extends BadnessListTableRecordSource<LockerScanAttachedNotificationChannel> {
     declare readonly definition: ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition;
@@ -27,7 +27,7 @@ export class ScanEditorAttachedNotificationChannelComparableListTableRecordSourc
 
     constructor(
         textFormatterService: TextFormatterService,
-        gridFieldCustomHeadingsService: RevFieldCustomHeadingsService,
+        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         correctnessBadness: CorrectnessBadness,
         definition: ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition,
