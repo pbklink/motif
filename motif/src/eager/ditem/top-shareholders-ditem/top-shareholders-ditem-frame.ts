@@ -19,7 +19,7 @@ import {
     TopShareholder,
     TopShareholderTableRecordSource
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame, TableRecordSourceDefinitionFactoryService } from 'content-internal-api';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
@@ -64,9 +64,9 @@ export class TopShareholdersDitemFrame extends BuiltinDitemFrame {
                 const keptLayoutElementResult = contentElement.tryGetElement(TopShareholdersDitemFrame.JsonName.keptLayout);
                 if (keptLayoutElementResult.isOk()) {
                     const keptLayoutElement = keptLayoutElementResult.value;
-                    const keptLayoutResult = RevGridLayoutOrReferenceDefinition.tryCreateFromJson(keptLayoutElement);
+                    const keptLayoutResult = RevColumnLayoutOrReferenceDefinition.tryCreateFromJson(keptLayoutElement);
                     if (keptLayoutResult.isOk()) {
-                        this._gridSourceFrame.keptGridLayoutOrReferenceDefinition = keptLayoutResult.value;
+                        this._gridSourceFrame.keptColumnLayoutOrReferenceDefinition = keptLayoutResult.value;
                     }
                 }
             }
@@ -84,7 +84,7 @@ export class TopShareholdersDitemFrame extends BuiltinDitemFrame {
 
         const contentElement = frameElement.newElement(TopShareholdersDitemFrame.JsonName.content);
         const keptLayoutElement = contentElement.newElement(TopShareholdersDitemFrame.JsonName.keptLayout);
-        const layoutDefinition = this._gridSourceFrame.createGridLayoutOrReferenceDefinition();
+        const layoutDefinition = this._gridSourceFrame.createColumnLayoutOrReferenceDefinition();
         layoutDefinition.saveToJson(keptLayoutElement);
     }
 

@@ -21,7 +21,7 @@ import {
     SymbolsService,
     TextFormatterService
 } from '@motifmarkets/motif-core';
-import { RevDataSourceOrReferenceDefinition, RevFavouriteReferenceableGridLayoutDefinitionsStoreService, RevGridLayout, RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayout, RevColumnLayoutOrReferenceDefinition, RevDataSourceOrReferenceDefinition, RevFavouriteReferenceableColumnLayoutDefinitionsStoreService } from '@xilytix/rev-data-source';
 import { ToastService } from 'component-services-internal-api';
 import {
     GridSourceFrame,
@@ -46,11 +46,11 @@ export class WatchlistDitemFrame extends BuiltinDitemFrame {
         symbolsService: SymbolsService,
         adiService: AdiService,
         private readonly _textFormatterService: TextFormatterService,
-        private readonly _favouriteNamedGridLayoutDefinitionReferencesService: RevFavouriteReferenceableGridLayoutDefinitionsStoreService,
+        private readonly _favouriteNamedColumnLayoutDefinitionReferencesService: RevFavouriteReferenceableColumnLayoutDefinitionsStoreService,
         private readonly _toastService: ToastService,
         private readonly _gridSourceOpenedEventer: WatchlistDitemFrame.GridSourceOpenedEventer,
         private readonly _recordFocusedEventer: WatchlistDitemFrame.RecordFocusedEventer,
-        private readonly _gridLayoutSetEventer: WatchlistDitemFrame.GridLayoutSetEventer,
+        private readonly _columnLayoutSetEventer: WatchlistDitemFrame.ColumnLayoutSetEventer,
         private readonly _litIvemIdAcceptedEventer: WatchlistDitemFrame.LitIvemIdAcceptedEventer,
     ) {
         super(BuiltinDitemFrame.BuiltinTypeId.Watchlist, componentAccess,
@@ -65,7 +65,7 @@ export class WatchlistDitemFrame extends BuiltinDitemFrame {
     initialise(ditemFrameElement: JsonElement | undefined, watchlistFrame: WatchlistFrame): void {
         this._watchlistFrame = watchlistFrame;
         watchlistFrame.gridSourceOpenedEventer = this._gridSourceOpenedEventer;
-        watchlistFrame.gridLayoutSetEventer = this._gridLayoutSetEventer;
+        watchlistFrame.columnLayoutSetEventer = this._columnLayoutSetEventer;
         watchlistFrame.gridSourceOpenedEventer = (rankedLitIvemIdList, rankedLitIvemIdListName) =>
             this.handleGridSourceOpenedEvent(rankedLitIvemIdList, rankedLitIvemIdListName);
         watchlistFrame.recordFocusedEventer = (newRecordIndex) => this.handleRecordFocusedEvent(newRecordIndex);
@@ -106,7 +106,7 @@ export class WatchlistDitemFrame extends BuiltinDitemFrame {
                     if (definitionWithLayoutError !== undefined) {
                         const layoutErrorCode = definitionWithLayoutError.layoutErrorCode;
                         if (layoutErrorCode !== undefined) {
-                            this._toastService.popup(`${Strings[StringId.ErrorLoadingGridLayout]} ${Strings[StringId.Watchlist]}: ${layoutErrorCode}`);
+                            this._toastService.popup(`${Strings[StringId.ErrorLoadingColumnLayout]} ${Strings[StringId.Watchlist]}: ${layoutErrorCode}`);
                         }
                         dataSourceOrReferenceDefinition = definitionWithLayoutError.definition;
                     }
@@ -181,19 +181,19 @@ export class WatchlistDitemFrame extends BuiltinDitemFrame {
         }
     }
 
-    tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition: RevGridLayoutOrReferenceDefinition) {
+    tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition: RevColumnLayoutOrReferenceDefinition) {
         if (this._watchlistFrame === undefined) {
             throw new AssertInternalError('WDFOGLONRD10174');
         } else {
-            return this._watchlistFrame.tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition);
+            return this._watchlistFrame.tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition);
         }
     }
 
-    createAllowedFieldsGridLayoutDefinition() {
+    createAllowedSourcedFieldsColumnLayoutDefinition() {
         if (this._watchlistFrame === undefined) {
             throw new AssertInternalError('WDFCAFALD10174');
         } else {
-            return this._watchlistFrame.createAllowedFieldsGridLayoutDefinition();
+            return this._watchlistFrame.createAllowedSourcedFieldsColumnLayoutDefinition();
         }
     }
 
@@ -389,6 +389,6 @@ export namespace WatchlistDitemFrame {
         rankedLitIvemIdListName: string | undefined
     ) => void;
     export type LitIvemIdAcceptedEventer = (this: void, litIvemId: LitIvemId) => void;
-    export type GridLayoutSetEventer = (this: void, layout: RevGridLayout) => void;
+    export type ColumnLayoutSetEventer = (this: void, layout: RevColumnLayout) => void;
     export type RecordFocusedEventer = (this: void, newRecordIndex: Integer | undefined) => void;
 }

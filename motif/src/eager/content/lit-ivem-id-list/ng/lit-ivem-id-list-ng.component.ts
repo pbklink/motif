@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, InjectionToken, Optional, ValueProvider } from '@angular/core';
 import { AdaptedRevgridGridSettings, JsonElement, LitIvemId, LockOpenListItem, UiComparableList } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { DelayedBadnessGridSourceNgDirective } from '../../delayed-badness-grid-source/ng-api';
 import { ContentNgService } from '../../ng/content-ng.service';
 import { LitIvemIdListFrame } from '../lit-ivem-id-list-frame';
@@ -44,7 +44,7 @@ export class LitIvemIdListNgComponent extends DelayedBadnessGridSourceNgDirectiv
 
     initialise(
         opener: LockOpenListItem.Opener,
-        layoutDefinition: RevGridLayoutOrReferenceDefinition | undefined,
+        layoutDefinition: RevColumnLayoutOrReferenceDefinition | undefined,
         frameElement: JsonElement | undefined,
         keepPreviousLayoutIfPossible: boolean,
     ) {
@@ -73,12 +73,12 @@ export class LitIvemIdListNgComponent extends DelayedBadnessGridSourceNgDirectiv
         return this.frame.getSelectedRecordIndices();
     }
 
-    createAllowedFieldsGridLayoutDefinition() {
-        return this.frame.createAllowedFieldsGridLayoutDefinition();
+    createAllowedSourcedFieldsColumnLayoutDefinition() {
+        return this.frame.createAllowedSourcedFieldsColumnLayoutDefinition();
     }
 
-    tryOpenGridLayoutOrReferenceDefinition(layoutOrReferenceDefinition: RevGridLayoutOrReferenceDefinition) {
-        return this.frame.tryOpenGridLayoutOrReferenceDefinition(layoutOrReferenceDefinition)
+    tryOpenColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition: RevColumnLayoutOrReferenceDefinition) {
+        return this.frame.tryOpenColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition)
     }
 
     areRowsSelected(includeAllAuto: boolean) {

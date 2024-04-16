@@ -7,8 +7,8 @@
 import {
     Account,
     AdiService,
-    AllowedFieldsGridLayoutDefinition,
     AllowedGridField,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
     BrokerageAccountGroup,
     CommandRegisterService,
@@ -26,7 +26,7 @@ import {
     SymbolsService,
     TextFormatterService
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutDefinition, RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition, RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { ToastService } from 'component-services-internal-api';
 import { BalancesFrame, HoldingsFrame } from 'content-internal-api';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
@@ -167,24 +167,24 @@ export class HoldingsDitemFrame extends BuiltinDitemFrame {
             throw new AssertInternalError('HDFCAFALD33097');
         } else {
             return {
-                holdings: this._holdingsFrame.createAllowedFieldsGridLayoutDefinition(),
-                balances: this._balancesFrame.createAllowedFieldsGridLayoutDefinition(),
+                holdings: this._holdingsFrame.createAllowedSourcedFieldsColumnLayoutDefinition(),
+                balances: this._balancesFrame.createAllowedSourcedFieldsColumnLayoutDefinition(),
             };
         }
     }
 
-    openGridLayoutOrReferenceDefinition(layouts: HoldingsDitemFrame.GridLayoutDefinitions) {
+    openColumnLayoutOrReferenceDefinition(layouts: HoldingsDitemFrame.ColumnLayoutDefinitions) {
         if (this._holdingsFrame === undefined) {
             throw new AssertInternalError('HDFAGLDH22298');
         } else {
-            const gridLayoutOrReferenceDefinition = new RevGridLayoutOrReferenceDefinition(layouts.holdings);
-            this._holdingsFrame.applyGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition);
+            const columnLayoutOrReferenceDefinition = new RevColumnLayoutOrReferenceDefinition(layouts.holdings);
+            this._holdingsFrame.applyColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition);
         }
         if (this._balancesFrame === undefined) {
             throw new AssertInternalError('HDFAGLDB22298');
         } else {
-            const gridLayoutOrReferenceDefinition = new RevGridLayoutOrReferenceDefinition(layouts.balances);
-            this._balancesFrame.applyGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition);
+            const columnLayoutOrReferenceDefinition = new RevColumnLayoutOrReferenceDefinition(layouts.balances);
+            this._balancesFrame.applyColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition);
         }
     }
 
@@ -350,14 +350,14 @@ export namespace HoldingsDitemFrame {
         balances: readonly AllowedGridField[];
     }
 
-    export interface GridLayoutDefinitions {
-        holdings: RevGridLayoutDefinition;
-        balances: RevGridLayoutDefinition;
+    export interface ColumnLayoutDefinitions {
+        holdings: RevColumnLayoutDefinition;
+        balances: RevColumnLayoutDefinition;
     }
 
     export interface AllowedFieldsAndLayoutDefinitions {
-        holdings: AllowedFieldsGridLayoutDefinition;
-        balances: AllowedFieldsGridLayoutDefinition;
+        holdings: AllowedSourcedFieldsColumnLayoutDefinition;
+        balances: AllowedSourcedFieldsColumnLayoutDefinition;
     }
 
     export interface ComponentAccess extends DitemFrame.ComponentAccess {

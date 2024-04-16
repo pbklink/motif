@@ -335,7 +335,7 @@ export class TableRecordSourceDefinitionFactoryService implements TableRecordSou
                     return new Ok(definition);
                 }
             }
-            case TableRecordSourceDefinition.TypeId.EditableGridLayoutDefinitionColumn: {
+            case TableRecordSourceDefinition.TypeId.EditableColumnLayoutDefinitionColumn: {
                 throw new AssertInternalError('TRSDFSTCTFJEGLDC45550', 'outside');
             }
             case TableRecordSourceDefinition.TypeId.Scan: {

@@ -33,7 +33,7 @@ import {
     logger
 } from '@motifmarkets/motif-core';
 import { AdiNgService, CommandRegisterNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
-import { DepthGridLayoutsDialogNgComponent, DepthNgComponent } from 'content-ng-api';
+import { DepthColumnLayoutsDialogNgComponent, DepthNgComponent } from 'content-ng-api';
 import { LitIvemIdSelectNgComponent, SvgButtonNgComponent, TextInputNgComponent } from 'controls-ng-api';
 import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
@@ -398,18 +398,18 @@ export class DepthDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirectiv
 
     private showLayoutEditor() {
         this.isLayoutEditorVisible = true;
-        const allowedFieldGridLayoutDefinition = this._frame.createAllowedFieldsGridLayoutDefinitions();
+        const allowedFieldColumnLayoutDefinition = this._frame.createAllowedSourcedFieldsColumnLayoutDefinitions();
 
-        const closePromise = DepthGridLayoutsDialogNgComponent.open(
+        const closePromise = DepthColumnLayoutsDialogNgComponent.open(
             this._layoutEditorContainer,
             this._frame.opener,
             Strings[StringId.Depth_ColumnsDialogCaption],
-            allowedFieldGridLayoutDefinition
+            allowedFieldColumnLayoutDefinition
         );
         closePromise.then(
             (layouts) => {
                 if (layouts !== undefined) {
-                    this._frame.applyGridLayoutDefinitions(layouts);
+                    this._frame.applyColumnLayoutDefinitions(layouts);
                 }
                 this.closeLayoutEditor();
             },

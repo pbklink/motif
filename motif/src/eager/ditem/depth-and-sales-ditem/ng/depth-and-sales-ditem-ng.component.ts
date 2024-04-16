@@ -45,7 +45,7 @@ import {
     TextFormatterNgService,
     ToastNgService
 } from 'component-services-ng-api';
-import { DepthAndSalesGridLayoutsDialogNgComponent, DepthNgComponent, TradesNgComponent, WatchlistNgComponent } from 'content-ng-api';
+import { DepthAndSalesColumnLayoutsDialogNgComponent, DepthNgComponent, TradesNgComponent, WatchlistNgComponent } from 'content-ng-api';
 import { AngularSplitTypes } from 'controls-internal-api';
 import {
     CommandBarNgComponent,
@@ -96,7 +96,7 @@ export class DepthAndSalesDitemNgComponent extends BuiltinDitemNgComponentBaseNg
 
     public explicitDepthWidth = false;
 
-    private _layoutEditorComponent: DepthAndSalesGridLayoutsDialogNgComponent | undefined;
+    private _layoutEditorComponent: DepthAndSalesColumnLayoutsDialogNgComponent | undefined;
 
     private _symbolEditUiAction: LitIvemIdUiAction;
     private _symbolApplyUiAction: IconButtonUiAction;
@@ -546,7 +546,7 @@ export class DepthAndSalesDitemNgComponent extends BuiltinDitemNgComponentBaseNg
     }
 
     private updateColumnsEnabledDisabled() {
-        if (this._frame.canCreateAllowedFieldsGridLayoutDefinition()) {
+        if (this._frame.canCreateAllowedSourcedFieldsColumnLayoutDefinition()) {
             this._columnsUiAction.pushAccepted();
         } else {
             this._columnsUiAction.pushDisabled();
@@ -557,7 +557,7 @@ export class DepthAndSalesDitemNgComponent extends BuiltinDitemNgComponentBaseNg
         this._modeId = DepthAndSalesDitemNgComponent.ModeId.LayoutDialog;
         const allowedFieldsAndLayoutDefinitions = this._frame.createAllowedFieldsAndLayoutDefinition();
 
-        const closePromise = DepthAndSalesGridLayoutsDialogNgComponent.open(
+        const closePromise = DepthAndSalesColumnLayoutsDialogNgComponent.open(
             this._dialogContainer,
             this._frame.opener,
             Strings[StringId.DepthAndSales_ColumnsDialogCaption],
@@ -566,7 +566,7 @@ export class DepthAndSalesDitemNgComponent extends BuiltinDitemNgComponentBaseNg
         closePromise.then(
             (layoutOrReferenceDefinition) => {
                 if (layoutOrReferenceDefinition !== undefined) {
-                    this._frame.applyGridLayoutDefinitions(layoutOrReferenceDefinition);
+                    this._frame.applyColumnLayoutDefinitions(layoutOrReferenceDefinition);
                 }
                 this.closeDialog();
             },

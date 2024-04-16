@@ -18,8 +18,8 @@ import {
     LockOpenListItem,
     LockerScanAttachedNotificationChannelList,
     NotificationChannelsService,
+    ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
-    ReferenceableGridLayoutsService,
     RenderValueRecordGridCellPainter,
     SettingsService,
     TableFieldSourceDefinitionCachingFactoryService,
@@ -27,7 +27,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { CellEditor, DatalessViewCell, Subgrid, ViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../../../../grid-source/internal-api';
@@ -51,7 +51,7 @@ export class ScanEditorAttachedNotificationChannelsGridFrame extends GridSourceF
         settingsService: SettingsService,
         notificationChannelsService: NotificationChannelsService,
         gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
-        referenceableGridLayoutsService: ReferenceableGridLayoutsService,
+        referenceableColumnLayoutsService: ReferenceableColumnLayoutsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,
         tableRecordSourceFactory: TableRecordSourceFactory,
@@ -63,7 +63,7 @@ export class ScanEditorAttachedNotificationChannelsGridFrame extends GridSourceF
         super(
             settingsService,
             gridFieldCustomHeadingsService,
-            referenceableGridLayoutsService,
+            referenceableColumnLayoutsService,
             tableFieldSourceDefinitionCachingFactoryService,
             tableRecordSourceDefinitionFactoryService,
             tableRecordSourceFactory,
@@ -142,7 +142,7 @@ export class ScanEditorAttachedNotificationChannelsGridFrame extends GridSourceF
         }
     }
 
-    private createListGridSourceOrReferenceDefinition(list: LockerScanAttachedNotificationChannelList, layoutDefinition: RevGridLayoutOrReferenceDefinition | undefined) {
+    private createListGridSourceOrReferenceDefinition(list: LockerScanAttachedNotificationChannelList, layoutDefinition: RevColumnLayoutOrReferenceDefinition | undefined) {
         const tableRecordSourceDefinition = new ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition(
             this.gridFieldCustomHeadingsService,
             this.tableFieldSourceDefinitionCachingFactoryService,
@@ -175,11 +175,11 @@ export class ScanEditorAttachedNotificationChannelsGridFrame extends GridSourceF
     }
 
     private tryGetCellEditor(sourcelesFieldName: string, readonly: boolean, subgridRowIndex: Integer): CellEditor<AdaptedRevgridBehavioredColumnSettings, GridField> | undefined {
-        // if (sourcelesFieldName === EditableGridLayoutDefinitionColumn.FieldName.visible) {
+        // if (sourcelesFieldName === EditableColumnLayoutDefinitionColumn.FieldName.visible) {
         //     this._visibleCheckboxEditor.readonly = readonly || subgridRowIndex < this._recordList.fixedColumnCount;
         //     return this._visibleCheckboxEditor;
         // } else {
-        //     if (sourcelesFieldName === EditableGridLayoutDefinitionColumn.FieldName.width) {
+        //     if (sourcelesFieldName === EditableColumnLayoutDefinitionColumn.FieldName.width) {
         //         this._widthEditor.readonly = readonly
         //         return this._widthEditor;
         //     } else {

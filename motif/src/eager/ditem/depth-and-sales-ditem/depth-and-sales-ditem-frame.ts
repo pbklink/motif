@@ -6,11 +6,11 @@
 
 import {
     AdiService,
-    AllowedFieldsGridLayoutDefinition,
     AllowedGridField,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
-    BidAskAllowedFieldsGridLayoutDefinitions,
-    BidAskGridLayoutDefinitions,
+    BidAskAllowedSourcedFieldsColumnLayoutDefinitions,
+    BidAskColumnLayoutDefinitions,
     BidAskPair,
     CommandRegisterService,
     DepthStyleId,
@@ -23,7 +23,7 @@ import {
     SymbolsService,
     TextFormatterService
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutDefinition, RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition, RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { lowestValidServerNotificationId } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import {
@@ -80,7 +80,7 @@ export class DepthAndSalesDitemFrame extends BuiltinDitemFrame {
         this._watchlistFrame.fixedRowCount = 1;
         this._watchlistFrame.focusedRowColoredAllowed = false;
 
-        let watchlistLayoutDefinition: RevGridLayoutOrReferenceDefinition | undefined;
+        let watchlistLayoutDefinition: RevColumnLayoutOrReferenceDefinition | undefined;
         if (frameElement === undefined) {
             this._tradesFrame.initialise(undefined);
             this._depthFrame.initialise(undefined);
@@ -220,26 +220,26 @@ export class DepthAndSalesDitemFrame extends BuiltinDitemFrame {
         this._tradesFrame.autoSizeAllColumnWidths(widenOnly );
     }
 
-    canCreateAllowedFieldsGridLayoutDefinition() {
+    canCreateAllowedSourcedFieldsColumnLayoutDefinition() {
         return (
-            this._watchlistFrame.canCreateAllowedFieldsGridLayoutDefinition() &&
-            this._depthFrame.canCreateAllowedFieldsGridLayoutDefinition()
+            this._watchlistFrame.canCreateAllowedSourcedFieldsColumnLayoutDefinition() &&
+            this._depthFrame.canCreateAllowedSourcedFieldsColumnLayoutDefinition()
         );
     }
 
     createAllowedFieldsAndLayoutDefinition(): DepthAndSalesDitemFrame.AllowedFieldsAndLayoutDefinitions {
         return {
-            depth: this._depthFrame.createAllowedFieldsGridLayoutDefinitions(),
-            watchlist: this._watchlistFrame.createAllowedFieldsGridLayoutDefinition(),
-            trades: this._tradesFrame.createAllowedFieldsGridLayoutDefinition(),
+            depth: this._depthFrame.createAllowedSourcedFieldsColumnLayoutDefinitions(),
+            watchlist: this._watchlistFrame.createAllowedSourcedFieldsColumnLayoutDefinition(),
+            trades: this._tradesFrame.createAllowedSourcedFieldsColumnLayoutDefinition(),
         };
     }
 
-    applyGridLayoutDefinitions(layouts: DepthAndSalesDitemFrame.GridLayoutDefinitions) {
-        this._depthFrame.applyGridLayoutDefinitions(layouts.depth);
-        const watchlistGridLayoutOrReferenceDefinition = new RevGridLayoutOrReferenceDefinition(layouts.watchlist);
-        this._watchlistFrame.applyGridLayoutOrReferenceDefinition(watchlistGridLayoutOrReferenceDefinition);
-        this._tradesFrame.applyGridLayoutDefinition(layouts.trades);
+    applyColumnLayoutDefinitions(layouts: DepthAndSalesDitemFrame.ColumnLayoutDefinitions) {
+        this._depthFrame.applyColumnLayoutDefinitions(layouts.depth);
+        const watchlistColumnLayoutOrReferenceDefinition = new RevColumnLayoutOrReferenceDefinition(layouts.watchlist);
+        this._watchlistFrame.applyColumnLayoutOrReferenceDefinition(watchlistColumnLayoutOrReferenceDefinition);
+        this._tradesFrame.applyColumnLayoutDefinition(layouts.trades);
     }
 
     // adviseShown() {
@@ -312,16 +312,16 @@ export namespace DepthAndSalesDitemFrame {
         trades: readonly AllowedGridField[];
     }
 
-    export interface GridLayoutDefinitions {
-        watchlist: RevGridLayoutDefinition;
-        depth: BidAskGridLayoutDefinitions;
-        trades: RevGridLayoutDefinition;
+    export interface ColumnLayoutDefinitions {
+        watchlist: RevColumnLayoutDefinition;
+        depth: BidAskColumnLayoutDefinitions;
+        trades: RevColumnLayoutDefinition;
     }
 
     export interface AllowedFieldsAndLayoutDefinitions {
-        watchlist: AllowedFieldsGridLayoutDefinition;
-        depth: BidAskAllowedFieldsGridLayoutDefinitions;
-        trades: AllowedFieldsGridLayoutDefinition;
+        watchlist: AllowedSourcedFieldsColumnLayoutDefinition;
+        depth: BidAskAllowedSourcedFieldsColumnLayoutDefinitions;
+        trades: AllowedSourcedFieldsColumnLayoutDefinition;
     }
 
     export type OpenedEventHandler = (this: void) => void;

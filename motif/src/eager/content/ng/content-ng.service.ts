@@ -5,7 +5,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { AdaptedRevgridGridSettings, EditableGridLayoutDefinitionColumnList, GridField, LockOpenListItem, SessionInfoService } from '@motifmarkets/motif-core';
+import { AdaptedRevgridGridSettings, EditableColumnLayoutDefinitionColumnList, GridField, LockOpenListItem, SessionInfoService } from '@motifmarkets/motif-core';
 import {
     CellPainterFactoryNgService,
     CoreNgService,
@@ -45,7 +45,7 @@ export class ContentNgService {
             coreNgService.scansService,
             coreNgService.textFormatterService,
             coreNgService.gridFieldCustomHeadingsService,
-            coreNgService.referenceableGridLayoutsService,
+            coreNgService.referenceableColumnLayoutsService,
             coreNgService.tableFieldSourceDefinitionCachingFactoryService,
             tableRecordSourceDefinitionFactoryNgService.service,
             tableRecordSourceFactoryNgService.service,
@@ -143,12 +143,12 @@ export class ContentNgService {
         return this._content.createLockOpenNotificationChannelsGridFrame(opener);
     }
 
-    createGridLayoutEditorAllowedFieldsFrame(allowedFields: readonly GridField[], columnList: EditableGridLayoutDefinitionColumnList) {
-        return this._content.createGridLayoutEditorAllowedFieldsFrame(allowedFields, columnList);
+    createColumnLayoutEditorAllowedFieldsFrame(allowedFields: readonly GridField[], columnList: EditableColumnLayoutDefinitionColumnList) {
+        return this._content.createColumnLayoutEditorAllowedFieldsFrame(allowedFields, columnList);
     }
 
-    createGridLayoutEditorColumnsFrame(columnList: EditableGridLayoutDefinitionColumnList) {
-        return this._content.createGridLayoutEditorColumnsFrame(columnList);
+    createColumnLayoutEditorColumnsFrame(columnList: EditableColumnLayoutDefinitionColumnList) {
+        return this._content.createColumnLayoutEditorColumnsFrame(columnList);
     }
 
     createSymbolListDirectoryGridFrame(opener: LockOpenListItem.Opener) {

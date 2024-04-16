@@ -6,7 +6,7 @@
 
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostBinding, OnDestroy, ViewChild } from '@angular/core';
 import {
-    AllowedFieldsGridLayoutDefinition,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
     ButtonUiAction,
     CommandRegisterService,
@@ -22,6 +22,7 @@ import {
     UnreachableCaseError,
     delay1Tick
 } from '@motifmarkets/motif-core';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { CommandRegisterNgService, ToastNgService } from 'component-services-ng-api';
 import { AngularSplitTypes } from 'controls-internal-api';
 import { ButtonInputNgComponent } from 'controls-ng-api';
@@ -32,7 +33,6 @@ import {
     GeneralScanEditorSectionNgComponent,
     ScanEditorAttachedNotificationChannelsNgComponent
 } from '../section/ng-api';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 
 @Component({
     selector: 'app-scan-editor',
@@ -575,8 +575,8 @@ export namespace ScanEditorNgComponent {
     export type EditTargetsMultiSymbolGridColumnsEventer = (
         this: void,
         caption: string,
-        allowedFieldsAndLayoutDefinition: AllowedFieldsGridLayoutDefinition
-    ) => Promise<RevGridLayoutOrReferenceDefinition | undefined>;
+        allowedFieldsAndLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition
+    ) => Promise<RevColumnLayoutOrReferenceDefinition | undefined>;
     export type PopoutTargetsMultiSymbolListEditorEventer = (
         this: void,
         caption: string,

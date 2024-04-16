@@ -11,7 +11,7 @@ import {
     TableFieldSourceDefinitionCachingFactoryService,
     TableRecordSourceDefinition
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { LockOpenNotificationChannelTableFieldSourceDefinition } from './lock-open-notification-channel-table-field-source-definition';
 
 export class LockOpenNotificationChannelListTableRecordSourceDefinition extends TableRecordSourceDefinition {
@@ -27,14 +27,14 @@ export class LockOpenNotificationChannelListTableRecordSourceDefinition extends 
         );
     }
 
-    override createDefaultLayoutDefinition(): RevGridLayoutDefinition {
+    override createDefaultLayoutDefinition(): RevColumnLayoutDefinition {
         const notificationChannelTableFieldSourceDefinition = LockOpenNotificationChannelTableFieldSourceDefinition.get(this.tableFieldSourceDefinitionCachingFactoryService);
 
         const fieldNames = new Array<string>();
 
         fieldNames.push(notificationChannelTableFieldSourceDefinition.getFieldNameById(LockOpenNotificationChannel.FieldId.Name));
 
-        return RevGridLayoutDefinition.createFromFieldNames(fieldNames);
+        return RevColumnLayoutDefinition.createFromFieldNames(fieldNames);
     }
 }
 
@@ -109,7 +109,7 @@ export namespace LockOpenNotificationChannelListTableRecordSourceDefinition {
     export function createLayoutDefinition(
         fieldSourceDefinitionRegistryService: TableFieldSourceDefinitionCachingFactoryService,
         fieldIds: FieldId[],
-    ): RevGridLayoutDefinition {
+    ): RevColumnLayoutDefinition {
         return fieldSourceDefinitionRegistryService.createLayoutDefinition(fieldIds);
     }
 

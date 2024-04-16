@@ -26,16 +26,16 @@ import { ContentComponentBaseNgDirective } from '../../../../ng/content-componen
 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridLayoutEditorSearchGridNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
+export class ColumnLayoutEditorSearchGridNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
     private static typeInstanceCreateCount = 0;
 
     @ViewChild('searchInput', { static: true }) private _searchInputComponent: TextInputNgComponent;
     @ViewChild('searchNextButton', { static: true }) private _searchNextButtonComponent: SvgButtonNgComponent;
     @ViewChild('selectAllButton', { static: true }) private _selectAllButtonComponent: SvgButtonNgComponent;
 
-    searchTextChangedEventer: GridLayoutEditorSearchGridNgComponent.SearchTextChangedEventer | undefined;
-    searchNextEventer: GridLayoutEditorSearchGridNgComponent.SearchNextEventer | undefined;
-    selectAllEventer: GridLayoutEditorSearchGridNgComponent.SelectAllEventer | undefined;
+    searchTextChangedEventer: ColumnLayoutEditorSearchGridNgComponent.SearchTextChangedEventer | undefined;
+    searchNextEventer: ColumnLayoutEditorSearchGridNgComponent.SearchNextEventer | undefined;
+    selectAllEventer: ColumnLayoutEditorSearchGridNgComponent.SelectAllEventer | undefined;
 
     private readonly _commandRegisterService: CommandRegisterService;
 
@@ -50,7 +50,7 @@ export class GridLayoutEditorSearchGridNgComponent extends ContentComponentBaseN
         private readonly _cdr: ChangeDetectorRef,
         commandRegisterNgService: CommandRegisterNgService,
     ) {
-        super(elRef, ++GridLayoutEditorSearchGridNgComponent.typeInstanceCreateCount);
+        super(elRef, ++ColumnLayoutEditorSearchGridNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
 
@@ -138,7 +138,7 @@ export class GridLayoutEditorSearchGridNgComponent extends ContentComponentBaseN
     }
 }
 
-export namespace GridLayoutEditorSearchGridNgComponent {
+export namespace ColumnLayoutEditorSearchGridNgComponent {
     export type SearchTextChangedEventer = (searchText: string) => void;
     export type SearchNextEventer = (searchText: string, downKeys: ModifierKey.IdSet) => void;
     export type SelectAllEventer = (downKeys: ModifierKey.IdSet) => void;

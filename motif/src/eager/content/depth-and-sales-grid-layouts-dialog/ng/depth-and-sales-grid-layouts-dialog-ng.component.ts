@@ -22,7 +22,7 @@ import {
     AllowedGridField,
     AssertInternalError,
     CommandRegisterService,
-    EditableGridLayoutDefinitionColumnList,
+    EditableColumnLayoutDefinitionColumnList,
     GridField,
     IconButtonUiAction,
     InternalCommand,
@@ -35,11 +35,11 @@ import {
     assert,
     delay1Tick
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition } from '@xilytix/rev-data-source';
 import { CommandRegisterNgService, CoreInjectionTokens } from 'component-services-ng-api';
 import { SvgButtonNgComponent, TabListNgComponent } from 'controls-ng-api';
 import { DepthAndSalesDitemFrame } from 'ditem-internal-api';
-import { GridLayoutEditorNgComponent, allowedFieldsInjectionToken, definitionColumnListInjectionToken } from '../../grid-layout-dialog/ng-api';
+import { ColumnLayoutEditorNgComponent, allowedFieldsInjectionToken, definitionColumnListInjectionToken } from '../../grid-layout-dialog/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 
 @Component({
@@ -49,7 +49,7 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DepthAndSalesGridLayoutsDialogNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
+export class DepthAndSalesColumnLayoutsDialogNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
     private static typeInstanceCreateCount = 0;
 
     @ViewChild('okButton', { static: true }) private _okButtonComponent: SvgButtonNgComponent;
@@ -64,18 +64,18 @@ export class DepthAndSalesGridLayoutsDialogNgComponent extends ContentComponentB
     private _watchlistAllowedFields: readonly GridField[];
     private _tradesAllowedFields: readonly GridField[];
 
-    private _depthBidLayoutDefinition: RevGridLayoutDefinition;
-    private _depthAskLayoutDefinition: RevGridLayoutDefinition;
-    private _watchlistLayoutDefinition: RevGridLayoutDefinition;
-    private _tradesLayoutDefinition: RevGridLayoutDefinition;
+    private _depthBidLayoutDefinition: RevColumnLayoutDefinition;
+    private _depthAskLayoutDefinition: RevColumnLayoutDefinition;
+    private _watchlistLayoutDefinition: RevColumnLayoutDefinition;
+    private _tradesLayoutDefinition: RevColumnLayoutDefinition;
 
     private _okUiAction: IconButtonUiAction;
     private _cancelUiAction: IconButtonUiAction;
 
-    private _activeSubFrameId: DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId | undefined;
-    private _editorComponent: GridLayoutEditorNgComponent | undefined;
+    private _activeSubFrameId: DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId | undefined;
+    private _editorComponent: ColumnLayoutEditorNgComponent | undefined;
 
-    private _closeResolve: (value: DepthAndSalesDitemFrame.GridLayoutDefinitions | undefined) => void;
+    private _closeResolve: (value: DepthAndSalesDitemFrame.ColumnLayoutDefinitions | undefined) => void;
     private _closeReject: (reason: unknown) => void;
 
     constructor(
@@ -83,11 +83,11 @@ export class DepthAndSalesGridLayoutsDialogNgComponent extends ContentComponentB
         private _cdr: ChangeDetectorRef,
         commandRegisterNgService: CommandRegisterNgService,
         @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-        @Inject(DepthAndSalesGridLayoutsDialogNgComponent.captionInjectionToken) public readonly caption: string,
-        @Inject(DepthAndSalesGridLayoutsDialogNgComponent.depthAndSalesAllowedFieldsInjectionToken) allowedFields: DepthAndSalesDitemFrame.AllowedGridFields,
-        @Inject(DepthAndSalesGridLayoutsDialogNgComponent.oldDepthAndSalesGridLayoutDefinitionsInjectionToken) oldLayoutDefinitions: DepthAndSalesDitemFrame.GridLayoutDefinitions,
+        @Inject(DepthAndSalesColumnLayoutsDialogNgComponent.captionInjectionToken) public readonly caption: string,
+        @Inject(DepthAndSalesColumnLayoutsDialogNgComponent.depthAndSalesAllowedFieldsInjectionToken) allowedFields: DepthAndSalesDitemFrame.AllowedGridFields,
+        @Inject(DepthAndSalesColumnLayoutsDialogNgComponent.oldDepthAndSalesColumnLayoutDefinitionsInjectionToken) oldLayoutDefinitions: DepthAndSalesDitemFrame.ColumnLayoutDefinitions,
     ) {
-        super(elRef, ++DepthAndSalesGridLayoutsDialogNgComponent.typeInstanceCreateCount);
+        super(elRef, ++DepthAndSalesColumnLayoutsDialogNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
 
@@ -115,30 +115,30 @@ export class DepthAndSalesGridLayoutsDialogNgComponent extends ContentComponentB
     }
 
     open() {
-        return new Promise<DepthAndSalesDitemFrame.GridLayoutDefinitions | undefined>((resolve, reject) => {
+        return new Promise<DepthAndSalesDitemFrame.ColumnLayoutDefinitions | undefined>((resolve, reject) => {
             this._closeResolve = resolve;
             this._closeReject = reject;
         });
     }
 
-    setSubFrameId(value: DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId) {
+    setSubFrameId(value: DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId) {
         this.checkLoadLayoutFromEditor();
 
         if (value !== this._activeSubFrameId) {
             switch (value) {
-                case DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.BidDepth:
+                case DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.BidDepth:
                     this._editorComponent = this.recreateEditor(this._depthBidAllowedFields, this._depthBidLayoutDefinition);
                     break;
 
-                case DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.AskDepth:
+                case DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.AskDepth:
                     this._editorComponent = this.recreateEditor(this._depthAskAllowedFields, this._depthAskLayoutDefinition);
                     break;
 
-                case DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.Watchlist:
+                case DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.Watchlist:
                     this._editorComponent = this.recreateEditor(this._watchlistAllowedFields, this._watchlistLayoutDefinition);
                     break;
 
-                case DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.Trades:
+                case DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.Trades:
                     this._editorComponent = this.recreateEditor(this._tradesAllowedFields, this._tradesLayoutDefinition);
                     break;
 
@@ -162,7 +162,7 @@ export class DepthAndSalesGridLayoutsDialogNgComponent extends ContentComponentB
         this.close(false);
     }
 
-    private handleActiveTabChangedEvent(tab: TabListNgComponent.Tab, subFrameId: DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId) {
+    private handleActiveTabChangedEvent(tab: TabListNgComponent.Tab, subFrameId: DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId) {
         if (tab.active) {
             this.setSubFrameId(subFrameId);
         }
@@ -197,33 +197,33 @@ export class DepthAndSalesGridLayoutsDialogNgComponent extends ContentComponentB
                 caption: Strings[StringId.Watchlist],
                 initialActive: true,
                 initialDisabled: false,
-                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.Watchlist),
+                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.Watchlist),
             },
             {
                 caption: Strings[StringId.BidDepth],
                 initialActive: false,
                 initialDisabled: false,
-                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.BidDepth),
+                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.BidDepth),
             },
             {
                 caption: Strings[StringId.AskDepth],
                 initialActive: false,
                 initialDisabled: false,
-                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.AskDepth),
+                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.AskDepth),
             },
             {
                 caption: Strings[StringId.Trades],
                 initialActive: false,
                 initialDisabled: false,
-                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.Trades),
+                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.Trades),
             },
         ];
         this._tabListComponent.setTabs(tabDefinitions);
 
-        this.setSubFrameId(DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.Watchlist);
+        this.setSubFrameId(DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.Watchlist);
     }
 
-    private recreateEditor(allowedFields: readonly AllowedGridField[], layoutDefinition: RevGridLayoutDefinition) {
+    private recreateEditor(allowedFields: readonly AllowedGridField[], layoutDefinition: RevColumnLayoutDefinition) {
         this.checkLoadLayoutFromEditor();
 
         if (this._editorComponent !== undefined) {
@@ -239,7 +239,7 @@ export class DepthAndSalesGridLayoutsDialogNgComponent extends ContentComponentB
             useValue: allowedFields,
         };
 
-        const definitionColumnList = new EditableGridLayoutDefinitionColumnList();
+        const definitionColumnList = new EditableColumnLayoutDefinitionColumnList();
         definitionColumnList.load(allowedFields, layoutDefinition, 0);
         const columnListProvider: ValueProvider = {
             provide: definitionColumnListInjectionToken,
@@ -250,7 +250,7 @@ export class DepthAndSalesGridLayoutsDialogNgComponent extends ContentComponentB
             providers: [openerProvider, allowedFieldsProvider, columnListProvider],
         });
 
-        const componentRef = this._editorContainer.createComponent(GridLayoutEditorNgComponent, { injector });
+        const componentRef = this._editorContainer.createComponent(ColumnLayoutEditorNgComponent, { injector });
         const component = componentRef.instance;
 
         return component;
@@ -264,20 +264,20 @@ export class DepthAndSalesGridLayoutsDialogNgComponent extends ContentComponentB
                 throw new AssertInternalError('PGLEDNCCLLFEE33333');
             } else {
                 switch (activeSubFrameId) {
-                    case DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.BidDepth:
-                        this._depthBidLayoutDefinition = editorComponent.getGridLayoutDefinition();
+                    case DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.BidDepth:
+                        this._depthBidLayoutDefinition = editorComponent.getColumnLayoutDefinition();
                         break;
 
-                    case DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.AskDepth:
-                        this._depthAskLayoutDefinition = editorComponent.getGridLayoutDefinition();
+                    case DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.AskDepth:
+                        this._depthAskLayoutDefinition = editorComponent.getColumnLayoutDefinition();
                         break;
 
-                    case DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.Watchlist:
-                        this._watchlistLayoutDefinition = editorComponent.getGridLayoutDefinition();
+                    case DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.Watchlist:
+                        this._watchlistLayoutDefinition = editorComponent.getColumnLayoutDefinition();
                         break;
 
-                    case DepthAndSalesGridLayoutsDialogNgComponent.SubFrameId.Trades:
-                        this._tradesLayoutDefinition = editorComponent.getGridLayoutDefinition();
+                    case DepthAndSalesColumnLayoutsDialogNgComponent.SubFrameId.Trades:
+                        this._tradesLayoutDefinition = editorComponent.getColumnLayoutDefinition();
                         break;
 
                     default:
@@ -290,7 +290,7 @@ export class DepthAndSalesGridLayoutsDialogNgComponent extends ContentComponentB
     private close(ok: boolean) {
         if (ok) {
             this.checkLoadLayoutFromEditor();
-            const layouts: DepthAndSalesDitemFrame.GridLayoutDefinitions = {
+            const layouts: DepthAndSalesDitemFrame.ColumnLayoutDefinitions = {
                 watchlist: this._watchlistLayoutDefinition,
                 depth: {
                     bid: this._depthBidLayoutDefinition,
@@ -305,7 +305,7 @@ export class DepthAndSalesGridLayoutsDialogNgComponent extends ContentComponentB
     }
 }
 
-export namespace DepthAndSalesGridLayoutsDialogNgComponent {
+export namespace DepthAndSalesColumnLayoutsDialogNgComponent {
     export const enum SubFrameId {
         BidDepth,
         AskDepth,
@@ -313,11 +313,11 @@ export namespace DepthAndSalesGridLayoutsDialogNgComponent {
         Trades,
     }
 
-    export type ClosePromise = Promise<DepthAndSalesDitemFrame.GridLayoutDefinitions | undefined>;
+    export type ClosePromise = Promise<DepthAndSalesDitemFrame.ColumnLayoutDefinitions | undefined>;
 
-    export const captionInjectionToken = new InjectionToken<string>('DepthAndSalesGridLayoutsDialogNgComponent.caption');
-    export const depthAndSalesAllowedFieldsInjectionToken = new InjectionToken<DepthAndSalesDitemFrame.AllowedGridFields>('DepthAndSalesGridLayoutsDialogNgComponent.allowedFields');
-    export const oldDepthAndSalesGridLayoutDefinitionsInjectionToken = new InjectionToken<DepthAndSalesDitemFrame.GridLayoutDefinitions>('DepthAndSalesGridLayoutsDialogNgComponent.allowedFields');
+    export const captionInjectionToken = new InjectionToken<string>('DepthAndSalesColumnLayoutsDialogNgComponent.caption');
+    export const depthAndSalesAllowedFieldsInjectionToken = new InjectionToken<DepthAndSalesDitemFrame.AllowedGridFields>('DepthAndSalesColumnLayoutsDialogNgComponent.allowedFields');
+    export const oldDepthAndSalesColumnLayoutDefinitionsInjectionToken = new InjectionToken<DepthAndSalesDitemFrame.ColumnLayoutDefinitions>('DepthAndSalesColumnLayoutsDialogNgComponent.allowedFields');
 
     export function open(
         container: ViewContainerRef,
@@ -344,7 +344,7 @@ export namespace DepthAndSalesGridLayoutsDialogNgComponent {
             trades: allowedFieldsAndLayoutDefinition.trades.allowedFields,
         };
 
-        const gridLayoutDefinitions: DepthAndSalesDitemFrame.GridLayoutDefinitions = {
+        const columnLayoutDefinitions: DepthAndSalesDitemFrame.ColumnLayoutDefinitions = {
             watchlist: allowedFieldsAndLayoutDefinition.watchlist,
             depth: {
                 bid: allowedFieldsAndLayoutDefinition.depth.bid,
@@ -358,15 +358,15 @@ export namespace DepthAndSalesGridLayoutsDialogNgComponent {
             useValue: allowedFields,
         };
         const oldBidAskLayoutDefinitionProvider: ValueProvider = {
-            provide: oldDepthAndSalesGridLayoutDefinitionsInjectionToken,
-            useValue: gridLayoutDefinitions,
+            provide: oldDepthAndSalesColumnLayoutDefinitionsInjectionToken,
+            useValue: columnLayoutDefinitions,
         };
         const injector = Injector.create({
             providers: [openerProvider, captionProvider, allowedFieldsProvider, oldBidAskLayoutDefinitionProvider],
         });
 
-        const componentRef = container.createComponent(DepthAndSalesGridLayoutsDialogNgComponent, { injector });
-        assert(componentRef.instance instanceof DepthAndSalesGridLayoutsDialogNgComponent, 'ID:157271511202');
+        const componentRef = container.createComponent(DepthAndSalesColumnLayoutsDialogNgComponent, { injector });
+        assert(componentRef.instance instanceof DepthAndSalesColumnLayoutsDialogNgComponent, 'ID:157271511202');
 
         const component = componentRef.instance;
 

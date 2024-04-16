@@ -38,7 +38,7 @@ import {
     SymbolsNgService,
     ToastNgService
 } from 'component-services-ng-api';
-import { BalancesNgComponent, NameableGridLayoutEditorDialogNgComponent } from 'content-ng-api';
+import { BalancesNgComponent, NameableColumnLayoutEditorDialogNgComponent } from 'content-ng-api';
 import { BrokerageAccountGroupInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
 import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
@@ -251,9 +251,9 @@ export class BalancesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirec
     private showLayoutEditorDialog() {
         this._activeDialogTypeId = BalancesDitemNgComponent.ActiveDialogTypeId.Layout;
 
-        const allowedFieldsAndLayoutDefinition = this._frame.createAllowedFieldsGridLayoutDefinition();
+        const allowedFieldsAndLayoutDefinition = this._frame.createAllowedSourcedFieldsColumnLayoutDefinition();
 
-        const closePromise = NameableGridLayoutEditorDialogNgComponent.open(
+        const closePromise = NameableColumnLayoutEditorDialogNgComponent.open(
             this._dialogContainer,
             this._frame.opener,
             Strings[StringId.Balances_ColumnsDialogCaption],
@@ -262,11 +262,11 @@ export class BalancesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirec
         closePromise.then(
             (layoutOrReferenceDefinition) => {
                 if (layoutOrReferenceDefinition !== undefined) {
-                    const openPromise = this._frame.tryOpenGridLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
+                    const openPromise = this._frame.tryOpenColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
                     openPromise.then(
                         (openResult) => {
                             if (openResult.isErr()) {
-                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.Balances]} ${Strings[StringId.GridLayout]}: ${openResult.error}`);
+                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.Balances]} ${Strings[StringId.ColumnLayout]}: ${openResult.error}`);
                             }
                         },
                         (reason) => { throw AssertInternalError.createIfNotError(reason, 'LIILENDHCSEOP56668'); }

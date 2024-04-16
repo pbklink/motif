@@ -5,16 +5,16 @@
  */
 
 import { Injectable } from '@angular/core';
-import { RevFavouriteReferenceableGridLayoutDefinitionsStoreService } from '@xilytix/rev-data-source';
+import { RevFavouriteReferenceableColumnLayoutDefinitionsStoreService } from '@xilytix/rev-data-source';
 
 @Injectable({
     providedIn: 'root',
 })
-export class FavouriteReferenceableGridLayoutDefinitionsStoreNgService {
-    private _service: RevFavouriteReferenceableGridLayoutDefinitionsStoreService;
+export class FavouriteReferenceableColumnLayoutDefinitionsStoreNgService {
+    private _service: RevFavouriteReferenceableColumnLayoutDefinitionsStoreService;
 
     constructor() {
-        this._service = new RevFavouriteReferenceableGridLayoutDefinitionsStoreService();
+        this._service = new RevFavouriteReferenceableColumnLayoutDefinitionsStoreService();
     }
 
     get service() { return this._service; }

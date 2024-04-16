@@ -33,7 +33,7 @@ import {
     SymbolsNgService,
     ToastNgService
 } from 'component-services-ng-api';
-import { NameableGridLayoutEditorDialogNgComponent, OrderAuthoriseNgComponent } from 'content-ng-api';
+import { NameableColumnLayoutEditorDialogNgComponent, OrderAuthoriseNgComponent } from 'content-ng-api';
 import { BrokerageAccountGroupInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
 import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
@@ -269,7 +269,7 @@ export class OrderAuthoriseDitemNgComponent extends BuiltinDitemNgComponentBaseN
 
         const allowedFieldsAndLayoutDefinition = this._frame.createAllowedFieldsAndLayoutDefinition();
 
-        const closePromise = NameableGridLayoutEditorDialogNgComponent.open(
+        const closePromise = NameableColumnLayoutEditorDialogNgComponent.open(
             this._dialogContainer,
             this._frame.opener,
             Strings[StringId.OrderAuthorise_ColumnsDialogCaption],
@@ -278,11 +278,11 @@ export class OrderAuthoriseDitemNgComponent extends BuiltinDitemNgComponentBaseN
         closePromise.then(
             (layoutOrReferenceDefinition) => {
                 if (layoutOrReferenceDefinition !== undefined) {
-                    const openPromise = this._frame.tryOpenGridLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
+                    const openPromise = this._frame.tryOpenColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
                     openPromise.then(
                         (openResult) => {
                             if (openResult.isErr()) {
-                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.OrderAuthorise]} ${Strings[StringId.GridLayout]}: ${openResult.error}`);
+                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.OrderAuthorise]} ${Strings[StringId.ColumnLayout]}: ${openResult.error}`);
                             }
                         },
                         (reason) => { throw AssertInternalError.createIfNotError(reason, 'OADNCSLECPOP68823'); }

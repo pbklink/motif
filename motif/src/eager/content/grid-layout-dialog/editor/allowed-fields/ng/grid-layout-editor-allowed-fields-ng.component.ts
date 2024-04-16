@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import {
     AssertInternalError,
-    EditableGridLayoutDefinitionColumnList,
+    EditableColumnLayoutDefinitionColumnList,
     GridField,
     LockOpenListItem,
     StringId,
@@ -18,8 +18,8 @@ import { CoreInjectionTokens, ToastNgService } from 'component-services-ng-api';
 import { GridSourceNgDirective } from '../../../../grid-source/ng-api';
 import { ContentNgService } from '../../../../ng/content-ng.service';
 import { allowedFieldsInjectionToken, definitionColumnListInjectionToken } from '../../../ng/grid-layout-dialog-ng-injection-tokens';
-import { GridLayoutEditorSearchGridNgComponent } from '../../search-grid/ng-api';
-import { GridLayoutEditorAllowedFieldsFrame } from '../grid-layout-editor-allowed-fields-frame';
+import { ColumnLayoutEditorSearchGridNgComponent } from '../../search-grid/ng-api';
+import { ColumnLayoutEditorAllowedFieldsFrame } from '../grid-layout-editor-allowed-fields-frame';
 
 @Component({
     selector: 'app-grid-layout-editor-allowed-fields',
@@ -28,16 +28,16 @@ import { GridLayoutEditorAllowedFieldsFrame } from '../grid-layout-editor-allowe
 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridLayoutEditorAllowedFieldsNgComponent extends GridSourceNgDirective {
+export class ColumnLayoutEditorAllowedFieldsNgComponent extends GridSourceNgDirective {
     private static typeInstanceCreateCount = 0;
 
-    @ViewChild('search', { static: true }) private _searchComponent: GridLayoutEditorSearchGridNgComponent;
+    @ViewChild('search', { static: true }) private _searchComponent: ColumnLayoutEditorSearchGridNgComponent;
 
-    columnsViewWithsChangedEventer: GridLayoutEditorAllowedFieldsNgComponent.ColumnsViewWithsChangedEventer | undefined;
+    columnsViewWithsChangedEventer: ColumnLayoutEditorAllowedFieldsNgComponent.ColumnsViewWithsChangedEventer | undefined;
 
     public readonly heading = Strings[StringId.Available]
 
-    declare readonly frame: GridLayoutEditorAllowedFieldsFrame;
+    declare readonly frame: ColumnLayoutEditorAllowedFieldsFrame;
 
     constructor(
         elRef: ElementRef<HTMLElement>,
@@ -46,10 +46,10 @@ export class GridLayoutEditorAllowedFieldsNgComponent extends GridSourceNgDirect
         private readonly _toastNgService: ToastNgService,
         @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
         @Inject(allowedFieldsInjectionToken) allowedFields: GridField[],
-        @Inject(definitionColumnListInjectionToken) columnList: EditableGridLayoutDefinitionColumnList,
+        @Inject(definitionColumnListInjectionToken) columnList: EditableColumnLayoutDefinitionColumnList,
     ) {
-        const frame = contentNgService.createGridLayoutEditorAllowedFieldsFrame(allowedFields, columnList);
-        super(elRef, ++GridLayoutEditorAllowedFieldsNgComponent.typeInstanceCreateCount, cdr, frame);
+        const frame = contentNgService.createColumnLayoutEditorAllowedFieldsFrame(allowedFields, columnList);
+        super(elRef, ++ColumnLayoutEditorAllowedFieldsNgComponent.typeInstanceCreateCount, cdr, frame);
     }
 
     calculateFixedColumnsWidth() {
@@ -95,6 +95,6 @@ export class GridLayoutEditorAllowedFieldsNgComponent extends GridSourceNgDirect
     }
 }
 
-export namespace GridLayoutEditorAllowedFieldsNgComponent {
+export namespace ColumnLayoutEditorAllowedFieldsNgComponent {
     export type ColumnsViewWithsChangedEventer = (this: void) => void;
 }

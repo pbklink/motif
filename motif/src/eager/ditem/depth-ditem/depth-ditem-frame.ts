@@ -7,7 +7,7 @@
 import {
     AdiService,
     AssertInternalError,
-    BidAskGridLayoutDefinitions,
+    BidAskColumnLayoutDefinitions,
     CommandRegisterService,
     DepthStyleId,
     JsonElement,
@@ -138,19 +138,19 @@ export class DepthDitemFrame extends BuiltinDitemFrame {
         }
     }
 
-    createAllowedFieldsGridLayoutDefinitions() {
+    createAllowedSourcedFieldsColumnLayoutDefinitions() {
         if (this._depthFrame === undefined) {
             throw new AssertInternalError('DDFCAFALD21915');
         } else {
-            return this._depthFrame.createAllowedFieldsGridLayoutDefinitions();
+            return this._depthFrame.createAllowedSourcedFieldsColumnLayoutDefinitions();
         }
     }
 
-    applyGridLayoutDefinitions(layout: BidAskGridLayoutDefinitions) {
+    applyColumnLayoutDefinitions(layout: BidAskColumnLayoutDefinitions) {
         if (this._depthFrame === undefined) {
             throw new AssertInternalError('DDFAGLD21915');
         } else {
-            this._depthFrame.applyGridLayoutDefinitions(layout);
+            this._depthFrame.applyColumnLayoutDefinitions(layout);
         }
     }
 

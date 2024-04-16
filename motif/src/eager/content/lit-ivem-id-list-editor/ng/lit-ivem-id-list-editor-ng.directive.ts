@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, InjectionToken, OnDestroy, ViewChild } from '@angular/core';
 import {
-    AllowedFieldsGridLayoutDefinition,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
     CommandRegisterService,
     IconButtonUiAction,
@@ -21,7 +21,7 @@ import {
     TableFieldSourceDefinitionCachingFactoryService,
     UiComparableList
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import {
     CommandRegisterNgService, ToastNgService,
 } from 'component-services-ng-api';
@@ -155,9 +155,9 @@ export abstract class LitIvemIdListEditorNgDirective extends ContentComponentBas
         }
 
         const layoutDefinition = this.createDefaultLayoutDefinition();
-        const gridLayoutOrReferenceDefinition = new RevGridLayoutOrReferenceDefinition(layoutDefinition);
+        const columnLayoutOrReferenceDefinition = new RevColumnLayoutOrReferenceDefinition(layoutDefinition);
 
-        this._litIvemIdListComponent.initialise(this.opener, gridLayoutOrReferenceDefinition, undefined, true);
+        this._litIvemIdListComponent.initialise(this.opener, columnLayoutOrReferenceDefinition, undefined, true);
 
         const openPromise = this._litIvemIdListComponent.tryOpenList(this.list, true);
         openPromise.then(
@@ -188,7 +188,7 @@ export abstract class LitIvemIdListEditorNgDirective extends ContentComponentBas
         this._filterUiAction.finalise();
     }
 
-    protected editGridColumns(allowedFieldsAndLayoutDefinition: AllowedFieldsGridLayoutDefinition) {
+    protected editGridColumns(allowedFieldsAndLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition) {
         if (this.editGridColumnsEventer === undefined) {
             return Promise.resolve(undefined);
         } else {
@@ -291,16 +291,16 @@ export abstract class LitIvemIdListEditorNgDirective extends ContentComponentBas
     }
 
     private handleColumnsSignalEvent() {
-        const allowedFieldsAndLayoutDefinition = this._litIvemIdListComponent.createAllowedFieldsGridLayoutDefinition();
+        const allowedFieldsAndLayoutDefinition = this._litIvemIdListComponent.createAllowedSourcedFieldsColumnLayoutDefinition();
         const editFinishPromise = this.editGridColumns(allowedFieldsAndLayoutDefinition);
         editFinishPromise.then(
             (layoutOrReferenceDefinition) => {
                 if (layoutOrReferenceDefinition !== undefined) {
-                    const openPromise = this._litIvemIdListComponent.tryOpenGridLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
+                    const openPromise = this._litIvemIdListComponent.tryOpenColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
                     openPromise.then(
                         (openResult) => {
                             if (openResult.isErr()) {
-                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.LitIvemIdListEditor]} ${Strings[StringId.GridLayout]}: ${openResult.error}`);
+                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.LitIvemIdListEditor]} ${Strings[StringId.ColumnLayout]}: ${openResult.error}`);
                             }
                         },
                         (reason) => { throw AssertInternalError.createIfNotError(reason, 'LIILENDHCSEOP56668'); }
@@ -353,7 +353,7 @@ export abstract class LitIvemIdListEditorNgDirective extends ContentComponentBas
 
 export namespace LitIvemIdListEditorNgDirective {
     export type AfterListChangedEventHandler = (this: void, ui: boolean) => void;
-    export type EditGridColumnsEventer = (this: void, allowedFieldsAndLayoutDefinition: AllowedFieldsGridLayoutDefinition) => Promise<RevGridLayoutOrReferenceDefinition | undefined>;
+    export type EditGridColumnsEventer = (this: void, allowedFieldsAndLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition) => Promise<RevColumnLayoutOrReferenceDefinition | undefined>;
     export type PopoutEventer = (this: void, list: UiComparableList<LitIvemId>) => void;
 
     export const listInjectionToken = new InjectionToken<UiComparableList<LitIvemId>>('LitIvemIdListEditorNgDirective.list');

@@ -19,7 +19,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { CellEditor, DatalessViewCell, Subgrid, ViewCell } from '@xilytix/revgrid';
 import { GridSourceFrame } from '../../../../../../../grid-source/internal-api';
 import { ScanFieldEditorFrame } from '../field/internal-api';
@@ -104,7 +104,7 @@ export class ScanFieldEditorFramesGridFrame extends GridSourceFrame {
         }
     }
 
-    private createListGridSourceOrReferenceDefinition(list: BadnessComparableList<ScanFieldEditorFrame>, layoutDefinition: RevGridLayoutOrReferenceDefinition | undefined) {
+    private createListGridSourceOrReferenceDefinition(list: BadnessComparableList<ScanFieldEditorFrame>, layoutDefinition: RevColumnLayoutOrReferenceDefinition | undefined) {
         const tableRecordSourceDefinition = new ScanFieldEditorFrameComparableListTableRecordSourceDefinition(
             this.gridFieldCustomHeadingsService,
             this.tableFieldSourceDefinitionCachingFactoryService,
@@ -137,11 +137,11 @@ export class ScanFieldEditorFramesGridFrame extends GridSourceFrame {
     }
 
     private tryGetCellEditor(sourcelesFieldName: string, readonly: boolean, subgridRowIndex: Integer): CellEditor<AdaptedRevgridBehavioredColumnSettings, GridField> | undefined {
-        // if (sourcelesFieldName === EditableGridLayoutDefinitionColumn.FieldName.visible) {
+        // if (sourcelesFieldName === EditableColumnLayoutDefinitionColumn.FieldName.visible) {
         //     this._visibleCheckboxEditor.readonly = readonly || subgridRowIndex < this._recordList.fixedColumnCount;
         //     return this._visibleCheckboxEditor;
         // } else {
-        //     if (sourcelesFieldName === EditableGridLayoutDefinitionColumn.FieldName.width) {
+        //     if (sourcelesFieldName === EditableColumnLayoutDefinitionColumn.FieldName.width) {
         //         this._widthEditor.readonly = readonly
         //         return this._widthEditor;
         //     } else {

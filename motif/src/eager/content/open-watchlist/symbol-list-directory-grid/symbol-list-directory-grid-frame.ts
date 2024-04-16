@@ -17,8 +17,8 @@ import {
     RankedLitIvemIdListDirectory,
     RankedLitIvemIdListDirectoryItemTableRecordSource,
     RankedLitIvemIdListDirectoryItemTableRecordSourceDefinition,
+    ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
-    ReferenceableGridLayoutsService,
     RenderValueRecordGridCellPainter,
     ScansService,
     SettingsService,
@@ -29,7 +29,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { DatalessViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../grid-source/internal-api';
@@ -47,7 +47,7 @@ export class SymbolListDirectoryGridFrame extends GridSourceFrame {
         settingsService: SettingsService,
         private readonly _scansService: ScansService,
         gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
-        referenceableGridLayoutsService: ReferenceableGridLayoutsService,
+        referenceableColumnLayoutsService: ReferenceableColumnLayoutsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,
         tableRecordSourceFactory: TableRecordSourceFactory,
@@ -59,7 +59,7 @@ export class SymbolListDirectoryGridFrame extends GridSourceFrame {
         super(
             settingsService,
             gridFieldCustomHeadingsService,
-            referenceableGridLayoutsService,
+            referenceableColumnLayoutsService,
             tableFieldSourceDefinitionCachingFactoryService,
             tableRecordSourceDefinitionFactoryService,
             tableRecordSourceFactory,
@@ -140,7 +140,7 @@ export class SymbolListDirectoryGridFrame extends GridSourceFrame {
         }
     }
 
-    private createListGridSourceOrReferenceDefinition(layoutDefinition: RevGridLayoutOrReferenceDefinition | undefined) {
+    private createListGridSourceOrReferenceDefinition(layoutDefinition: RevColumnLayoutOrReferenceDefinition | undefined) {
         const namedSourceList: RankedLitIvemIdListDirectory.NamedSourceList = {
             name: Strings[StringId.Scan],
             list: this._scansService.scanList,

@@ -22,7 +22,7 @@ import {
     SymbolDetailCacheService,
     SymbolsService,
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { ToastService } from 'component-services-internal-api';
 import { OrdersFrame } from 'content-internal-api';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
@@ -111,15 +111,15 @@ export class OrdersDitemFrame extends BuiltinDitemFrame {
         if (this._ordersFrame === undefined) {
             throw new AssertInternalError('ODFCAFALD04418');
         } else {
-            return this._ordersFrame.createAllowedFieldsGridLayoutDefinition();
+            return this._ordersFrame.createAllowedSourcedFieldsColumnLayoutDefinition();
         }
     }
 
-    tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition: RevGridLayoutOrReferenceDefinition) {
+    tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition: RevColumnLayoutOrReferenceDefinition) {
         if (this._ordersFrame === undefined) {
             throw new AssertInternalError('ODFOGLONRD04418');
         } else {
-            return this._ordersFrame.tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition);
+            return this._ordersFrame.tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition);
         }
     }
 

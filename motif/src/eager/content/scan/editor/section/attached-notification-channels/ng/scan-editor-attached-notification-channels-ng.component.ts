@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import {
-    AllowedFieldsGridLayoutDefinition,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
     CommandRegisterService,
     HtmlTypes,
@@ -17,7 +17,7 @@ import {
     UnreachableCaseError,
     delay1Tick
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { CommandRegisterNgService, NotificationChannelsNgService, ToastNgService } from 'component-services-ng-api';
 import {
     IntegerEnumInputNgComponent, SvgButtonNgComponent
@@ -300,16 +300,16 @@ export class ScanEditorAttachedNotificationChannelsNgComponent extends ScanEdito
     }
 
     private handleColumnsSignalEvent() {
-        const allowedFieldsAndLayoutDefinition = this._channelsGridFrame.createAllowedFieldsGridLayoutDefinition();
+        const allowedFieldsAndLayoutDefinition = this._channelsGridFrame.createAllowedSourcedFieldsColumnLayoutDefinition();
         const editFinishPromise = this.editGridColumns(allowedFieldsAndLayoutDefinition);
         editFinishPromise.then(
             (layoutOrReferenceDefinition) => {
                 if (layoutOrReferenceDefinition !== undefined) {
-                    const openPromise = this._channelsGridFrame.tryOpenGridLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
+                    const openPromise = this._channelsGridFrame.tryOpenColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
                     openPromise.then(
                         (openResult) => {
                             if (openResult.isErr()) {
-                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.ScanEditorAttachedNotificationChannels]} ${Strings[StringId.GridLayout]}: ${openResult.error}`);
+                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.ScanEditorAttachedNotificationChannels]} ${Strings[StringId.ColumnLayout]}: ${openResult.error}`);
                             }
                         },
                         (reason) => { throw AssertInternalError.createIfNotError(reason, 'LIILENDHCSEOP56668'); }
@@ -320,7 +320,7 @@ export class ScanEditorAttachedNotificationChannelsNgComponent extends ScanEdito
         );
     }
 
-    private editGridColumns(allowedFieldsAndLayoutDefinition: AllowedFieldsGridLayoutDefinition) {
+    private editGridColumns(allowedFieldsAndLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition) {
         if (this.editGridColumnsEventer === undefined) {
             return Promise.resolve(undefined);
         } else {
@@ -337,6 +337,6 @@ export namespace ScanEditorAttachedNotificationChannelsNgComponent {
     export type EditGridColumnsEventer = (
         this: void,
         caption: string,
-        allowedFieldsAndLayoutDefinition: AllowedFieldsGridLayoutDefinition
-    ) => Promise<RevGridLayoutOrReferenceDefinition | undefined>;
+        allowedFieldsAndLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition
+    ) => Promise<RevColumnLayoutOrReferenceDefinition | undefined>;
 }

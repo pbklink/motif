@@ -9,6 +9,7 @@ import {
     AllowedGridField,
     AssertInternalError,
     CellPainterFactoryService,
+    ColumnLayoutDefinition,
     DataItem,
     Decimal,
     DepthDataItem,
@@ -20,7 +21,6 @@ import {
     DepthStyleId,
     FullDepthSideGridField,
     FullDepthSideGridRecordStore,
-    GridLayoutDefinition,
     Integer,
     JsonElement,
     OrderSideId,
@@ -34,7 +34,7 @@ import {
     TextRenderValueCellPainter,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
-import { RevRecordStore, RevGridLayout, RevGridLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayout, RevColumnLayoutDefinition, RevRecordStore } from '@xilytix/rev-data-source';
 import { ContentFrame } from '../content-frame';
 
 export class DepthSideFrame extends ContentFrame {
@@ -73,33 +73,33 @@ export class DepthSideFrame extends ContentFrame {
     initialise(sideId: OrderSideId, element: JsonElement | undefined) {
         this._sideId = sideId;
 
-        const initialGridLayoutDefinitions = new Array<RevGridLayoutDefinition | undefined>(DepthStyle.idCount);
+        const initialColumnLayoutDefinitions = new Array<RevColumnLayoutDefinition | undefined>(DepthStyle.idCount);
         if (element !== undefined) {
             const tryGetFullResult = element.tryGetElement(DepthSideFrame.JsonName.fullLayout);
             if (tryGetFullResult.isOk()) {
-                const layoutDefinitionResult = GridLayoutDefinition.tryCreateFromJson(tryGetFullResult.value);
+                const layoutDefinitionResult = ColumnLayoutDefinition.tryCreateFromJson(tryGetFullResult.value);
                 if (layoutDefinitionResult.isOk()) {
                     const layoutDefinition = layoutDefinitionResult.value;
                     // const styleCacheElement = this._styleCache[DepthStyleId.Full];
                     // styleCacheElement.lastLayoutDefinition = layoutDefinition;
-                    initialGridLayoutDefinitions[DepthStyleId.Full] = layoutDefinition;
+                    initialColumnLayoutDefinitions[DepthStyleId.Full] = layoutDefinition;
                 }
             }
 
             const tryGetShortResult = element.tryGetElement(DepthSideFrame.JsonName.shortLayout);
             if (tryGetShortResult.isOk()) {
-                const layoutDefinitionResult = GridLayoutDefinition.tryCreateFromJson(tryGetShortResult.value);
+                const layoutDefinitionResult = ColumnLayoutDefinition.tryCreateFromJson(tryGetShortResult.value);
                 if (layoutDefinitionResult.isOk()) {
                     const layoutDefinition = layoutDefinitionResult.value;
                     // const styleCacheElement = this._styleCache[DepthStyleId.Short];
                     // styleCacheElement.lastLayoutDefinition = layoutDefinition;
-                    initialGridLayoutDefinitions[DepthStyleId.Short] = layoutDefinition;
+                    initialColumnLayoutDefinitions[DepthStyleId.Short] = layoutDefinition;
                 }
             }
         }
 
         for (let styleId = 0; styleId < DepthStyle.idCount; styleId++) {
-            this.initialiseStyle(styleId, initialGridLayoutDefinitions[styleId]);
+            this.initialiseStyle(styleId, initialColumnLayoutDefinitions[styleId]);
         }
 
         const styleId = DepthSideFrame.initialDepthStyleId;
@@ -149,19 +149,19 @@ export class DepthSideFrame extends ContentFrame {
     save(element: JsonElement) {
         if (this._activeStore !== undefined) {
             const styleCacheElement = this._styleCache[this._activeStore.styleId];
-            styleCacheElement.lastLayoutDefinition = this._grid.createGridLayoutDefinition();
+            styleCacheElement.lastLayoutDefinition = this._grid.createColumnLayoutDefinition();
         }
 
-        const fullGridLayoutDefinition = this._styleCache[DepthStyleId.Full].lastLayoutDefinition;
-        if (fullGridLayoutDefinition !== undefined) {
-            const fullGridLayoutElement = element.newElement(DepthSideFrame.JsonName.fullLayout);
-            fullGridLayoutDefinition.saveToJson(fullGridLayoutElement);
+        const fullColumnLayoutDefinition = this._styleCache[DepthStyleId.Full].lastLayoutDefinition;
+        if (fullColumnLayoutDefinition !== undefined) {
+            const fullColumnLayoutElement = element.newElement(DepthSideFrame.JsonName.fullLayout);
+            fullColumnLayoutDefinition.saveToJson(fullColumnLayoutElement);
         }
 
-        const shortGridLayoutDefinition = this._styleCache[DepthStyleId.Short].lastLayoutDefinition;
-        if (shortGridLayoutDefinition !== undefined) {
-            const shortGridLayoutElement = element.newElement(DepthSideFrame.JsonName.shortLayout);
-            shortGridLayoutDefinition.saveToJson(shortGridLayoutElement);
+        const shortColumnLayoutDefinition = this._styleCache[DepthStyleId.Short].lastLayoutDefinition;
+        if (shortColumnLayoutDefinition !== undefined) {
+            const shortColumnLayoutElement = element.newElement(DepthSideFrame.JsonName.shortLayout);
+            shortColumnLayoutDefinition.saveToJson(shortColumnLayoutElement);
         }
     }
 
@@ -249,11 +249,11 @@ export class DepthSideFrame extends ContentFrame {
     //     }
     // }
 
-    canCreateAllowedFieldsGridLayoutDefinition() {
+    canCreateAllowedSourcedFieldsColumnLayoutDefinition() {
         return this._activeStore !== undefined;
     }
 
-    createAllowedFieldsGridLayoutDefinition() {
+    createAllowedSourcedFieldsColumnLayoutDefinition() {
         const activeStore = this._activeStore;
         if (activeStore === undefined) {
             throw new AssertInternalError('DSFCAFGLDU22209');
@@ -269,19 +269,19 @@ export class DepthSideFrame extends ContentFrame {
                 default:
                     throw new UnreachableCaseError('DSFCAFGLDD22209', activeStore.styleId);
             }
-            return this._grid.createAllowedFieldsGridLayoutDefinition(allowedFields);
+            return this._grid.createAllowedSourcedFieldsColumnLayoutDefinition(allowedFields);
         }
     }
 
-    applyGridLayoutDefinition(definition: RevGridLayoutDefinition) {
-        this._grid.applyGridLayoutDefinition(definition);
+    applyColumnLayoutDefinition(definition: RevColumnLayoutDefinition) {
+        this._grid.applyColumnLayoutDefinition(definition);
     }
 
     private handleGetDataItemCorrectnessIdEvent() {
         return this._dataItem.correctnessId;
     }
 
-    private initialiseStyle(styleId: DepthStyleId, initialGridLayoutDefinition: RevGridLayoutDefinition | undefined) {
+    private initialiseStyle(styleId: DepthStyleId, initialColumnLayoutDefinition: RevColumnLayoutDefinition | undefined) {
         let fields: DepthSideGridField[];
         let store: DepthSideGridRecordStore;
         switch (styleId) {
@@ -289,8 +289,8 @@ export class DepthSideFrame extends ContentFrame {
                 fields = FullDepthSideGridField.createAll(this._sideId, () => this.handleGetDataItemCorrectnessIdEvent());
                 store = new FullDepthSideGridRecordStore(this._sessionInfoService, styleId, this._sideId);
 
-                if (initialGridLayoutDefinition === undefined) {
-                    initialGridLayoutDefinition = FullDepthSideGridField.createDefaultGridLayoutDefinition(this._sideId);
+                if (initialColumnLayoutDefinition === undefined) {
+                    initialColumnLayoutDefinition = FullDepthSideGridField.createDefaultColumnLayoutDefinition(this._sideId);
                 }
 
                 break;
@@ -299,8 +299,8 @@ export class DepthSideFrame extends ContentFrame {
                 fields = ShortDepthSideGridField.createAll(this._sideId, () => this.handleGetDataItemCorrectnessIdEvent());
                 store = new ShortDepthSideGridRecordStore(styleId, this._sideId);
 
-                if (initialGridLayoutDefinition === undefined) {
-                    initialGridLayoutDefinition = ShortDepthSideGridField.createDefaultGridLayoutDefinition(this._sideId);
+                if (initialColumnLayoutDefinition === undefined) {
+                    initialColumnLayoutDefinition = ShortDepthSideGridField.createDefaultColumnLayoutDefinition(this._sideId);
                 }
 
                 break;
@@ -311,19 +311,19 @@ export class DepthSideFrame extends ContentFrame {
 
         const element: DepthSideFrame.StyleCacheElement = {
             allowedGridFields: fields,
-            lastLayoutDefinition: initialGridLayoutDefinition,
+            lastLayoutDefinition: initialColumnLayoutDefinition,
             store,
         };
 
         this._styleCache[styleId] = element;
     }
 
-    private createDefaultGridLayoutDefinition(fields: DepthSideGridField[], fieldVisibles: boolean[]) {
+    private createDefaultColumnLayoutDefinition(fields: DepthSideGridField[], fieldVisibles: boolean[]) {
         const fieldCount = fields.length;
-        const layoutDefinitionColumns = new Array<RevGridLayoutDefinition.Column>(fieldCount);
+        const layoutDefinitionColumns = new Array<RevColumnLayoutDefinition.Column>(fieldCount);
         for (let i = 0; i < fieldCount; i++) {
             const field = fields[i];
-            const layoutDefinitionColumn: RevGridLayoutDefinition.Column = {
+            const layoutDefinitionColumn: RevColumnLayoutDefinition.Column = {
                 fieldName: field.name,
                 visible: fieldVisibles[i],
                 autoSizableWidth: undefined,
@@ -336,7 +336,7 @@ export class DepthSideFrame extends ContentFrame {
             layoutDefinitionColumns.reverse();
         }
 
-        return new RevGridLayoutDefinition(layoutDefinitionColumns);
+        return new RevColumnLayoutDefinition(layoutDefinitionColumns);
     }
 
     private activateStyle(newStyleId: DepthStyleId) {
@@ -348,7 +348,7 @@ export class DepthSideFrame extends ContentFrame {
             if (oldStyleId === newStyleId) {
                 return false;
             } else {
-                this._styleCache[oldStyleId].lastLayoutDefinition = this._grid.createGridLayoutDefinition();
+                this._styleCache[oldStyleId].lastLayoutDefinition = this._grid.createColumnLayoutDefinition();
                 this._activeStore.finalise();
                 this.activateStore(newStyleId);
                 return true;
@@ -458,8 +458,8 @@ export class DepthSideFrame extends ContentFrame {
 
     private applyFirstUsable(styleId: DepthStyleId) {
         const styleCacheElement = this._styleCache[styleId];
-        const gridLayout = new RevGridLayout(styleCacheElement.lastLayoutDefinition);
-        this._grid.applyFirstUsable(undefined, undefined, gridLayout);
+        const columnLayout = new RevColumnLayout(styleCacheElement.lastLayoutDefinition);
+        this._grid.applyFirstUsable(undefined, undefined, columnLayout);
     }
 
     private waitRendered() {
@@ -489,7 +489,7 @@ export namespace DepthSideFrame {
         allowedGridFields: readonly DepthSideGridField[];
         // defaultGridFieldStates: readonly GridRecordFieldState[];
         // defaultGridFieldVisibles: readonly boolean[];
-        lastLayoutDefinition: RevGridLayoutDefinition | undefined;
+        lastLayoutDefinition: RevColumnLayoutDefinition | undefined;
         store: DepthSideGridRecordStore;
     }
 

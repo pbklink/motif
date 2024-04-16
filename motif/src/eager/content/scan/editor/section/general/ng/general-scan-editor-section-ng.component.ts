@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
-    AllowedFieldsGridLayoutDefinition,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     BooleanUiAction,
     LitIvemId,
     ScanEditor,
@@ -9,7 +9,7 @@ import {
     Strings,
     UiComparableList
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import {
     CaptionLabelNgComponent, CaptionedCheckboxNgComponent, CheckboxInputNgComponent, TextInputNgComponent
 } from 'controls-ng-api';
@@ -384,8 +384,8 @@ export namespace GeneralScanEditorSectionNgComponent {
     export type EditGridColumnsEventer = (
         this: void,
         caption: string,
-        allowedFieldsAndLayoutDefinition: AllowedFieldsGridLayoutDefinition,
-    ) => Promise<RevGridLayoutOrReferenceDefinition | undefined>;
+        allowedFieldsAndLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition,
+    ) => Promise<RevColumnLayoutOrReferenceDefinition | undefined>;
     export type PopoutTargetsMultiSymbolListEditorEventer = (
         this: void,
         caption: string,

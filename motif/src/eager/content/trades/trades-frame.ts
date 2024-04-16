@@ -7,16 +7,16 @@
 import {
     AdaptedRevgrid,
     AdiService,
-    AllowedFieldsGridLayoutDefinition,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
     Badness,
     CellPainterFactoryService,
+    ColumnLayoutDefinition,
     CorrectnessId,
     DayTradesDataDefinition,
     DayTradesDataItem,
     DayTradesGridField,
     DayTradesGridRecordStore,
-    GridLayoutDefinition,
     JsonElement,
     LitIvemId,
     MultiEvent,
@@ -26,7 +26,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevGridLayout, RevGridLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayout, RevColumnLayoutDefinition } from '@xilytix/rev-data-source';
 import { ContentFrame } from '../content-frame';
 
 export class TradesFrame extends ContentFrame {
@@ -41,7 +41,7 @@ export class TradesFrame extends ContentFrame {
     private _gridHeaderCellPainter: TextHeaderCellPainter;
     private _gridMainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
 
-    private _gridLayout: RevGridLayout;
+    private _columnLayout: RevColumnLayout;
 
     constructor(
         private readonly _settingsService: SettingsService,
@@ -64,17 +64,17 @@ export class TradesFrame extends ContentFrame {
 
     initialise(tradesFrameElement: JsonElement | undefined) {
         if (tradesFrameElement === undefined) {
-            this._gridLayout = this.createDefaultGridLayout();
+            this._columnLayout = this.createDefaultColumnLayout();
         } else {
             const tryGetElementResult = tradesFrameElement.tryGetElement(TradesFrame.JsonName.layout);
             if (tryGetElementResult.isErr()) {
-                this._gridLayout = this.createDefaultGridLayout();
+                this._columnLayout = this.createDefaultColumnLayout();
             } else {
-                const definitionResult = GridLayoutDefinition.tryCreateFromJson(tryGetElementResult.value);
+                const definitionResult = ColumnLayoutDefinition.tryCreateFromJson(tryGetElementResult.value);
                 if (definitionResult.isErr()) {
-                    this._gridLayout = this.createDefaultGridLayout();
+                    this._columnLayout = this.createDefaultColumnLayout();
                 } else {
-                    this._gridLayout = new RevGridLayout(definitionResult.value);
+                    this._columnLayout = new RevColumnLayout(definitionResult.value);
                 }
             }
         }
@@ -102,7 +102,7 @@ export class TradesFrame extends ContentFrame {
 
     saveLayoutToConfig(element: JsonElement) {
         const layoutElement = element.newElement(TradesFrame.JsonName.layout);
-        const definition = this._grid.createGridLayoutDefinition();
+        const definition = this._grid.createColumnLayoutDefinition();
         definition.saveToJson(layoutElement);
     }
 
@@ -126,7 +126,7 @@ export class TradesFrame extends ContentFrame {
         this._componentAccess.hideBadnessWithVisibleDelay(this._dataItem.badness);
 
         if (this._dataItem.usable) {
-            this._grid.applyFirstUsable(undefined, undefined, this._gridLayout);
+            this._grid.applyFirstUsable(undefined, undefined, this._columnLayout);
         }
     }
 
@@ -134,13 +134,13 @@ export class TradesFrame extends ContentFrame {
         this.checkClose();
     }
 
-    createAllowedFieldsGridLayoutDefinition(): AllowedFieldsGridLayoutDefinition {
+    createAllowedSourcedFieldsColumnLayoutDefinition(): AllowedSourcedFieldsColumnLayoutDefinition {
         const allowedFields = DayTradesGridField.createAllowedFields();
-        return this._grid.createAllowedFieldsGridLayoutDefinition(allowedFields);
+        return this._grid.createAllowedSourcedFieldsColumnLayoutDefinition(allowedFields);
     }
 
-    applyGridLayoutDefinition(layoutDefinition: RevGridLayoutDefinition) {
-        this._grid.applyGridLayoutDefinition(layoutDefinition);
+    applyColumnLayoutDefinition(layoutDefinition: RevColumnLayoutDefinition) {
+        this._grid.applyColumnLayoutDefinition(layoutDefinition);
     }
 
     autoSizeAllColumnWidths(widenOnly: boolean) {
@@ -179,7 +179,7 @@ export class TradesFrame extends ContentFrame {
             throw new AssertInternalError('TFHDIBCE23000447878');
         } else {
             if (this._dataItem.usable && !this._grid.beenUsable) {
-                this._grid.applyFirstUsable(undefined, undefined, this._gridLayout);
+                this._grid.applyFirstUsable(undefined, undefined, this._columnLayout);
             }
             this._componentAccess.setBadness(this._dataItem.badness);
         }
@@ -218,9 +218,9 @@ export class TradesFrame extends ContentFrame {
         return grid;
     }
 
-    private createDefaultGridLayout() {
-        const definition = DayTradesGridField.createDefaultGridLayoutDefinition();
-        return new RevGridLayout(definition);
+    private createDefaultColumnLayout() {
+        const definition = DayTradesGridField.createDefaultColumnLayoutDefinition();
+        return new RevColumnLayout(definition);
     }
 
     private checkClose() {

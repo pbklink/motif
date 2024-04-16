@@ -5,7 +5,7 @@
  */
 
 import { InjectionToken } from '@angular/core';
-import { AllowedFieldsGridLayoutDefinition, AllowedGridField, BidAskGridLayoutDefinitions, BidAskPair, EditableGridLayoutDefinitionColumnList } from '@motifmarkets/motif-core';
+import { AllowedGridField, AllowedSourcedFieldsColumnLayoutDefinition, BidAskColumnLayoutDefinitions, BidAskPair, EditableColumnLayoutDefinitionColumnList } from '@motifmarkets/motif-core';
 
 
 export type BidAskAllowedGridFields = BidAskPair<readonly AllowedGridField[]>;
@@ -13,10 +13,10 @@ export type BidAskAllowedGridFields = BidAskPair<readonly AllowedGridField[]>;
 const allowedFieldsTokenName = 'allowedFields';
 export const allowedFieldsInjectionToken = new InjectionToken<AllowedGridField[]>(allowedFieldsTokenName);
 const oldLayoutDefinitionTokenName = 'oldLayoutDefinition';
-export const oldLayoutDefinitionInjectionToken = new InjectionToken<AllowedFieldsGridLayoutDefinition>(oldLayoutDefinitionTokenName);
+export const oldLayoutDefinitionInjectionToken = new InjectionToken<AllowedSourcedFieldsColumnLayoutDefinition>(oldLayoutDefinitionTokenName);
 const definitionColumnListTokenName = 'definitionColumnList';
-export const definitionColumnListInjectionToken = new InjectionToken<EditableGridLayoutDefinitionColumnList>(definitionColumnListTokenName);
+export const definitionColumnListInjectionToken = new InjectionToken<EditableColumnLayoutDefinitionColumnList>(definitionColumnListTokenName);
 const bidAskAllowedFieldsTokenName = 'bidAskAllowedFields';
 export const bidAskAllowedFieldsInjectionToken = new InjectionToken<BidAskAllowedGridFields>(bidAskAllowedFieldsTokenName);
 const oldBidAskLayoutDefinitionTokenName = 'bidAskOldLayoutDefinition';
-export const oldBidAskLayoutDefinitionInjectionToken = new InjectionToken<BidAskGridLayoutDefinitions>(oldBidAskLayoutDefinitionTokenName);
+export const oldBidAskLayoutDefinitionInjectionToken = new InjectionToken<BidAskColumnLayoutDefinitions>(oldBidAskLayoutDefinitionTokenName);

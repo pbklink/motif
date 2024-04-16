@@ -10,7 +10,7 @@ import {
     CallOrPutId,
     CallPutSecurityDataItemTableFieldSourceDefinition,
     CallPutTableFieldSourceDefinition,
-    EditableGridLayoutDefinitionColumnTableFieldSourceDefinition,
+    EditableColumnLayoutDefinitionColumnTableFieldSourceDefinition,
     FeedTableFieldSourceDefinition,
     GridFieldTableFieldSourceDefinition,
     HoldingTableFieldSourceDefinition,
@@ -49,8 +49,8 @@ export class TableFieldSourceDefinitionFactoryService implements TableFieldSourc
                 return new LitIvemAlternateCodesTableFieldSourceDefinition();
             case TableFieldSourceDefinition.TypeId.MyxLitIvemAttributes:
                 return new MyxLitIvemAttributesTableFieldSourceDefinition();
-            case TableFieldSourceDefinition.TypeId.EditableGridLayoutDefinitionColumn:
-                return new EditableGridLayoutDefinitionColumnTableFieldSourceDefinition();
+            case TableFieldSourceDefinition.TypeId.EditableColumnLayoutDefinitionColumn:
+                return new EditableColumnLayoutDefinitionColumnTableFieldSourceDefinition();
             case TableFieldSourceDefinition.TypeId.SecurityDataItem:
                 return new SecurityDataItemTableFieldSourceDefinition();
             case TableFieldSourceDefinition.TypeId.BrokerageAccount:

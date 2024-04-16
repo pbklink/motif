@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, InjectionToken, Injector, Optional, ValueProvider, ViewChild, ViewContainerRef } from '@angular/core';
 import {
-    AllowedFieldsGridLayoutDefinition,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
     CommandRegisterService,
     IconButtonUiAction,
@@ -11,10 +11,10 @@ import {
     UiComparableList,
     getErrorMessage,
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { CommandRegisterNgService, CoreInjectionTokens, ToastNgService } from 'component-services-ng-api';
 import { SvgButtonNgComponent } from 'controls-ng-api';
-import { NameableGridLayoutEditorDialogNgComponent } from '../../../nameable-grid-layout-editor-dialog/ng-api';
+import { NameableColumnLayoutEditorDialogNgComponent } from '../../../nameable-grid-layout-editor-dialog/ng-api';
 import { TableFieldSourceDefinitionCachingFactoryNgService } from '../../../ng/table-field-source-definition-caching-factory-ng.service';
 import { LitIvemIdListEditorNgDirective } from '../../ng/lit-ivem-id-list-editor-ng.directive';
 
@@ -81,14 +81,14 @@ export class LitIvemIdListEditorDialogNgComponent extends LitIvemIdListEditorNgD
         super.finalise();
     }
 
-    protected override editGridColumns(allowedFieldsGridLayoutDefinition: AllowedFieldsGridLayoutDefinition) {
+    protected override editGridColumns(allowedSourcedFieldsColumnLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition) {
         this.dialogActive = true;
 
         // We cannot just return the promise from the dialog as we need to close the dialog as well.
         // So return a separate promise which is resolved when dialog is closed.
-        let definitonResolveFtn: (this: void, definition: RevGridLayoutOrReferenceDefinition | undefined) => void;
+        let definitonResolveFtn: (this: void, definition: RevColumnLayoutOrReferenceDefinition | undefined) => void;
 
-        const definitionPromise = new Promise<RevGridLayoutOrReferenceDefinition | undefined>(
+        const definitionPromise = new Promise<RevColumnLayoutOrReferenceDefinition | undefined>(
             (resolve) => {
                 definitonResolveFtn = resolve;
             }
@@ -96,11 +96,11 @@ export class LitIvemIdListEditorDialogNgComponent extends LitIvemIdListEditorNgD
 
         this.enabled = false;
 
-        const closePromise = NameableGridLayoutEditorDialogNgComponent.open(
+        const closePromise = NameableColumnLayoutEditorDialogNgComponent.open(
             this._dialogContainer,
             this.opener,
             this._columnsEditCaption,
-            allowedFieldsGridLayoutDefinition,
+            allowedSourcedFieldsColumnLayoutDefinition,
         );
         closePromise.then(
             (definition) => {
@@ -119,7 +119,7 @@ export class LitIvemIdListEditorDialogNgComponent extends LitIvemIdListEditorNgD
     }
 
     private createOkUiAction(commandRegisterService: CommandRegisterService) {
-        const commandName = InternalCommand.Id.GridLayoutDialog_Ok;
+        const commandName = InternalCommand.Id.ColumnLayoutDialog_Ok;
         const displayId = StringId.Ok;
         const command = commandRegisterService.getOrRegisterInternalCommand(commandName, displayId);
         const action = new IconButtonUiAction(command);

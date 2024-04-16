@@ -30,7 +30,7 @@ import {
     delay1Tick
 } from '@motifmarkets/motif-core';
 import { AdiNgService, CommandRegisterNgService, SettingsNgService, SymbolsNgService } from 'component-services-ng-api';
-import { GridLayoutDialogNgComponent, TradesNgComponent } from 'content-ng-api';
+import { ColumnLayoutDialogNgComponent, TradesNgComponent } from 'content-ng-api';
 import { DateInputNgComponent, LitIvemIdSelectNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
 import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
@@ -221,7 +221,7 @@ export class TradesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
     }
 
     private handleColumnsUiActionSignalEvent() {
-        const dialogPromise = this.showGridLayoutDialog();
+        const dialogPromise = this.showColumnLayoutDialog();
         AssertInternalError.throwErrorIfPromiseRejected(dialogPromise, 'TDNCHCUASE34009');
     }
 
@@ -330,15 +330,15 @@ export class TradesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
         }
     }
 
-    private async showGridLayoutDialog() {
-        const allowedFieldsGridLayoutDefinition = this._frame.createAllowedFieldsGridLayoutDefinition();
+    private async showColumnLayoutDialog() {
+        const allowedSourcedFieldsColumnLayoutDefinition = this._frame.createAllowedSourcedFieldsColumnLayoutDefinition();
 
-        if (allowedFieldsGridLayoutDefinition !== undefined) {
-            const component = GridLayoutDialogNgComponent.create(
+        if (allowedSourcedFieldsColumnLayoutDefinition !== undefined) {
+            const component = ColumnLayoutDialogNgComponent.create(
                 this._dialogContainer,
                 this._frame.opener,
                 Strings[StringId.Trades_ColumnsDialogCaption],
-                allowedFieldsGridLayoutDefinition,
+                allowedSourcedFieldsColumnLayoutDefinition,
             );
 
             this.isDialogVisible = true;
@@ -346,7 +346,7 @@ export class TradesDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
 
             const newLayoutDefinition = await component.waitClose();
             if (newLayoutDefinition !== undefined) {
-                this._frame.applyGridLayoutDefinition(newLayoutDefinition);
+                this._frame.applyColumnLayoutDefinition(newLayoutDefinition);
             }
 
             this.closeLayoutEditor();

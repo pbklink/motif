@@ -11,15 +11,15 @@ import {
     CellPainterFactoryService,
     DataSourceDefinition,
     DataSourceOrReferenceDefinition,
-    EditableGridLayoutDefinitionColumnList,
+    EditableColumnLayoutDefinitionColumnList,
     GridField,
     GridFieldTableRecordSource,
     Integer,
     ModifierKey,
     ModifierKeyId,
     MultiEvent,
+    ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
-    ReferenceableGridLayoutsService,
     RenderValueRecordGridCellPainter,
     SettingsService,
     TableFieldSourceDefinitionCachingFactoryService,
@@ -35,8 +35,8 @@ import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../../grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../../../table-record-source-definition-factory-service';
 
-export class GridLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
-    selectionChangedEventer: GridLayoutEditorAllowedFieldsFrame.SelectionChangedEventer | undefined;
+export class ColumnLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
+    selectionChangedEventer: ColumnLayoutEditorAllowedFieldsFrame.SelectionChangedEventer | undefined;
 
     private _records: readonly GridField[];
 
@@ -48,7 +48,7 @@ export class GridLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
     constructor(
         settingsService: SettingsService,
         gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
-        namedGridLayoutsService: ReferenceableGridLayoutsService,
+        namedColumnLayoutsService: ReferenceableColumnLayoutsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,
         tableRecordSourceFactory: TableRecordSourceFactory,
@@ -56,12 +56,12 @@ export class GridLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
         cellPainterFactoryService: CellPainterFactoryService,
         toastService: ToastService,
         private readonly _allowedFields: readonly GridField[],
-        private readonly _columnList: EditableGridLayoutDefinitionColumnList,
+        private readonly _columnList: EditableColumnLayoutDefinitionColumnList,
     ) {
         super(
             settingsService,
             gridFieldCustomHeadingsService,
-            namedGridLayoutsService,
+            namedColumnLayoutsService,
             tableFieldSourceDefinitionCachingFactoryService,
             tableRecordSourceDefinitionFactoryService,
             tableRecordSourceFactory,
@@ -238,6 +238,6 @@ export class GridLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
     }
 }
 
-export namespace GridLayoutEditorAllowedFieldsFrame {
+export namespace ColumnLayoutEditorAllowedFieldsFrame {
     export type SelectionChangedEventer = (this: void) => void;
 }

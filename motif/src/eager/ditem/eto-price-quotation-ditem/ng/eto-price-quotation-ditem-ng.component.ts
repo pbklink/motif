@@ -25,7 +25,7 @@ import {
     delay1Tick
 } from '@motifmarkets/motif-core';
 import { CommandRegisterNgService, CoreNgService, SettingsNgService } from 'component-services-ng-api';
-import { GridLayoutEditorNgComponent, GridSourceNgDirective, WatchlistNgComponent } from 'content-ng-api';
+import { ColumnLayoutEditorNgComponent, GridSourceNgDirective, WatchlistNgComponent } from 'content-ng-api';
 import { LitIvemIdSelectNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
 import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
@@ -48,7 +48,7 @@ export class EtoPriceQuotationDitemNgComponent extends BuiltinDitemNgComponentBa
     @ViewChild('autoSizeColumnWidthsButton', { static: true }) private _autoSizeColumnWidthsButtonComponent: SvgButtonNgComponent;
     @ViewChild('watchGridSource', { static: true }) private _watchGridSourceComponent: WatchlistNgComponent;
     @ViewChild('callPutGridSource', { static: true }) private _callPutGridSourceComponent: GridSourceNgDirective;
-    @ViewChild('layoutEditor', { static: true }) private _layoutEditorComponent: GridLayoutEditorNgComponent;
+    @ViewChild('layoutEditor', { static: true }) private _layoutEditorComponent: ColumnLayoutEditorNgComponent;
 
     private _symbolEditUiAction: LitIvemIdUiAction;
     private _applySymbolUiAction: IconButtonUiAction;
@@ -161,11 +161,11 @@ export class EtoPriceQuotationDitemNgComponent extends BuiltinDitemNgComponentBa
     }
 
     private handleColumnsSignalEvent(downKeys: ModifierKey.IdSet) {
-        // let layoutWithHeadings: GridLayoutRecordStore.LayoutWithHeadersMap;
+        // let layoutWithHeadings: ColumnLayoutRecordStore.LayoutWithHeadersMap;
         // if (ModifierKey.idSetIncludes(downKeys, ModifierKeyId.Shift)) {
-        //     layoutWithHeadings = this._watchGridSourceComponent.frame.getGridLayoutWithHeadersMap();
+        //     layoutWithHeadings = this._watchGridSourceComponent.frame.getColumnLayoutWithHeadersMap();
         // } else {
-        //     layoutWithHeadings = this._callPutGridSourceComponent.frame.getGridLayoutWithHeadersMap();
+        //     layoutWithHeadings = this._callPutGridSourceComponent.frame.getColumnLayoutWithHeadersMap();
         // }
         // this._modeId = EtoPriceQuotationDitemNgComponent.ModeId.LayoutDialog;
         // this._layoutEditorComponent.setAllowedFieldsAndLayoutDefinition(layoutWithHeadings);
@@ -177,7 +177,7 @@ export class EtoPriceQuotationDitemNgComponent extends BuiltinDitemNgComponentBa
 
     private handleLayoutEditorComponentCloseEvent(ok: boolean) {
         // if (ok) {
-        //     const layout = this._layoutEditorComponent.getGridLayoutDefinition();
+        //     const layout = this._layoutEditorComponent.getColumnLayoutDefinition();
         //     // need to work out which is being edited
         //     this._watchGridSourceComponent.frame.gridLoadLayout(layout);
         // }

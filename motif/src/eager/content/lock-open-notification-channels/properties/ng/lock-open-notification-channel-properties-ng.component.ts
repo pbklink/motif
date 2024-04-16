@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import {
     ActiveFaultedStatus,
-    AllowedFieldsGridLayoutDefinition,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
     BooleanUiAction,
     LockOpenNotificationChannel,
@@ -12,7 +12,7 @@ import {
     Strings,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import {
     CaptionLabelNgComponent,
     IntegerTextInputNgComponent
@@ -279,6 +279,6 @@ export namespace LockOpenNotificationChannelPropertiesNgComponent {
     export type EditGridColumnsEventer = (
         this: void,
         caption: string,
-        allowedFieldsAndLayoutDefinition: AllowedFieldsGridLayoutDefinition
-    ) => Promise<RevGridLayoutOrReferenceDefinition | undefined>;
+        allowedFieldsAndLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition
+    ) => Promise<RevColumnLayoutOrReferenceDefinition | undefined>;
 }

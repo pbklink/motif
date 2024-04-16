@@ -21,8 +21,8 @@ import { ColorSchemeGridNgComponent } from '../color-scheme-grid/ng-api';
 import { ColorSchemeItemPropertiesNgComponent } from '../color-scheme-item-properties/ng-api';
 import { ColorSchemePresetCodeNgComponent } from '../color-scheme-preset-code/ng-api';
 import { DelayedBadnessNgComponent } from '../delayed-badness/ng-api';
-import { DepthAndSalesGridLayoutsDialogNgComponent } from '../depth-and-sales-grid-layouts-dialog/ng-api';
-import { DepthGridLayoutsDialogNgComponent } from '../depth-grid-layouts-dialog/ng-api';
+import { DepthAndSalesColumnLayoutsDialogNgComponent } from '../depth-and-sales-grid-layouts-dialog/ng-api';
+import { DepthColumnLayoutsDialogNgComponent } from '../depth-grid-layouts-dialog/ng-api';
 import { DepthSideNgComponent } from '../depth-side/ng-api';
 import { DepthNgComponent } from '../depth/ng-api';
 import { ExchangeSettingsNgComponent } from '../exchange-settings/ng-api';
@@ -39,14 +39,14 @@ import {
 } from '../extensions/ng-api';
 import { FeedsNgComponent } from '../feeds/ng-api';
 import {
-    GridLayoutDialogNgComponent,
-    GridLayoutEditorAllowedFieldsNgComponent,
-    GridLayoutEditorColumnsNgComponent,
-    GridLayoutEditorFieldControlsNgComponent,
-    GridLayoutEditorNgComponent,
-    GridLayoutEditorSearchGridNgComponent
+    ColumnLayoutDialogNgComponent,
+    ColumnLayoutEditorAllowedFieldsNgComponent,
+    ColumnLayoutEditorColumnsNgComponent,
+    ColumnLayoutEditorFieldControlsNgComponent,
+    ColumnLayoutEditorNgComponent,
+    ColumnLayoutEditorSearchGridNgComponent
 } from '../grid-layout-dialog/ng-api';
-import { HoldingsGridLayoutsDialogNgComponent } from '../holdings-grid-layouts-dialog/ng-api';
+import { HoldingsColumnLayoutsDialogNgComponent } from '../holdings-grid-layouts-dialog/ng-api';
 import { HoldingsNgComponent } from '../holdings/ng-api';
 import { IvemHoldingsNgComponent } from '../ivem-holdings/ng-api';
 import { LitIvemIdListEditorDialogNgComponent, LitIvemIdListEditorNgComponent } from '../lit-ivem-id-list-editor/ng-api';
@@ -54,7 +54,7 @@ import { LitIvemIdListNgComponent } from '../lit-ivem-id-list/ng-api';
 import { LockOpenNotificationChannelPropertiesNgComponent, LockOpenNotificationChannelsGridNgComponent } from '../lock-open-notification-channels/ng-api';
 import { MarketsNgComponent } from '../markets/ng-api';
 import { MultiColorPickerNgComponent } from '../multi-color-picker/ng/multi-color-picker-ng.component';
-import { NameableGridLayoutEditorDialogNgComponent } from '../nameable-grid-layout-editor-dialog/ng-api';
+import { NameableColumnLayoutEditorDialogNgComponent } from '../nameable-grid-layout-editor-dialog/ng-api';
 import { OpenWatchlistDialogNgComponent, SymbolListDirectoryGridNgComponent } from '../open-watchlist/ng-api';
 import { OrderAuthoriseNgComponent } from '../order-authorise/ng-api';
 import {
@@ -143,8 +143,8 @@ import { ZenithStatusNgComponent } from '../zenith-status/ng-api';
         DateValueScanFieldConditionOperandsEditorNgComponent,
         DelayedBadnessNgComponent,
         DeleteScanFieldConditionNgComponent,
-        DepthAndSalesGridLayoutsDialogNgComponent,
-        DepthGridLayoutsDialogNgComponent,
+        DepthAndSalesColumnLayoutsDialogNgComponent,
+        DepthColumnLayoutsDialogNgComponent,
         DepthNgComponent,
         DepthSideNgComponent,
         ExchangeOverlapsScanFieldConditionOperandsEditorNgComponent,
@@ -161,15 +161,15 @@ import { ZenithStatusNgComponent } from '../zenith-status/ng-api';
         FormulaScanEditorSectionNgComponent,
         GeneralScanEditorSectionNgComponent,
         GeneralSettingsNgComponent,
-        GridLayoutDialogNgComponent,
-        GridLayoutEditorAllowedFieldsNgComponent,
-        GridLayoutEditorColumnsNgComponent,
-        GridLayoutEditorFieldControlsNgComponent,
-        GridLayoutEditorNgComponent,
-        GridLayoutEditorSearchGridNgComponent,
+        ColumnLayoutDialogNgComponent,
+        ColumnLayoutEditorAllowedFieldsNgComponent,
+        ColumnLayoutEditorColumnsNgComponent,
+        ColumnLayoutEditorFieldControlsNgComponent,
+        ColumnLayoutEditorNgComponent,
+        ColumnLayoutEditorSearchGridNgComponent,
         GridSettingsNgComponent,
         HasValueScanFieldConditionOperandsEditorNgComponent,
-        HoldingsGridLayoutsDialogNgComponent,
+        HoldingsColumnLayoutsDialogNgComponent,
         HoldingsNgComponent,
         InstalledExtensionListNgComponent,
         IvemHoldingsNgComponent,
@@ -182,7 +182,7 @@ import { ZenithStatusNgComponent } from '../zenith-status/ng-api';
         MarketOverlapsScanFieldConditionOperandsEditorNgComponent,
         MarketsNgComponent,
         MultiColorPickerNgComponent,
-        NameableGridLayoutEditorDialogNgComponent,
+        NameableColumnLayoutEditorDialogNgComponent,
         NumericComparisonValueScanFieldConditionOperandsEditorNgComponent,
         NumericRangeScanFieldConditionOperandsEditorNgComponent,
         NumericValueScanFieldConditionOperandsEditorNgComponent,
@@ -235,22 +235,22 @@ import { ZenithStatusNgComponent } from '../zenith-status/ng-api';
         BrokerageAccountsNgComponent,
         ColorSettingsNgComponent,
         DelayedBadnessNgComponent,
-        DepthAndSalesGridLayoutsDialogNgComponent,
-        DepthGridLayoutsDialogNgComponent,
+        DepthAndSalesColumnLayoutsDialogNgComponent,
+        DepthColumnLayoutsDialogNgComponent,
         DepthNgComponent,
         ExtensionDetailNgComponent,
         ExtensionsSidebarNgComponent,
         FeedsNgComponent,
         GeneralSettingsNgComponent,
-        GridLayoutDialogNgComponent,
-        GridLayoutEditorNgComponent,
+        ColumnLayoutDialogNgComponent,
+        ColumnLayoutEditorNgComponent,
         GridSettingsNgComponent,
-        HoldingsGridLayoutsDialogNgComponent,
+        HoldingsColumnLayoutsDialogNgComponent,
         HoldingsNgComponent,
         LockOpenNotificationChannelPropertiesNgComponent,
         LockOpenNotificationChannelsGridNgComponent,
         MarketsNgComponent,
-        NameableGridLayoutEditorDialogNgComponent,
+        NameableColumnLayoutEditorDialogNgComponent,
         OpenWatchlistDialogNgComponent,
         OrderAuthoriseNgComponent,
         OrdersNgComponent,

@@ -8,8 +8,8 @@ import {
     AdiService,
     AssertInternalError,
     Badness,
-    BidAskAllowedFieldsGridLayoutDefinitions,
-    BidAskGridLayoutDefinitions,
+    BidAskAllowedSourcedFieldsColumnLayoutDefinitions,
+    BidAskColumnLayoutDefinitions,
     CommaText,
     CommaTextErr,
     Correctness,
@@ -276,20 +276,20 @@ export class DepthFrame extends ContentFrame {
         this._askDepthSideFrame.autoSizeAllColumnWidths(widthOnly);
     }
 
-    canCreateAllowedFieldsGridLayoutDefinition() {
-        return this._bidDepthSideFrame.canCreateAllowedFieldsGridLayoutDefinition() && this._askDepthSideFrame.canCreateAllowedFieldsGridLayoutDefinition();
+    canCreateAllowedSourcedFieldsColumnLayoutDefinition() {
+        return this._bidDepthSideFrame.canCreateAllowedSourcedFieldsColumnLayoutDefinition() && this._askDepthSideFrame.canCreateAllowedSourcedFieldsColumnLayoutDefinition();
     }
 
-    createAllowedFieldsGridLayoutDefinitions(): BidAskAllowedFieldsGridLayoutDefinitions {
+    createAllowedSourcedFieldsColumnLayoutDefinitions(): BidAskAllowedSourcedFieldsColumnLayoutDefinitions {
         return {
-            bid: this._bidDepthSideFrame.createAllowedFieldsGridLayoutDefinition(),
-            ask: this._askDepthSideFrame.createAllowedFieldsGridLayoutDefinition(),
+            bid: this._bidDepthSideFrame.createAllowedSourcedFieldsColumnLayoutDefinition(),
+            ask: this._askDepthSideFrame.createAllowedSourcedFieldsColumnLayoutDefinition(),
         };
     }
 
-    applyGridLayoutDefinitions(layoutDefinitions: BidAskGridLayoutDefinitions) {
-        this._bidDepthSideFrame.applyGridLayoutDefinition(layoutDefinitions.bid);
-        this._askDepthSideFrame.applyGridLayoutDefinition(layoutDefinitions.ask);
+    applyColumnLayoutDefinitions(layoutDefinitions: BidAskColumnLayoutDefinitions) {
+        this._bidDepthSideFrame.applyColumnLayoutDefinition(layoutDefinitions.bid);
+        this._askDepthSideFrame.applyColumnLayoutDefinition(layoutDefinitions.ask);
     }
 
     // async initialiseWidths() {

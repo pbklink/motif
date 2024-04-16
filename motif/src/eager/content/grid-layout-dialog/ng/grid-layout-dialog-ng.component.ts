@@ -20,9 +20,9 @@ import {
     ViewContainerRef
 } from '@angular/core';
 import {
-    AllowedFieldsGridLayoutDefinition,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     CommandRegisterService,
-    EditableGridLayoutDefinitionColumnList,
+    EditableColumnLayoutDefinitionColumnList,
     GridField,
     IconButtonUiAction,
     InternalCommand,
@@ -30,22 +30,22 @@ import {
     StringId,
     delay1Tick
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition } from '@xilytix/rev-data-source';
 import { CommandRegisterNgService, CoreInjectionTokens } from 'component-services-ng-api';
 import { SvgButtonNgComponent } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
-import { GridLayoutEditorNgComponent } from '../editor/ng-api';
+import { ColumnLayoutEditorNgComponent } from '../editor/ng-api';
 import { allowedFieldsInjectionToken, definitionColumnListInjectionToken, oldLayoutDefinitionInjectionToken } from './grid-layout-dialog-ng-injection-tokens';
 
 @Component({
     selector: 'app-grid-layout-dialog',
     templateUrl: './grid-layout-dialog-ng.component.html',
     styleUrls: ['./grid-layout-dialog-ng.component.scss'],
-    providers: [ { provide: definitionColumnListInjectionToken, useClass: EditableGridLayoutDefinitionColumnList}],
+    providers: [ { provide: definitionColumnListInjectionToken, useClass: EditableColumnLayoutDefinitionColumnList}],
 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridLayoutDialogNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
+export class ColumnLayoutDialogNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
     private static typeInstanceCreateCount = 0;
 
     @ViewChild('subDialog', { static: true, read: ViewContainerRef }) private _subDialogContainer: ViewContainerRef;
@@ -57,9 +57,9 @@ export class GridLayoutDialogNgComponent extends ContentComponentBaseNgDirective
     private _okUiAction: IconButtonUiAction;
     private _cancelUiAction: IconButtonUiAction;
 
-    private _editor: GridLayoutEditorNgComponent;
+    private _editor: ColumnLayoutEditorNgComponent;
 
-    private _closeResolve: (value: RevGridLayoutDefinition | undefined) => void;
+    private _closeResolve: (value: RevColumnLayoutDefinition | undefined) => void;
     private _closeReject: (reason: unknown) => void;
 
     constructor(
@@ -68,11 +68,11 @@ export class GridLayoutDialogNgComponent extends ContentComponentBaseNgDirective
         commandRegisterNgService: CommandRegisterNgService,
         @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
         @Inject(allowedFieldsInjectionToken) allowedFields: readonly GridField[],
-        @Inject(GridLayoutDialogNgComponent.captionInjectionToken) public readonly caption: string,
-        @Inject(oldLayoutDefinitionInjectionToken) private readonly _oldLayoutDefinition: AllowedFieldsGridLayoutDefinition,
-        @Self() @Inject(definitionColumnListInjectionToken) private readonly _definitionColumnList: EditableGridLayoutDefinitionColumnList,
+        @Inject(ColumnLayoutDialogNgComponent.captionInjectionToken) public readonly caption: string,
+        @Inject(oldLayoutDefinitionInjectionToken) private readonly _oldLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition,
+        @Self() @Inject(definitionColumnListInjectionToken) private readonly _definitionColumnList: EditableColumnLayoutDefinitionColumnList,
     ) {
-        super(elRef, ++GridLayoutDialogNgComponent.typeInstanceCreateCount);
+        super(elRef, ++ColumnLayoutDialogNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
         this._okUiAction = this.createOkUiAction();
@@ -90,8 +90,8 @@ export class GridLayoutDialogNgComponent extends ContentComponentBaseNgDirective
         this._cancelUiAction.finalise();
     }
 
-    waitClose(): GridLayoutDialogNgComponent.ClosePromise {
-        return new Promise<RevGridLayoutDefinition | undefined>((resolve, reject) => {
+    waitClose(): ColumnLayoutDialogNgComponent.ClosePromise {
+        return new Promise<RevColumnLayoutDefinition | undefined>((resolve, reject) => {
             this._closeResolve = resolve;
             this._closeReject = reject;
         });
@@ -106,7 +106,7 @@ export class GridLayoutDialogNgComponent extends ContentComponentBaseNgDirective
     }
 
     private createOkUiAction() {
-        const commandName = InternalCommand.Id.GridLayoutDialog_Ok;
+        const commandName = InternalCommand.Id.ColumnLayoutDialog_Ok;
         const displayId = StringId.Ok;
         const command = this._commandRegisterService.getOrRegisterInternalCommand(commandName, displayId);
         const action = new IconButtonUiAction(command);
@@ -116,7 +116,7 @@ export class GridLayoutDialogNgComponent extends ContentComponentBaseNgDirective
     }
 
     private createCancelUiAction() {
-        const commandName = InternalCommand.Id.GridLayoutDialog_Cancel;
+        const commandName = InternalCommand.Id.ColumnLayoutDialog_Cancel;
         const displayId = StringId.Cancel;
         const command = this._commandRegisterService.getOrRegisterInternalCommand(commandName, displayId);
         const action = new IconButtonUiAction(command);
@@ -133,7 +133,7 @@ export class GridLayoutDialogNgComponent extends ContentComponentBaseNgDirective
 
     private close(ok: boolean) {
         if (ok) {
-            this._closeResolve(this._editor.getGridLayoutDefinition());
+            this._closeResolve(this._editor.getColumnLayoutDefinition());
         } else {
             this._closeResolve(undefined);
         }
@@ -141,20 +141,20 @@ export class GridLayoutDialogNgComponent extends ContentComponentBaseNgDirective
 
     private showEditor() {
         this._subDialogContainer.clear();
-        this._editor = GridLayoutEditorNgComponent.create(this._subDialogContainer);
+        this._editor = ColumnLayoutEditorNgComponent.create(this._subDialogContainer);
     }
 }
 
-export namespace GridLayoutDialogNgComponent {
-    export type ClosePromise = Promise<RevGridLayoutDefinition | undefined>;
-    export const captionInjectionToken = new InjectionToken<string>('GridLayoutDialogNgComponent.Caption');
+export namespace ColumnLayoutDialogNgComponent {
+    export type ClosePromise = Promise<RevColumnLayoutDefinition | undefined>;
+    export const captionInjectionToken = new InjectionToken<string>('ColumnLayoutDialogNgComponent.Caption');
 
     export function create(
         container: ViewContainerRef,
         opener: LockOpenListItem.Opener,
         caption: string,
-        allowedFieldsGridLayoutDefinition: AllowedFieldsGridLayoutDefinition,
-    ): GridLayoutDialogNgComponent {
+        allowedSourcedFieldsColumnLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition,
+    ): ColumnLayoutDialogNgComponent {
         container.clear();
 
         const openerProvider: ValueProvider = {
@@ -167,18 +167,18 @@ export namespace GridLayoutDialogNgComponent {
         }
         const allowedFieldsProvider: ValueProvider = {
             provide: allowedFieldsInjectionToken,
-            useValue: allowedFieldsGridLayoutDefinition.allowedFields,
+            useValue: allowedSourcedFieldsColumnLayoutDefinition.allowedFields,
         };
         const oldLayoutDefinitionProvider: ValueProvider = {
             provide: oldLayoutDefinitionInjectionToken,
-            useValue: allowedFieldsGridLayoutDefinition,
+            useValue: allowedSourcedFieldsColumnLayoutDefinition,
         };
 
         const injector = Injector.create({
             providers: [openerProvider, captionProvider, allowedFieldsProvider, oldLayoutDefinitionProvider],
         });
 
-        const componentRef = container.createComponent(GridLayoutDialogNgComponent, { injector });
+        const componentRef = container.createComponent(ColumnLayoutDialogNgComponent, { injector });
         const component = componentRef.instance;
 
         return component;

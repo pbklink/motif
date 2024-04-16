@@ -6,7 +6,7 @@
 
 import {
     AdiService,
-    AllowedFieldsGridLayoutDefinition,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
     CommandRegisterService,
     JsonElement,
@@ -14,7 +14,7 @@ import {
     SettingsService,
     SymbolsService
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition } from '@xilytix/rev-data-source';
 import { TradesFrame } from 'content-internal-api';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
 import { DitemFrame } from '../ditem-frame';
@@ -103,19 +103,19 @@ export class TradesDitemFrame extends BuiltinDitemFrame {
         }
     }
 
-    createAllowedFieldsGridLayoutDefinition(): AllowedFieldsGridLayoutDefinition | undefined {
+    createAllowedSourcedFieldsColumnLayoutDefinition(): AllowedSourcedFieldsColumnLayoutDefinition | undefined {
         if (this._tradesFrame === undefined) {
             throw new AssertInternalError('TDFCAFALD44407');
         } else {
-            return this._tradesFrame.createAllowedFieldsGridLayoutDefinition();
+            return this._tradesFrame.createAllowedSourcedFieldsColumnLayoutDefinition();
         }
     }
 
-    applyGridLayoutDefinition(layoutDefinition: RevGridLayoutDefinition): void {
+    applyColumnLayoutDefinition(layoutDefinition: RevColumnLayoutDefinition): void {
         if (this._tradesFrame === undefined) {
             throw new Error('Condition not handled [ID:5326171853]');
         } else {
-            this._tradesFrame.applyGridLayoutDefinition(layoutDefinition);
+            this._tradesFrame.applyColumnLayoutDefinition(layoutDefinition);
         }
     }
 

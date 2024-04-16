@@ -13,7 +13,7 @@ import {
     TableFieldSourceDefinitionCachingFactoryService,
     TableRecordSourceDefinition
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { LockerScanAttachedNotificationChannelTableFieldSourceDefinition } from './locker-scan-attached-notification-channel-table-field-source-definition';
 
 export class ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition extends BadnessListTableRecordSourceDefinition<LockerScanAttachedNotificationChannel> {
@@ -33,14 +33,14 @@ export class ScanEditorAttachedNotificationChannelComparableListTableRecordSourc
         );
     }
 
-    override createDefaultLayoutDefinition(): RevGridLayoutDefinition {
+    override createDefaultLayoutDefinition(): RevColumnLayoutDefinition {
         const notificationChannelTableFieldSourceDefinition = LockerScanAttachedNotificationChannelTableFieldSourceDefinition.get(this.tableFieldSourceDefinitionCachingFactoryService);
 
         const fieldNames = new Array<string>();
 
         fieldNames.push(notificationChannelTableFieldSourceDefinition.getFieldNameById(LockerScanAttachedNotificationChannel.FieldId.Name));
 
-        return RevGridLayoutDefinition.createFromFieldNames(fieldNames);
+        return RevColumnLayoutDefinition.createFromFieldNames(fieldNames);
     }
 }
 
@@ -117,7 +117,7 @@ export namespace ScanEditorAttachedNotificationChannelComparableListTableRecordS
     export function createLayoutDefinition(
         fieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         fieldIds: FieldId[],
-    ): RevGridLayoutDefinition {
+    ): RevColumnLayoutDefinition {
         return fieldSourceDefinitionCachingFactoryService.createLayoutDefinition(fieldIds);
     }
 

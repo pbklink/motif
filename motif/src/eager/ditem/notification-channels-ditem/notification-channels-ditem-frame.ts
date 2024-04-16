@@ -22,7 +22,7 @@ import {
     Strings,
     SymbolsService
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { LockOpenNotificationChannelsGridFrame } from 'content-internal-api';
 import { ToastService } from '../../component-services/toast-service';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
@@ -133,19 +133,19 @@ export class NotificationChannelsDitemFrame extends BuiltinDitemFrame {
         }
     }
 
-    createAllowedFieldsGridLayoutDefinition() {
+    createAllowedSourcedFieldsColumnLayoutDefinition() {
         if (this._gridFrame === undefined) {
             throw new AssertInternalError('SDFCAFALD04418');
         } else {
-            return this._gridFrame.createAllowedFieldsGridLayoutDefinition();
+            return this._gridFrame.createAllowedSourcedFieldsColumnLayoutDefinition();
         }
     }
 
-    tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition: RevGridLayoutOrReferenceDefinition) {
+    tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition: RevColumnLayoutOrReferenceDefinition) {
         if (this._gridFrame === undefined) {
             throw new AssertInternalError('SLFOGLONRD04418');
         } else {
-            return this._gridFrame.tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition);
+            return this._gridFrame.tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition);
         }
     }
 

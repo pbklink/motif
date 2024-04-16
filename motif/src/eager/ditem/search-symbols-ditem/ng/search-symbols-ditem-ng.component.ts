@@ -48,7 +48,7 @@ import {
     SymbolsNgService,
     ToastNgService
 } from 'component-services-ng-api';
-import { NameableGridLayoutEditorDialogNgComponent, SearchSymbolsNgComponent } from 'content-ng-api';
+import { NameableColumnLayoutEditorDialogNgComponent, SearchSymbolsNgComponent } from 'content-ng-api';
 import {
     ButtonInputNgComponent,
     CaptionLabelNgComponent,
@@ -435,7 +435,7 @@ export class SearchSymbolsDitemNgComponent extends BuiltinDitemNgComponentBaseNg
         this._modeId = SearchSymbolsDitemNgComponent.ModeId.LayoutEditor;
         const allowedFieldsAndLayoutDefinition = this._frame.createAllowedFieldsAndLayoutDefinition();
 
-        const closePromise = NameableGridLayoutEditorDialogNgComponent.open(
+        const closePromise = NameableColumnLayoutEditorDialogNgComponent.open(
             this._dialogContainer,
             this._frame.opener,
             Strings[StringId.SymbolsDitemControlCaption_ColumnsDialogCaption],
@@ -444,11 +444,11 @@ export class SearchSymbolsDitemNgComponent extends BuiltinDitemNgComponentBaseNg
         closePromise.then(
             (layoutOrReferenceDefinition) => {
                 if (layoutOrReferenceDefinition !== undefined) {
-                    const openPromise = this._frame.tryOpenGridLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
+                    const openPromise = this._frame.tryOpenColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
                     openPromise.then(
                         (openResult) => {
                             if (openResult.isErr()) {
-                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.SearchSymbols]} ${Strings[StringId.GridLayout]}: ${openResult.error}`);
+                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.SearchSymbols]} ${Strings[StringId.ColumnLayout]}: ${openResult.error}`);
                             }
                         },
                         (reason) => { throw AssertInternalError.createIfNotError(reason, 'SSDNCSLECPOP68823'); }

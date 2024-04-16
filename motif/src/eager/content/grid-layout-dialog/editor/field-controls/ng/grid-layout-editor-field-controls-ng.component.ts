@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import {
     CommandRegisterService,
-    EditableGridLayoutDefinitionColumnList,
+    EditableColumnLayoutDefinitionColumnList,
     IconButtonUiAction,
     InternalCommand,
     StringId,
@@ -28,8 +28,8 @@ import {
 } from 'controls-ng-api';
 import { ContentComponentBaseNgDirective } from '../../../../ng/content-component-base-ng.directive';
 import { definitionColumnListInjectionToken } from '../../../ng/grid-layout-dialog-ng-injection-tokens';
-import { GridLayoutEditorAllowedFieldsFrame } from '../../allowed-fields/internal-api';
-import { GridLayoutEditorColumnsFrame } from '../../columns/internal-api';
+import { ColumnLayoutEditorAllowedFieldsFrame } from '../../allowed-fields/internal-api';
+import { ColumnLayoutEditorColumnsFrame } from '../../columns/internal-api';
 
 @Component({
     selector: 'app-grid-layout-editor-field-controls',
@@ -38,7 +38,7 @@ import { GridLayoutEditorColumnsFrame } from '../../columns/internal-api';
 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridLayoutEditorFieldControlsNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
+export class ColumnLayoutEditorFieldControlsNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
 
     @ViewChild('insertButton', { static: true }) private _insertButtonComponent: SvgButtonNgComponent;
@@ -55,15 +55,15 @@ export class GridLayoutEditorFieldControlsNgComponent extends ContentComponentBa
     private readonly _moveDownUiAction: IconButtonUiAction;
     private readonly _moveBottomUiAction: IconButtonUiAction;
 
-    private _allowedFieldsFrame: GridLayoutEditorAllowedFieldsFrame;
-    private _columnsFrame: GridLayoutEditorColumnsFrame;
+    private _allowedFieldsFrame: ColumnLayoutEditorAllowedFieldsFrame;
+    private _columnsFrame: ColumnLayoutEditorColumnsFrame;
 
     constructor(
         elRef: ElementRef<HTMLElement>,
         commandRegisterNgService: CommandRegisterNgService,
-        @Inject(definitionColumnListInjectionToken) private _columnList: EditableGridLayoutDefinitionColumnList,
+        @Inject(definitionColumnListInjectionToken) private _columnList: EditableColumnLayoutDefinitionColumnList,
     ) {
-        super(elRef, ++GridLayoutEditorFieldControlsNgComponent.typeInstanceCreateCount);
+        super(elRef, ++ColumnLayoutEditorFieldControlsNgComponent.typeInstanceCreateCount);
 
         const commandRegisterService = commandRegisterNgService.service;
 
@@ -89,8 +89,8 @@ export class GridLayoutEditorFieldControlsNgComponent extends ContentComponentBa
     }
 
     initialise(
-        allowedFieldsFrame: GridLayoutEditorAllowedFieldsFrame,
-        columnsFrame: GridLayoutEditorColumnsFrame,
+        allowedFieldsFrame: ColumnLayoutEditorAllowedFieldsFrame,
+        columnsFrame: ColumnLayoutEditorColumnsFrame,
     ) {
         this._allowedFieldsFrame = allowedFieldsFrame;
         this._columnsFrame = columnsFrame;
@@ -104,10 +104,10 @@ export class GridLayoutEditorFieldControlsNgComponent extends ContentComponentBa
 
     private createInsertUiAction(commandRegisterService: CommandRegisterService) {
         const commandName = InternalCommand.Id.Grid_Insert;
-        const displayId = StringId.GridLayoutEditor_InsertCaption;
+        const displayId = StringId.ColumnLayoutEditor_InsertCaption;
         const command = commandRegisterService.getOrRegisterInternalCommand(commandName, displayId);
         const action = new IconButtonUiAction(command);
-        action.pushTitle(Strings[StringId.GridLayoutEditor_InsertTitle]);
+        action.pushTitle(Strings[StringId.ColumnLayoutEditor_InsertTitle]);
         action.pushIcon(IconButtonUiAction.IconId.InsertIntoListFromLeft);
         action.pushUnselected();
         action.signalEvent = () => {
@@ -119,10 +119,10 @@ export class GridLayoutEditorFieldControlsNgComponent extends ContentComponentBa
 
     private createRemoveUiAction(commandRegisterService: CommandRegisterService) {
         const commandName = InternalCommand.Id.Grid_Remove;
-        const displayId = StringId.GridLayoutEditor_RemoveCaption;
+        const displayId = StringId.ColumnLayoutEditor_RemoveCaption;
         const command = commandRegisterService.getOrRegisterInternalCommand(commandName, displayId);
         const action = new IconButtonUiAction(command);
-        action.pushTitle(Strings[StringId.GridLayoutEditor_RemoveTitle]);
+        action.pushTitle(Strings[StringId.ColumnLayoutEditor_RemoveTitle]);
         action.pushIcon(IconButtonUiAction.IconId.RemoveFromListToLeft);
         action.pushUnselected();
         action.signalEvent = () => this._columnsFrame.removeSelectedColumns();
@@ -131,10 +131,10 @@ export class GridLayoutEditorFieldControlsNgComponent extends ContentComponentBa
 
     private createMoveUpUiAction(commandRegisterService: CommandRegisterService) {
         const commandName = InternalCommand.Id.Grid_MoveUp;
-        const displayId = StringId.GridLayoutEditor_MoveUpCaption;
+        const displayId = StringId.ColumnLayoutEditor_MoveUpCaption;
         const command = commandRegisterService.getOrRegisterInternalCommand(commandName, displayId);
         const action = new IconButtonUiAction(command);
-        action.pushTitle(Strings[StringId.GridLayoutEditor_MoveUpTitle]);
+        action.pushTitle(Strings[StringId.ColumnLayoutEditor_MoveUpTitle]);
         action.pushIcon(IconButtonUiAction.IconId.MoveUp);
         action.pushUnselected();
         action.signalEvent = () => this._columnsFrame.moveSelectedColumnsUp();
@@ -143,10 +143,10 @@ export class GridLayoutEditorFieldControlsNgComponent extends ContentComponentBa
 
     private createMoveTopUiAction(commandRegisterService: CommandRegisterService) {
         const commandName = InternalCommand.Id.Grid_MoveTop;
-        const displayId = StringId.GridLayoutEditor_MoveTopCaption;
+        const displayId = StringId.ColumnLayoutEditor_MoveTopCaption;
         const command = commandRegisterService.getOrRegisterInternalCommand(commandName, displayId);
         const action = new IconButtonUiAction(command);
-        action.pushTitle(Strings[StringId.GridLayoutEditor_MoveTopTitle]);
+        action.pushTitle(Strings[StringId.ColumnLayoutEditor_MoveTopTitle]);
         action.pushIcon(IconButtonUiAction.IconId.MoveToTop);
         action.pushUnselected();
         action.signalEvent = () => this._columnsFrame.moveSelectedColumnsToTop();
@@ -155,10 +155,10 @@ export class GridLayoutEditorFieldControlsNgComponent extends ContentComponentBa
 
     private createMoveDownUiAction(commandRegisterService: CommandRegisterService) {
         const commandName = InternalCommand.Id.Grid_MoveDown;
-        const displayId = StringId.GridLayoutEditor_MoveDownCaption;
+        const displayId = StringId.ColumnLayoutEditor_MoveDownCaption;
         const command = commandRegisterService.getOrRegisterInternalCommand(commandName, displayId);
         const action = new IconButtonUiAction(command);
-        action.pushTitle(Strings[StringId.GridLayoutEditor_MoveDownTitle]);
+        action.pushTitle(Strings[StringId.ColumnLayoutEditor_MoveDownTitle]);
         action.pushIcon(IconButtonUiAction.IconId.MoveDown);
         action.pushUnselected();
         action.signalEvent = () => this._columnsFrame.moveSelectedColumnsDown();
@@ -167,10 +167,10 @@ export class GridLayoutEditorFieldControlsNgComponent extends ContentComponentBa
 
     private createMoveBottomUiAction(commandRegisterService: CommandRegisterService) {
         const commandName = InternalCommand.Id.Grid_MoveBottom;
-        const displayId = StringId.GridLayoutEditor_MoveBottomCaption;
+        const displayId = StringId.ColumnLayoutEditor_MoveBottomCaption;
         const command = commandRegisterService.getOrRegisterInternalCommand(commandName, displayId);
         const action = new IconButtonUiAction(command);
-        action.pushTitle(Strings[StringId.GridLayoutEditor_MoveBottomTitle]);
+        action.pushTitle(Strings[StringId.ColumnLayoutEditor_MoveBottomTitle]);
         action.pushIcon(IconButtonUiAction.IconId.MoveToBottom);
         action.pushUnselected();
         action.signalEvent = () => this._columnsFrame.moveSelectedColumnsToBottom();

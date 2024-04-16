@@ -19,7 +19,7 @@ import {
     Strings,
     SymbolsService
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { ToastService } from 'component-services-internal-api';
 import { BalancesFrame } from 'content-internal-api';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
@@ -103,19 +103,19 @@ export class BalancesDitemFrame extends BuiltinDitemFrame {
         }
     }
 
-    createAllowedFieldsGridLayoutDefinition() {
+    createAllowedSourcedFieldsColumnLayoutDefinition() {
         if (this._balancesFrame === undefined) {
             throw new AssertInternalError('BDFCAFALD04418');
         } else {
-            return this._balancesFrame.createAllowedFieldsGridLayoutDefinition();
+            return this._balancesFrame.createAllowedSourcedFieldsColumnLayoutDefinition();
         }
     }
 
-    tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition: RevGridLayoutOrReferenceDefinition) {
+    tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition: RevColumnLayoutOrReferenceDefinition) {
         if (this._balancesFrame === undefined) {
             throw new AssertInternalError('BDFOGLONRD04418');
         } else {
-            return this._balancesFrame.tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition);
+            return this._balancesFrame.tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition);
         }
     }
 

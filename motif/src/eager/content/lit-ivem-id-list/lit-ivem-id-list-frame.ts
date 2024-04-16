@@ -9,8 +9,8 @@ import {
     LitIvemId,
     LitIvemIdComparableListTableRecordSource,
     MarketInfo,
+    ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
-    ReferenceableGridLayoutsService,
     RenderValueRecordGridCellPainter,
     SettingsService,
     TableFieldSourceDefinitionCachingFactoryService,
@@ -19,7 +19,7 @@ import {
     TextRenderValueCellPainter,
     UiComparableList
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { DatalessViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { DelayedBadnessGridSourceFrame } from '../delayed-badness-grid-source/internal-api';
@@ -45,7 +45,7 @@ export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
     constructor(
         settingsService: SettingsService,
         gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
-        referenceableGridLayoutsService: ReferenceableGridLayoutsService,
+        referenceableColumnLayoutsService: ReferenceableColumnLayoutsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,
         tableRecordSourceFactory: TableRecordSourceFactory,
@@ -57,7 +57,7 @@ export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
         super(
             settingsService,
             gridFieldCustomHeadingsService,
-            referenceableGridLayoutsService,
+            referenceableColumnLayoutsService,
             tableFieldSourceDefinitionCachingFactoryService,
             tableRecordSourceDefinitionFactoryService,
             tableRecordSourceFactory,
@@ -177,7 +177,7 @@ export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
         return this._gridMainCellPainter;
     }
 
-    private createListGridSourceOrReferenceDefinition(list: UiComparableList<LitIvemId>, layoutDefinition: RevGridLayoutOrReferenceDefinition | undefined) {
+    private createListGridSourceOrReferenceDefinition(list: UiComparableList<LitIvemId>, layoutDefinition: RevColumnLayoutOrReferenceDefinition | undefined) {
         const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createLitIvemIdComparableList(list);
         const gridSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, layoutDefinition, undefined);
         return new DataSourceOrReferenceDefinition(gridSourceDefinition);

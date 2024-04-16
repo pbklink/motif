@@ -11,7 +11,7 @@ import {
     ViewContainerRef
 } from '@angular/core';
 import {
-    AllowedFieldsGridLayoutDefinition,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
     ButtonUiAction,
     IconButtonUiAction,
@@ -28,9 +28,9 @@ import {
     delay1Tick,
     getErrorMessage
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { AdiNgService, CommandRegisterNgService, CoreInjectionTokens, LockOpenListItemOpenerNgUseClass, NotificationChannelsNgService, SettingsNgService, SymbolsNgService, ToastNgService } from 'component-services-ng-api';
-import { LockOpenNotificationChannelPropertiesNgComponent, LockOpenNotificationChannelsGridNgComponent, NameableGridLayoutEditorDialogNgComponent } from 'content-ng-api';
+import { LockOpenNotificationChannelPropertiesNgComponent, LockOpenNotificationChannelsGridNgComponent, NameableColumnLayoutEditorDialogNgComponent } from 'content-ng-api';
 import { ButtonInputNgComponent, IntegerEnumInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
 import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
@@ -183,23 +183,23 @@ export class NotificationChannelsDitemNgComponent extends BuiltinDitemNgComponen
     }
 
     private handleColumnsUiActionSignalEvent() {
-        const allowedFieldsGridLayoutDefinition = this._frame.createAllowedFieldsGridLayoutDefinition();
+        const allowedSourcedFieldsColumnLayoutDefinition = this._frame.createAllowedSourcedFieldsColumnLayoutDefinition();
 
-        const closePromise = NameableGridLayoutEditorDialogNgComponent.open(
+        const closePromise = NameableColumnLayoutEditorDialogNgComponent.open(
             this._dialogContainer,
             this._opener,
             Strings[StringId.Scans_ColumnsDialogCaption],
-            allowedFieldsGridLayoutDefinition,
+            allowedSourcedFieldsColumnLayoutDefinition,
         );
 
         closePromise.then(
             (layoutOrReferenceDefinition) => {
                 if (layoutOrReferenceDefinition !== undefined) {
-                    const openPromise = this._frame.tryOpenGridLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
+                    const openPromise = this._frame.tryOpenColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
                     openPromise.then(
                         (openResult) => {
                             if (openResult.isErr()) {
-                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.NotificationChannels]} ${Strings[StringId.GridLayout]}: ${openResult.error}`);
+                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.NotificationChannels]} ${Strings[StringId.ColumnLayout]}: ${openResult.error}`);
                             }
                         },
                         (reason) => { throw AssertInternalError.createIfNotError(reason, 'LIILENDHCSEOP56668'); }
@@ -339,20 +339,20 @@ export class NotificationChannelsDitemNgComponent extends BuiltinDitemNgComponen
     }
     }
 
-    private openGridColumnsEditorDialog(caption: string, allowedFieldsAndLayoutDefinition: AllowedFieldsGridLayoutDefinition) {
+    private openGridColumnsEditorDialog(caption: string, allowedFieldsAndLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition) {
         this.dialogActive = true;
 
         // We cannot just return the promise from the dialog as we need to close the dialog as well.
         // So return a separate promise which is resolved when dialog is closed.
-        let definitonResolveFtn: (this: void, definition: RevGridLayoutOrReferenceDefinition | undefined) => void;
+        let definitonResolveFtn: (this: void, definition: RevColumnLayoutOrReferenceDefinition | undefined) => void;
 
-        const definitionPromise = new Promise<RevGridLayoutOrReferenceDefinition | undefined>(
+        const definitionPromise = new Promise<RevColumnLayoutOrReferenceDefinition | undefined>(
             (resolve) => {
                 definitonResolveFtn = resolve;
             }
         )
 
-        const closePromise = NameableGridLayoutEditorDialogNgComponent.open(
+        const closePromise = NameableColumnLayoutEditorDialogNgComponent.open(
             this._dialogContainer,
             this._frame.opener,
             caption,

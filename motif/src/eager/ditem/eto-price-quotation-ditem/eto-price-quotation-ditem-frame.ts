@@ -12,7 +12,7 @@ import {
     SettingsService,
     SymbolsService
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { GridSourceFrame, WatchlistFrame } from 'content-internal-api';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
 import { DitemFrame } from '../ditem-frame';
@@ -103,9 +103,9 @@ export class EtoPriceQuotationDitemFrame extends BuiltinDitemFrame {
                 const keptLayoutElementResult = watchElement.tryGetElement(EtoPriceQuotationDitemFrame.JsonName.keptLayout);
                 if (keptLayoutElementResult.isOk()) {
                     const keptLayoutElement = keptLayoutElementResult.value;
-                    const keptLayoutResult = RevGridLayoutOrReferenceDefinition.tryCreateFromJson(keptLayoutElement);
+                    const keptLayoutResult = RevColumnLayoutOrReferenceDefinition.tryCreateFromJson(keptLayoutElement);
                     if (keptLayoutResult.isOk()) {
-                        this._watchGridSourceFrame.keptGridLayoutOrReferenceDefinition = keptLayoutResult.value;
+                        this._watchGridSourceFrame.keptColumnLayoutOrReferenceDefinition = keptLayoutResult.value;
                     }
                 }
             }
@@ -123,9 +123,9 @@ export class EtoPriceQuotationDitemFrame extends BuiltinDitemFrame {
                 const keptLayoutElementResult = callPutElement.tryGetElement(EtoPriceQuotationDitemFrame.JsonName.keptLayout);
                 if (keptLayoutElementResult.isOk()) {
                     const keptLayoutElement = keptLayoutElementResult.value;
-                    const keptLayoutResult = RevGridLayoutOrReferenceDefinition.tryCreateFromJson(keptLayoutElement);
+                    const keptLayoutResult = RevColumnLayoutOrReferenceDefinition.tryCreateFromJson(keptLayoutElement);
                     if (keptLayoutResult.isOk()) {
-                        this._callPutGridSourceFrame.keptGridLayoutOrReferenceDefinition = keptLayoutResult.value;
+                        this._callPutGridSourceFrame.keptColumnLayoutOrReferenceDefinition = keptLayoutResult.value;
                     }
                 }
             }
@@ -134,7 +134,7 @@ export class EtoPriceQuotationDitemFrame extends BuiltinDitemFrame {
 
     private saveWatchCallPut(frame: GridSourceFrame, element: JsonElement) {
         const keptLayoutElement = element.newElement(EtoPriceQuotationDitemFrame.JsonName.keptLayout);
-        const layoutDefinition = frame.createGridLayoutOrReferenceDefinition();
+        const layoutDefinition = frame.createColumnLayoutOrReferenceDefinition();
         layoutDefinition.saveToJson(keptLayoutElement);
     }
 }

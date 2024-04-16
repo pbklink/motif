@@ -15,9 +15,9 @@ import {
     KeyboardService,
     MotifServicesService,
     NotificationChannelsService,
+    ReferenceableColumnLayoutsService,
     ReferenceableDataSourceDefinitionsStoreService,
     ReferenceableDataSourcesService,
-    ReferenceableGridLayoutsService,
     ScansService,
     SettingsService,
     SymbolDetailCacheService,
@@ -55,7 +55,7 @@ export class CoreNgService implements OnDestroy {
     get tableFieldSourceDefinitionCachingFactoryService(): TableFieldSourceDefinitionCachingFactoryService {
         return this._service.tableFieldSourceDefinitionCachingFactoryService;
     }
-    get referenceableGridLayoutsService(): ReferenceableGridLayoutsService { return this._service.referenceableGridLayoutsService; }
+    get referenceableColumnLayoutsService(): ReferenceableColumnLayoutsService { return this._service.referenceableColumnLayoutsService; }
     get referenceableDataSourceDefinitionsStoreService(): ReferenceableDataSourceDefinitionsStoreService { return this._service.referenceableDataSourceDefinitionsStoreService; }
     get referenceableDataSourcesService(): ReferenceableDataSourcesService { return this._service.referenceableDataSourcesService; }
     get cellPainterFactoryService(): CellPainterFactoryService { return this._service.cellPainterFactoryService; }

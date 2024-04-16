@@ -13,16 +13,16 @@ import {
     CheckboxRenderValueRecordGridCellPainter,
     DataSourceDefinition,
     DataSourceOrReferenceDefinition,
-    EditableGridLayoutDefinitionColumn,
-    EditableGridLayoutDefinitionColumnList,
-    EditableGridLayoutDefinitionColumnTableRecordSource,
-    EditableGridLayoutDefinitionColumnTableRecordSourceDefinition,
+    EditableColumnLayoutDefinitionColumn,
+    EditableColumnLayoutDefinitionColumnList,
+    EditableColumnLayoutDefinitionColumnTableRecordSource,
+    EditableColumnLayoutDefinitionColumnTableRecordSourceDefinition,
     GridField,
     Integer,
     ModifierKey,
     ModifierKeyId,
+    ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
-    ReferenceableGridLayoutsService,
     RenderValueRecordGridCellPainter,
     SettingsService,
     TableFieldSourceDefinitionCachingFactoryService,
@@ -36,10 +36,10 @@ import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../../grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../../../table-record-source-definition-factory-service';
 
-export class GridLayoutEditorColumnsFrame extends GridSourceFrame {
-    selectionChangedEventer: GridLayoutEditorColumnsFrame.SelectionChangedEventer | undefined;
+export class ColumnLayoutEditorColumnsFrame extends GridSourceFrame {
+    selectionChangedEventer: ColumnLayoutEditorColumnsFrame.SelectionChangedEventer | undefined;
 
-    private _recordList: EditableGridLayoutDefinitionColumnList;
+    private _recordList: EditableColumnLayoutDefinitionColumnList;
 
     private _gridHeaderCellPainter: TextHeaderCellPainter;
     private _gridMainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
@@ -50,19 +50,19 @@ export class GridLayoutEditorColumnsFrame extends GridSourceFrame {
     constructor(
         settingsService: SettingsService,
         gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
-        namedGridLayoutsService: ReferenceableGridLayoutsService,
+        namedColumnLayoutsService: ReferenceableColumnLayoutsService,
         tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,
         tableRecordSourceFactory: TableRecordSourceFactory,
         namedGridSourcesService: ReferenceableDataSourcesService,
         cellPainterFactoryService: CellPainterFactoryService,
         toastService: ToastService,
-        private readonly _columnList: EditableGridLayoutDefinitionColumnList,
+        private readonly _columnList: EditableColumnLayoutDefinitionColumnList,
     ) {
         super(
             settingsService,
             gridFieldCustomHeadingsService,
-            namedGridLayoutsService,
+            namedColumnLayoutsService,
             tableFieldSourceDefinitionCachingFactoryService,
             tableRecordSourceDefinitionFactoryService,
             tableRecordSourceFactory,
@@ -209,7 +209,7 @@ export class GridLayoutEditorColumnsFrame extends GridSourceFrame {
     }
 
     protected override processGridSourceOpenedEvent() {
-        const recordSource = this.grid.openedRecordSource as EditableGridLayoutDefinitionColumnTableRecordSource;
+        const recordSource = this.grid.openedRecordSource as EditableColumnLayoutDefinitionColumnTableRecordSource;
         this._recordList = recordSource.list;
     }
 
@@ -224,7 +224,7 @@ export class GridLayoutEditorColumnsFrame extends GridSourceFrame {
     }
 
     private createDefaultLayoutGridSourceOrReferenceDefinition() {
-        const tableRecordSourceDefinition = new EditableGridLayoutDefinitionColumnTableRecordSourceDefinition(
+        const tableRecordSourceDefinition = new EditableColumnLayoutDefinitionColumnTableRecordSourceDefinition(
             this.gridFieldCustomHeadingsService,
             this.tableFieldSourceDefinitionCachingFactoryService,
             this._columnList,
@@ -282,7 +282,7 @@ export class GridLayoutEditorColumnsFrame extends GridSourceFrame {
             GridField
         >;
 
-        if (viewCell.viewLayoutColumn.column.field.definition.sourcelessName === EditableGridLayoutDefinitionColumn.FieldName.visible) {
+        if (viewCell.viewLayoutColumn.column.field.definition.sourcelessName === EditableColumnLayoutDefinitionColumn.FieldName.visible) {
             cellPainter = this._visibleCheckboxPainter;
         } else {
             cellPainter = this._gridMainCellPainter;
@@ -301,11 +301,11 @@ export class GridLayoutEditorColumnsFrame extends GridSourceFrame {
     }
 
     private tryGetCellEditor(sourcelesFieldName: string, readonly: boolean, subgridRowIndex: Integer): CellEditor<AdaptedRevgridBehavioredColumnSettings, GridField> | undefined {
-        if (sourcelesFieldName === EditableGridLayoutDefinitionColumn.FieldName.visible) {
+        if (sourcelesFieldName === EditableColumnLayoutDefinitionColumn.FieldName.visible) {
             this._visibleCheckboxEditor.readonly = readonly || subgridRowIndex < this._recordList.anchoredRecordCount;
             return this._visibleCheckboxEditor;
         } else {
-            if (sourcelesFieldName === EditableGridLayoutDefinitionColumn.FieldName.width) {
+            if (sourcelesFieldName === EditableColumnLayoutDefinitionColumn.FieldName.width) {
                 this._widthEditor.readonly = readonly
                 return this._widthEditor;
             } else {
@@ -351,7 +351,7 @@ export class GridLayoutEditorColumnsFrame extends GridSourceFrame {
     }
 }
 
-export namespace GridLayoutEditorColumnsFrame {
+export namespace ColumnLayoutEditorColumnsFrame {
     export type SelectionChangedEventer = (this: void) => void;
-    export type FocusChangedEventer = (this: void, column: EditableGridLayoutDefinitionColumn | undefined) => void;
+    export type FocusChangedEventer = (this: void, column: EditableColumnLayoutDefinitionColumn | undefined) => void;
 }

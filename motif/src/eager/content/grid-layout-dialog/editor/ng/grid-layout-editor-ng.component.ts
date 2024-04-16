@@ -17,16 +17,16 @@ import {
 } from '@angular/core';
 import {
     AssertInternalError,
-    EditableGridLayoutDefinitionColumnList,
+    EditableColumnLayoutDefinitionColumnList,
     Integer,
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition } from '@xilytix/rev-data-source';
 import { AngularSplitTypes } from 'controls-internal-api';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
 import { definitionColumnListInjectionToken } from '../../ng/grid-layout-dialog-ng-injection-tokens';
-import { GridLayoutEditorAllowedFieldsNgComponent } from '../allowed-fields/ng-api';
-import { GridLayoutEditorColumnsNgComponent } from '../columns/ng-api';
-import { GridLayoutEditorFieldControlsNgComponent } from '../field-controls/ng-api';
+import { ColumnLayoutEditorAllowedFieldsNgComponent } from '../allowed-fields/ng-api';
+import { ColumnLayoutEditorColumnsNgComponent } from '../columns/ng-api';
+import { ColumnLayoutEditorFieldControlsNgComponent } from '../field-controls/ng-api';
 
 @Component({
     selector: 'app-grid-layout-editor',
@@ -35,13 +35,13 @@ import { GridLayoutEditorFieldControlsNgComponent } from '../field-controls/ng-a
 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridLayoutEditorNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
+export class ColumnLayoutEditorNgComponent extends ContentComponentBaseNgDirective implements OnDestroy, AfterViewInit {
     private static typeInstanceCreateCount = 0;
 
-    @ViewChild('allowedFields', { static: true }) private _allowedFieldsComponent: GridLayoutEditorAllowedFieldsNgComponent;
+    @ViewChild('allowedFields', { static: true }) private _allowedFieldsComponent: ColumnLayoutEditorAllowedFieldsNgComponent;
     @ViewChild('fieldControlsAndColumns', { static: true }) private _fieldControlsAndColumnsElRef: ElementRef<HTMLDivElement>;
-    @ViewChild('fieldControls', { static: true }) private _fieldControlsComponent: GridLayoutEditorFieldControlsNgComponent;
-    @ViewChild('columns', { static: true }) private _columnsComponent: GridLayoutEditorColumnsNgComponent;
+    @ViewChild('fieldControls', { static: true }) private _fieldControlsComponent: ColumnLayoutEditorFieldControlsNgComponent;
+    @ViewChild('columns', { static: true }) private _columnsComponent: ColumnLayoutEditorColumnsNgComponent;
 
     public allowedFieldsWidth: AngularSplitTypes.AreaSize.Html;
     public allowedFieldsMinWidth: AngularSplitTypes.AreaSize.Html;
@@ -55,17 +55,17 @@ export class GridLayoutEditorNgComponent extends ContentComponentBaseNgDirective
     constructor(
         elRef: ElementRef<HTMLElement>,
         private readonly _cdr: ChangeDetectorRef,
-        @Inject(definitionColumnListInjectionToken) private readonly _columnList: EditableGridLayoutDefinitionColumnList,
+        @Inject(definitionColumnListInjectionToken) private readonly _columnList: EditableColumnLayoutDefinitionColumnList,
     ) {
-        super(elRef, ++GridLayoutEditorNgComponent.typeInstanceCreateCount);
+        super(elRef, ++ColumnLayoutEditorNgComponent.typeInstanceCreateCount);
     }
 
     public handleSplitterDragEnd() {
         this._splitterDragged = true;
     }
 
-    getGridLayoutDefinition(): RevGridLayoutDefinition {
-        return this._columnList.createGridLayoutDefinition();
+    getColumnLayoutDefinition(): RevColumnLayoutDefinition {
+        return this._columnList.createColumnLayoutDefinition();
     }
 
     ngAfterViewInit() {
@@ -88,7 +88,7 @@ export class GridLayoutEditorNgComponent extends ContentComponentBaseNgDirective
     }
 
     private updateWidths() {
-        const allowedFieldsMinWidth = this._allowedFieldsComponent.calculateFixedColumnsWidth() + GridLayoutEditorNgComponent.fixedColumnsMinExtraEmWidth * this._allowedFieldsComponent.emWidth;
+        const allowedFieldsMinWidth = this._allowedFieldsComponent.calculateFixedColumnsWidth() + ColumnLayoutEditorNgComponent.fixedColumnsMinExtraEmWidth * this._allowedFieldsComponent.emWidth;
         this.allowedFieldsMinWidth = allowedFieldsMinWidth;
 
         if (!this._splitterDragged) {
@@ -113,12 +113,12 @@ export class GridLayoutEditorNgComponent extends ContentComponentBaseNgDirective
     }
 }
 
-export namespace GridLayoutEditorNgComponent {
+export namespace ColumnLayoutEditorNgComponent {
     export const fixedColumnsMinExtraEmWidth = 2;
 
     export function create(container: ViewContainerRef) {
         container.clear();
-        const componentRef  = container.createComponent(GridLayoutEditorNgComponent);
+        const componentRef  = container.createComponent(ColumnLayoutEditorNgComponent);
         return componentRef.instance;
     }
 }

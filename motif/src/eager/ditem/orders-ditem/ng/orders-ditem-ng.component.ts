@@ -41,7 +41,7 @@ import {
     SymbolsNgService,
     ToastNgService
 } from 'component-services-ng-api';
-import { NameableGridLayoutEditorDialogNgComponent, OrdersNgComponent } from 'content-ng-api';
+import { NameableColumnLayoutEditorDialogNgComponent, OrdersNgComponent } from 'content-ng-api';
 import { BrokerageAccountGroupInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
 import { ComponentContainer } from 'golden-layout';
 import { BuiltinDitemNgComponentBaseNgDirective } from '../../ng/builtin-ditem-ng-component-base.directive';
@@ -271,7 +271,7 @@ export class OrdersDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
 
         const allowedFieldsAndLayoutDefinition = this._frame.createAllowedFieldsAndLayoutDefinition();
 
-        const closePromise = NameableGridLayoutEditorDialogNgComponent.open(
+        const closePromise = NameableColumnLayoutEditorDialogNgComponent.open(
             this._dialogContainer,
             this._frame.opener,
             Strings[StringId.Orders_ColumnsDialogCaption],
@@ -280,11 +280,11 @@ export class OrdersDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirecti
         closePromise.then(
             (layoutOrReferenceDefinition) => {
                 if (layoutOrReferenceDefinition !== undefined) {
-                    const openPromise = this._frame.tryOpenGridLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
+                    const openPromise = this._frame.tryOpenColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
                     openPromise.then(
                         (openResult) => {
                             if (openResult.isErr()) {
-                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.Orders]} ${Strings[StringId.GridLayout]}: ${openResult.error}`);
+                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.Orders]} ${Strings[StringId.ColumnLayout]}: ${openResult.error}`);
                             }
                         },
                         (reason) => { throw AssertInternalError.createIfNotError(reason, 'OADNCSLECPOP68823'); }

@@ -26,7 +26,7 @@ import {
     SymbolsService,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { SearchSymbolsFrame } from 'content-internal-api';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
 import { DitemFrame } from '../ditem-frame';
@@ -159,7 +159,7 @@ export class SearchSymbolsDitemFrame extends BuiltinDitemFrame {
         searchSymbolsFrame.gridSourceOpenedEventer = (dataDefinition) => this.handleGridSourceOpenedEvent(dataDefinition);
         searchSymbolsFrame.recordFocusedEventer = (newRecordIndex) => this.handleRecordFocusedEvent(newRecordIndex);
 
-        let layoutDefinition: RevGridLayoutOrReferenceDefinition | undefined;
+        let layoutDefinition: RevColumnLayoutOrReferenceDefinition | undefined;
         if (ditemFrameElement !== undefined) {
             const searchSymbolsFrameElementResult = ditemFrameElement.tryGetElement(SearchSymbolsDitemFrame.JsonName.searchSymbolsFrame);
             if (searchSymbolsFrameElementResult.isOk()) {
@@ -202,12 +202,12 @@ export class SearchSymbolsDitemFrame extends BuiltinDitemFrame {
         }
     }
 
-    tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition: RevGridLayoutOrReferenceDefinition) {
+    tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition: RevColumnLayoutOrReferenceDefinition) {
         const gridSourceFrame = this._searchSymbolsFrame;
         if (gridSourceFrame === undefined) {
             throw new AssertInternalError('SSDFOGLONRD13133');
         } else {
-            return gridSourceFrame.tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition);
+            return gridSourceFrame.tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition);
         }
     }
 
@@ -216,7 +216,7 @@ export class SearchSymbolsDitemFrame extends BuiltinDitemFrame {
         if (gridSourceFrame === undefined) {
             throw new AssertInternalError('SSDFCAFALD13133');
         } else {
-            return gridSourceFrame.createAllowedFieldsGridLayoutDefinition();
+            return gridSourceFrame.createAllowedSourcedFieldsColumnLayoutDefinition();
         }
     }
 

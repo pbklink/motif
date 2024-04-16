@@ -36,18 +36,18 @@ import {
     assigned,
     delay1Tick
 } from '@motifmarkets/motif-core';
-import { RevGridLayout, RevReferenceableGridLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayout, RevReferenceableColumnLayoutDefinition } from '@xilytix/rev-data-source';
 import {
     AdiNgService,
     CommandRegisterNgService,
-    FavouriteReferenceableGridLayoutDefinitionsStoreNgService,
+    FavouriteReferenceableColumnLayoutDefinitionsStoreNgService,
     SettingsNgService,
     SymbolsNgService,
     TextFormatterNgService,
     ToastNgService
 } from 'component-services-ng-api';
 import {
-    NameableGridLayoutEditorDialogNgComponent,
+    NameableColumnLayoutEditorDialogNgComponent,
     OpenWatchlistDialogNgComponent,
     SaveWatchlistDialogNgComponent,
     WatchlistNgComponent
@@ -84,7 +84,7 @@ export class WatchlistDitemNgComponent extends BuiltinDitemNgComponentBaseNgDire
     public watchlistAbbreviatedDescription: string;
     public watchListFullDescription: string;
 
-    private _layoutEditorComponent: NameableGridLayoutEditorDialogNgComponent | undefined;
+    private _layoutEditorComponent: NameableColumnLayoutEditorDialogNgComponent | undefined;
 
     private _symbolEditUiAction: LitIvemIdUiAction;
     private _symbolApplyUiAction: IconButtonUiAction;
@@ -92,7 +92,7 @@ export class WatchlistDitemNgComponent extends BuiltinDitemNgComponentBaseNgDire
     private _newUiAction: IconButtonUiAction;
     private _openUiAction: IconButtonUiAction;
     private _saveUiAction: IconButtonUiAction;
-    private _favouriteLayoutsUiAction: TypedMappedExplicitElementsArrayUiAction<RevReferenceableGridLayoutDefinition>;
+    private _favouriteLayoutsUiAction: TypedMappedExplicitElementsArrayUiAction<RevReferenceableColumnLayoutDefinition>;
     private _columnsUiAction: IconButtonUiAction;
     private _autoSizeColumnWidthsUiAction: IconButtonUiAction;
     private _toggleSymbolLinkingUiAction: IconButtonUiAction;
@@ -110,7 +110,7 @@ export class WatchlistDitemNgComponent extends BuiltinDitemNgComponentBaseNgDire
         symbolsNgService: SymbolsNgService,
         adiNgService: AdiNgService,
         textFormatterNgService: TextFormatterNgService,
-        favouriteNamedGridLayoutDefinitionReferencesNgService: FavouriteReferenceableGridLayoutDefinitionsStoreNgService,
+        favouriteNamedColumnLayoutDefinitionReferencesNgService: FavouriteReferenceableColumnLayoutDefinitionsStoreNgService,
         private readonly _toastNgService: ToastNgService,
         @Inject(BuiltinDitemNgComponentBaseNgDirective.goldenLayoutContainerInjectionToken) container: ComponentContainer,
     ) {
@@ -132,14 +132,14 @@ export class WatchlistDitemNgComponent extends BuiltinDitemNgComponentBaseNgDire
             symbolsNgService.service,
             adiNgService.service,
             textFormatterNgService.service,
-            favouriteNamedGridLayoutDefinitionReferencesNgService.service,
+            favouriteNamedColumnLayoutDefinitionReferencesNgService.service,
             this._toastNgService.service,
             (rankedLitIvemIdList, rankedLitIvemIdListName) => this.handleGridSourceOpenedEvent(
                 rankedLitIvemIdList,
                 rankedLitIvemIdListName
             ),
             (newRecordIndex) => this.handleRecordFocusedEvent(newRecordIndex),
-            (layout) => this.handleGridLayoutSetEvent(layout),
+            (layout) => this.handleColumnLayoutSetEvent(layout),
             (litIvemId) => this.handleLitIvemIdAcceptedEvent(litIvemId),
         );
         this._symbolEditUiAction = this.createSymbolEditUiAction();
@@ -340,7 +340,7 @@ export class WatchlistDitemNgComponent extends BuiltinDitemNgComponentBaseNgDire
         this._symbolApplyUiAction.pushDisabled();
     }
 
-    private handleGridLayoutSetEvent(layout: RevGridLayout) {
+    private handleColumnLayoutSetEvent(layout: RevColumnLayout) {
         // not implemented
     }
 
@@ -504,22 +504,22 @@ export class WatchlistDitemNgComponent extends BuiltinDitemNgComponentBaseNgDire
 
     private showLayoutEditor() {
         this._modeId = WatchlistDitemNgComponent.ModeId.LayoutDialog;
-        const allowedFieldsGridLayoutDefinition = this._frame.createAllowedFieldsGridLayoutDefinition();
+        const allowedSourcedFieldsColumnLayoutDefinition = this._frame.createAllowedSourcedFieldsColumnLayoutDefinition();
 
-        const closePromise = NameableGridLayoutEditorDialogNgComponent.open(
+        const closePromise = NameableColumnLayoutEditorDialogNgComponent.open(
             this._dialogContainer,
             this._frame.opener,
             Strings[StringId.Watchlist_ColumnsDialogCaption],
-            allowedFieldsGridLayoutDefinition
+            allowedSourcedFieldsColumnLayoutDefinition
         );
         closePromise.then(
             (layoutOrReferenceDefinition) => {
                 if (layoutOrReferenceDefinition !== undefined) {
-                    const openPromise = this._frame.tryOpenGridLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
+                    const openPromise = this._frame.tryOpenColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
                     openPromise.then(
                         (openResult) => {
                             if (openResult.isErr()) {
-                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.Watchlist]} ${Strings[StringId.GridLayout]}: ${openResult.error}`);
+                                this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.Watchlist]} ${Strings[StringId.ColumnLayout]}: ${openResult.error}`);
                             }
                         },
                         (reason) => { throw AssertInternalError.createIfNotError(reason, 'SSDNCSLECPOP68823'); }

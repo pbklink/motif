@@ -41,7 +41,7 @@ import {
     TextFormatterNgService,
     ToastNgService
 } from 'component-services-ng-api';
-import { BalancesNgComponent, HoldingsGridLayoutsDialogNgComponent, HoldingsNgComponent } from 'content-ng-api';
+import { BalancesNgComponent, HoldingsColumnLayoutsDialogNgComponent, HoldingsNgComponent } from 'content-ng-api';
 import { AngularSplitTypes } from 'controls-internal-api';
 import { BrokerageAccountGroupInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';
 import { ComponentContainer } from 'golden-layout';
@@ -399,7 +399,7 @@ export class HoldingsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirec
 
         const allowedFieldsAndLayoutDefinitions = this._frame.createAllowedFieldsAndLayoutDefinition();
 
-        const closePromise = HoldingsGridLayoutsDialogNgComponent.open(
+        const closePromise = HoldingsColumnLayoutsDialogNgComponent.open(
             this._dialogContainer,
             this._frame.opener,
             Strings[StringId.Holdings_ColumnsDialogCaption],
@@ -408,7 +408,7 @@ export class HoldingsDitemNgComponent extends BuiltinDitemNgComponentBaseNgDirec
         closePromise.then(
             (layoutOrReferenceDefinition) => {
                 if (layoutOrReferenceDefinition !== undefined) {
-                    this._frame.openGridLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
+                    this._frame.openColumnLayoutOrReferenceDefinition(layoutOrReferenceDefinition);
                 }
                 this.closeDialog();
             },

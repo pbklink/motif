@@ -14,8 +14,8 @@ import {
     CallPutFromUnderlyingTableRecordSource,
     CallPutFromUnderlyingTableRecordSourceDefinition,
     CorrectnessBadness,
-    EditableGridLayoutDefinitionColumnTableRecordSource,
-    EditableGridLayoutDefinitionColumnTableRecordSourceDefinition,
+    EditableColumnLayoutDefinitionColumnTableRecordSource,
+    EditableColumnLayoutDefinitionColumnTableRecordSourceDefinition,
     FeedTableRecordSource,
     FeedTableRecordSourceDefinition,
     GridFieldTableRecordSource,
@@ -95,7 +95,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
             case TableRecordSourceDefinition.TypeId.Holding: return this.createHolding(definition);
             case TableRecordSourceDefinition.TypeId.Balances: return this.createBalances(definition);
             case TableRecordSourceDefinition.TypeId.TopShareholder: return this.createTopShareholder(definition);
-            case TableRecordSourceDefinition.TypeId.EditableGridLayoutDefinitionColumn: return this.createGridLayoutDefinitionColumnEditRecord(definition);
+            case TableRecordSourceDefinition.TypeId.EditableColumnLayoutDefinitionColumn: return this.createColumnLayoutDefinitionColumnEditRecord(definition);
             case TableRecordSourceDefinition.TypeId.Scan: return this.createScan(definition);
             case TableRecordSourceDefinition.TypeId.RankedLitIvemIdListDirectoryItem: return this.createRankedLitIvemIdListDirectoryItem(definition);
             case TableRecordSourceDefinition.TypeId.GridField: return this.createGridField(definition);
@@ -263,9 +263,9 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
         }
     }
 
-    private createGridLayoutDefinitionColumnEditRecord(definition: TableRecordSourceDefinition) {
-        if (definition instanceof EditableGridLayoutDefinitionColumnTableRecordSourceDefinition) {
-            return new EditableGridLayoutDefinitionColumnTableRecordSource(
+    private createColumnLayoutDefinitionColumnEditRecord(definition: TableRecordSourceDefinition) {
+        if (definition instanceof EditableColumnLayoutDefinitionColumnTableRecordSourceDefinition) {
+            return new EditableColumnLayoutDefinitionColumnTableRecordSource(
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
                 this._tableFieldSourceDefinitionCachingFactoryService,

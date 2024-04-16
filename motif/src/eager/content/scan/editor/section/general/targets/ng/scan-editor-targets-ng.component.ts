@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import {
-    AllowedFieldsGridLayoutDefinition,
     AllowedMarketsEnumUiAction,
     AllowedMarketsExplicitElementsArrayUiAction,
+    AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
     EnumInfoOutOfOrderError,
     Integer,
@@ -21,7 +21,7 @@ import {
     UnreachableCaseError,
     delay1Tick
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { SymbolsNgService } from 'component-services-ng-api';
 import {
     CaptionLabelNgComponent,
@@ -600,8 +600,8 @@ export namespace ScanEditorTargetsNgComponent {
     export type EditGridColumnsEventer = (
         this: void,
         caption: string,
-        allowedFieldsAndLayoutDefinition: AllowedFieldsGridLayoutDefinition
-    ) => Promise<RevGridLayoutOrReferenceDefinition | undefined>;
+        allowedFieldsAndLayoutDefinition: AllowedSourcedFieldsColumnLayoutDefinition
+    ) => Promise<RevColumnLayoutOrReferenceDefinition | undefined>;
     export type PopoutMultiSymbolListEditorEventer = (
         this: void,
         caption: string,

@@ -12,7 +12,7 @@ import {
     TableFieldSourceDefinitionCachingFactoryService,
     TableRecordSourceDefinition
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
 import { ScanFieldEditorFrame } from '../field/internal-api';
 import { ScanFieldEditorFrameTableFieldSourceDefinition } from './scan-field-editor-frame-table-field-source-definition';
 
@@ -33,14 +33,14 @@ export class ScanFieldEditorFrameComparableListTableRecordSourceDefinition exten
         );
     }
 
-    override createDefaultLayoutDefinition(): RevGridLayoutDefinition {
+    override createDefaultLayoutDefinition(): RevColumnLayoutDefinition {
         const scanFieldEditorFrameFieldSourceDefinition = ScanFieldEditorFrameTableFieldSourceDefinition.get(this.tableFieldSourceDefinitionCachingFactoryService);
 
         const fieldNames = new Array<string>();
 
         fieldNames.push(scanFieldEditorFrameFieldSourceDefinition.getFieldNameById(ScanFieldEditorFrame.FieldId.Name));
 
-        return RevGridLayoutDefinition.createFromFieldNames(fieldNames);
+        return RevColumnLayoutDefinition.createFromFieldNames(fieldNames);
     }
 }
 
@@ -117,7 +117,7 @@ export namespace ScanFieldEditorFrameComparableListTableRecordSourceDefinition {
     export function createLayoutDefinition(
         fieldSourceDefinitionRegistryService: TableFieldSourceDefinitionCachingFactoryService,
         fieldIds: FieldId[],
-    ): RevGridLayoutDefinition {
+    ): RevColumnLayoutDefinition {
         return fieldSourceDefinitionRegistryService.createLayoutDefinition(fieldIds);
     }
 

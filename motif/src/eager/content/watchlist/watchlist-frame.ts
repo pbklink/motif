@@ -23,7 +23,7 @@ import {
     TextRenderValueCellPainter,
     compareInteger
 } from '@motifmarkets/motif-core';
-import { RevDataSourceOrReferenceDefinition, RevGridLayoutOrReferenceDefinition, RevRecordRowOrderDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition, RevDataSourceOrReferenceDefinition, RevRecordRowOrderDefinition } from '@xilytix/rev-data-source';
 import { DatalessViewCell } from '@xilytix/revgrid';
 import { DelayedBadnessGridSourceFrame } from '../delayed-badness-grid-source/internal-api';
 
@@ -83,7 +83,7 @@ export class WatchlistFrame extends DelayedBadnessGridSourceFrame {
 
     createGridSourceOrReferenceDefinitionFromList(
         listDefinition: RankedLitIvemIdListDefinition,
-        gridLayoutOrReferenceDefinition: RevGridLayoutOrReferenceDefinition | undefined,
+        columnLayoutOrReferenceDefinition: RevColumnLayoutOrReferenceDefinition | undefined,
         rowOrderDefinition: RevRecordRowOrderDefinition | undefined,
     ) {
         const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createRankedLitIvemIdList(
@@ -91,7 +91,7 @@ export class WatchlistFrame extends DelayedBadnessGridSourceFrame {
         );
         const gridSourceDefinition = new DataSourceDefinition(
             tableRecordSourceDefinition,
-            gridLayoutOrReferenceDefinition,
+            columnLayoutOrReferenceDefinition,
             rowOrderDefinition,
         );
         return new DataSourceOrReferenceDefinition(gridSourceDefinition);
@@ -108,13 +108,13 @@ export class WatchlistFrame extends DelayedBadnessGridSourceFrame {
         rankedLitIvemIds.sort((left, right) => compareInteger(left.rank, right.rank));
         const newLitIvemIds = rankedLitIvemIds.map((rankedLitIvemId) => rankedLitIvemId.litIvemId);
 
-        let gridLayoutOrReferenceDefinition: RevGridLayoutOrReferenceDefinition | undefined;
+        let columnLayoutOrReferenceDefinition: RevColumnLayoutOrReferenceDefinition | undefined;
         let rowOrderDefinition: RevRecordRowOrderDefinition | undefined;
         if (as.tableRecordSourceOnly) {
-            gridLayoutOrReferenceDefinition = undefined;
+            columnLayoutOrReferenceDefinition = undefined;
             rowOrderDefinition = undefined;
         } else {
-            gridLayoutOrReferenceDefinition = this.createGridLayoutOrReferenceDefinition();
+            columnLayoutOrReferenceDefinition = this.createColumnLayoutOrReferenceDefinition();
             rowOrderDefinition = this.createRowOrderDefinition();
         }
 
@@ -147,7 +147,7 @@ export class WatchlistFrame extends DelayedBadnessGridSourceFrame {
 
         const definition = this.createGridSourceOrReferenceDefinitionFromList(
             litIvemIdArrayRankedLitIvemIdListDefinition,
-            gridLayoutOrReferenceDefinition,
+            columnLayoutOrReferenceDefinition,
             rowOrderDefinition,
         );
 

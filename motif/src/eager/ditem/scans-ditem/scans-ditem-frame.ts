@@ -21,7 +21,7 @@ import {
     SymbolsService,
     logger
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
 import { ToastService } from 'component-services-internal-api';
 import { ScanListFrame } from 'content-internal-api';
 import { ScanFieldSetEditorFrame } from '../../content/scan/editor/section/formula/view/field-set/scan-field-set-editor-frame';
@@ -168,19 +168,19 @@ export class ScansDitemFrame extends BuiltinDitemFrame {
         this._setEditorEventer(this._scanEditor);
     }
 
-    createAllowedFieldsGridLayoutDefinition() {
+    createAllowedSourcedFieldsColumnLayoutDefinition() {
         if (this._scanListFrame === undefined) {
             throw new AssertInternalError('SDFCAFALD04418');
         } else {
-            return this._scanListFrame.createAllowedFieldsGridLayoutDefinition();
+            return this._scanListFrame.createAllowedSourcedFieldsColumnLayoutDefinition();
         }
     }
 
-    tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition: RevGridLayoutOrReferenceDefinition) {
+    tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition: RevColumnLayoutOrReferenceDefinition) {
         if (this._scanListFrame === undefined) {
             throw new AssertInternalError('SLFOGLONRD04418');
         } else {
-            return this._scanListFrame.tryOpenGridLayoutOrReferenceDefinition(gridLayoutOrReferenceDefinition);
+            return this._scanListFrame.tryOpenColumnLayoutOrReferenceDefinition(columnLayoutOrReferenceDefinition);
         }
     }
 

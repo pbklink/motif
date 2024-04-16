@@ -7,7 +7,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import {
     AssertInternalError,
-    EditableGridLayoutDefinitionColumnList,
+    EditableColumnLayoutDefinitionColumnList,
     IntegerUiAction,
     LockOpenListItem,
     StringId,
@@ -19,8 +19,8 @@ import { IntegerTextInputNgComponent } from 'controls-ng-api';
 import { GridSourceNgDirective } from '../../../../grid-source/ng-api';
 import { ContentNgService } from '../../../../ng/content-ng.service';
 import { definitionColumnListInjectionToken } from '../../../ng/grid-layout-dialog-ng-injection-tokens';
-import { GridLayoutEditorSearchGridNgComponent } from '../../search-grid/ng-api';
-import { GridLayoutEditorColumnsFrame } from '../grid-layout-editor-columns-frame';
+import { ColumnLayoutEditorSearchGridNgComponent } from '../../search-grid/ng-api';
+import { ColumnLayoutEditorColumnsFrame } from '../grid-layout-editor-columns-frame';
 
 @Component({
     selector: 'app-grid-layout-editor-columns',
@@ -29,15 +29,15 @@ import { GridLayoutEditorColumnsFrame } from '../grid-layout-editor-columns-fram
 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridLayoutEditorColumnsNgComponent extends GridSourceNgDirective {
+export class ColumnLayoutEditorColumnsNgComponent extends GridSourceNgDirective {
     private static typeInstanceCreateCount = 0;
 
-    @ViewChild('search', { static: true }) private _searchComponent: GridLayoutEditorSearchGridNgComponent;
+    @ViewChild('search', { static: true }) private _searchComponent: ColumnLayoutEditorSearchGridNgComponent;
     @ViewChild('widthEditorControl', { static: true }) private _widthEditorComponent: IntegerTextInputNgComponent;
 
     public readonly heading = Strings[StringId.InUse]
 
-    declare readonly frame: GridLayoutEditorColumnsFrame;
+    declare readonly frame: ColumnLayoutEditorColumnsFrame;
 
     private readonly _widthEditorUiAction: IntegerUiAction;
 
@@ -47,10 +47,10 @@ export class GridLayoutEditorColumnsNgComponent extends GridSourceNgDirective {
         contentNgService: ContentNgService,
         private readonly _toastNgService: ToastNgService,
         @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-        @Inject(definitionColumnListInjectionToken) columnList: EditableGridLayoutDefinitionColumnList,
+        @Inject(definitionColumnListInjectionToken) columnList: EditableColumnLayoutDefinitionColumnList,
     ) {
-        const frame = contentNgService.createGridLayoutEditorColumnsFrame(columnList);
-        super(elRef, ++GridLayoutEditorColumnsNgComponent.typeInstanceCreateCount, cdr, frame);
+        const frame = contentNgService.createColumnLayoutEditorColumnsFrame(columnList);
+        super(elRef, ++ColumnLayoutEditorColumnsNgComponent.typeInstanceCreateCount, cdr, frame);
 
         this._widthEditorUiAction = this.createWidthEditorUiAction();
     }
@@ -67,7 +67,7 @@ export class GridLayoutEditorColumnsNgComponent extends GridSourceNgDirective {
         openPromise.then(
             (result) => {
                 if (result.isErr()) {
-                    this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.GridLayoutEditorColumns]}: ${result.error}`);
+                    this._toastNgService.popup(`${Strings[StringId.ErrorOpening]} ${Strings[StringId.ColumnLayoutEditorColumns]}: ${result.error}`);
                 }
             },
             (reason) => { throw AssertInternalError.createIfNotError(reason, 'GLECNCPR50137') }
@@ -86,8 +86,8 @@ export class GridLayoutEditorColumnsNgComponent extends GridSourceNgDirective {
 
     private createWidthEditorUiAction() {
         const action = new IntegerUiAction(false);
-        action.pushCaption(Strings[StringId.GridLayoutEditorColumns_SetWidthCaption]);
-        action.pushTitle(Strings[StringId.GridLayoutEditorColumns_SetWidthTitle]);
+        action.pushCaption(Strings[StringId.ColumnLayoutEditorColumns_SetWidthCaption]);
+        action.pushTitle(Strings[StringId.ColumnLayoutEditorColumns_SetWidthTitle]);
         action.commitEvent = () => {
             const focus = this.frame.grid.focus;
             if (focus.canSetFocusedEditValue()) {
@@ -98,7 +98,7 @@ export class GridLayoutEditorColumnsNgComponent extends GridSourceNgDirective {
     }
 }
 
-export namespace GridLayoutEditorColumnsNgComponent {
+export namespace ColumnLayoutEditorColumnsNgComponent {
     // export const enum ColumnFilterId {
     //     ShowAll = 1,
     //     ShowVisible = 2,
@@ -111,20 +111,20 @@ export namespace GridLayoutEditorColumnsNgComponent {
     //             case ColumnFilterId.ShowAll:
     //                 return {
     //                     element: ColumnFilterId.ShowAll,
-    //                     caption: Strings[StringId.GridLayoutEditor_ShowAllRadioCaption],
-    //                     title: Strings[StringId.GridLayoutEditor_ShowAllRadioTitle],
+    //                     caption: Strings[StringId.ColumnLayoutEditor_ShowAllRadioCaption],
+    //                     title: Strings[StringId.ColumnLayoutEditor_ShowAllRadioTitle],
     //                 };
     //             case ColumnFilterId.ShowVisible:
     //                 return {
     //                     element: ColumnFilterId.ShowVisible,
-    //                     caption: Strings[StringId.GridLayoutEditor_ShowVisibleRadioCaption],
-    //                     title: Strings[StringId.GridLayoutEditor_ShowVisibleRadioTitle],
+    //                     caption: Strings[StringId.ColumnLayoutEditor_ShowVisibleRadioCaption],
+    //                     title: Strings[StringId.ColumnLayoutEditor_ShowVisibleRadioTitle],
     //                 };
     //             case ColumnFilterId.ShowHidden:
     //                 return {
     //                     element: ColumnFilterId.ShowHidden,
-    //                     caption: Strings[StringId.GridLayoutEditor_ShowHiddenRadioCaption],
-    //                     title: Strings[StringId.GridLayoutEditor_ShowHiddenRadioTitle],
+    //                     caption: Strings[StringId.ColumnLayoutEditor_ShowHiddenRadioCaption],
+    //                     title: Strings[StringId.ColumnLayoutEditor_ShowHiddenRadioTitle],
     //                 };
     //             default:
     //                 throw new UnreachableCaseError('GLEGCCFGEUAEP0098233', id);
@@ -141,10 +141,10 @@ export namespace GridLayoutEditorColumnsNgComponent {
 // // eslint-disable-next-line @typescript-eslint/ban-types
 // function showVisibleFilter(record: object): boolean {
 //     return true;
-//     // return (record as RevGridLayout.Column).visible;
+//     // return (record as RevColumnLayout.Column).visible;
 // }
 
 // // eslint-disable-next-line @typescript-eslint/ban-types
 // function showHiddenFilter(record: object): boolean {
-//     return !(record as RevGridLayout.Column).visible;
+//     return !(record as RevColumnLayout.Column).visible;
 // }

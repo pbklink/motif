@@ -22,7 +22,7 @@ import {
     AllowedGridField,
     AssertInternalError,
     CommandRegisterService,
-    EditableGridLayoutDefinitionColumnList,
+    EditableColumnLayoutDefinitionColumnList,
     GridField,
     IconButtonUiAction,
     InternalCommand,
@@ -34,11 +34,11 @@ import {
     UnreachableCaseError,
     delay1Tick
 } from '@motifmarkets/motif-core';
-import { RevGridLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition } from '@xilytix/rev-data-source';
 import { CommandRegisterNgService, CoreInjectionTokens } from 'component-services-ng-api';
 import { SvgButtonNgComponent, TabListNgComponent } from 'controls-ng-api';
 import { HoldingsDitemFrame } from 'ditem-internal-api';
-import { GridLayoutEditorNgComponent, allowedFieldsInjectionToken, definitionColumnListInjectionToken } from '../../grid-layout-dialog/ng-api';
+import { ColumnLayoutEditorNgComponent, allowedFieldsInjectionToken, definitionColumnListInjectionToken } from '../../grid-layout-dialog/ng-api';
 import { ContentComponentBaseNgDirective } from '../../ng/content-component-base-ng.directive';
 
 @Component({
@@ -48,7 +48,7 @@ import { ContentComponentBaseNgDirective } from '../../ng/content-component-base
 
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HoldingsGridLayoutsDialogNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
+export class HoldingsColumnLayoutsDialogNgComponent extends ContentComponentBaseNgDirective implements AfterViewInit, OnDestroy {
     private static typeInstanceCreateCount = 0;
 
     @ViewChild('okButton', { static: true }) private _okButtonComponent: SvgButtonNgComponent;
@@ -63,18 +63,18 @@ export class HoldingsGridLayoutsDialogNgComponent extends ContentComponentBaseNg
     private _holdingsAllowedFields: readonly GridField[];
     private _balancesAllowedFields: readonly GridField[];
 
-    private _depthBidLayoutDefinition: RevGridLayoutDefinition;
-    private _depthAskLayoutDefinition: RevGridLayoutDefinition;
-    private _holdingsLayoutDefinition: RevGridLayoutDefinition;
-    private _balancesLayoutDefinition: RevGridLayoutDefinition;
+    private _depthBidLayoutDefinition: RevColumnLayoutDefinition;
+    private _depthAskLayoutDefinition: RevColumnLayoutDefinition;
+    private _holdingsLayoutDefinition: RevColumnLayoutDefinition;
+    private _balancesLayoutDefinition: RevColumnLayoutDefinition;
 
     private _okUiAction: IconButtonUiAction;
     private _cancelUiAction: IconButtonUiAction;
 
-    private _activeSubFrameId: HoldingsGridLayoutsDialogNgComponent.SubFrameId | undefined;
-    private _editorComponent: GridLayoutEditorNgComponent | undefined;
+    private _activeSubFrameId: HoldingsColumnLayoutsDialogNgComponent.SubFrameId | undefined;
+    private _editorComponent: ColumnLayoutEditorNgComponent | undefined;
 
-    private _closeResolve: (value: HoldingsDitemFrame.GridLayoutDefinitions | undefined) => void;
+    private _closeResolve: (value: HoldingsDitemFrame.ColumnLayoutDefinitions | undefined) => void;
     private _closeReject: (reason: unknown) => void;
 
     constructor(
@@ -82,11 +82,11 @@ export class HoldingsGridLayoutsDialogNgComponent extends ContentComponentBaseNg
         private _cdr: ChangeDetectorRef,
         commandRegisterNgService: CommandRegisterNgService,
         @Inject(CoreInjectionTokens.lockOpenListItemOpener) private readonly _opener: LockOpenListItem.Opener,
-        @Inject(HoldingsGridLayoutsDialogNgComponent.captionInjectionToken) public readonly caption: string,
-        @Inject(HoldingsGridLayoutsDialogNgComponent.holdingsAllowedFieldsInjectionToken) allowedFields: HoldingsDitemFrame.AllowedGridFields,
-        @Inject(HoldingsGridLayoutsDialogNgComponent.oldHoldingsGridLayoutDefinitionsInjectionToken) oldLayoutDefinitions: HoldingsDitemFrame.GridLayoutDefinitions,
+        @Inject(HoldingsColumnLayoutsDialogNgComponent.captionInjectionToken) public readonly caption: string,
+        @Inject(HoldingsColumnLayoutsDialogNgComponent.holdingsAllowedFieldsInjectionToken) allowedFields: HoldingsDitemFrame.AllowedGridFields,
+        @Inject(HoldingsColumnLayoutsDialogNgComponent.oldHoldingsColumnLayoutDefinitionsInjectionToken) oldLayoutDefinitions: HoldingsDitemFrame.ColumnLayoutDefinitions,
     ) {
-        super(elRef, ++HoldingsGridLayoutsDialogNgComponent.typeInstanceCreateCount);
+        super(elRef, ++HoldingsColumnLayoutsDialogNgComponent.typeInstanceCreateCount);
 
         this._commandRegisterService = commandRegisterNgService.service;
 
@@ -110,22 +110,22 @@ export class HoldingsGridLayoutsDialogNgComponent extends ContentComponentBaseNg
     }
 
     open() {
-        return new Promise<HoldingsDitemFrame.GridLayoutDefinitions | undefined>((resolve, reject) => {
+        return new Promise<HoldingsDitemFrame.ColumnLayoutDefinitions | undefined>((resolve, reject) => {
             this._closeResolve = resolve;
             this._closeReject = reject;
         });
     }
 
-    setSubFrameId(value: HoldingsGridLayoutsDialogNgComponent.SubFrameId) {
+    setSubFrameId(value: HoldingsColumnLayoutsDialogNgComponent.SubFrameId) {
         this.checkLoadLayoutFromEditor();
 
         if (value !== this._activeSubFrameId) {
             switch (value) {
-                case HoldingsGridLayoutsDialogNgComponent.SubFrameId.Holdings:
+                case HoldingsColumnLayoutsDialogNgComponent.SubFrameId.Holdings:
                     this._editorComponent = this.recreateEditor(this._holdingsAllowedFields, this._holdingsLayoutDefinition);
                     break;
 
-                case HoldingsGridLayoutsDialogNgComponent.SubFrameId.Balances:
+                case HoldingsColumnLayoutsDialogNgComponent.SubFrameId.Balances:
                     this._editorComponent = this.recreateEditor(this._balancesAllowedFields, this._balancesLayoutDefinition);
                     break;
 
@@ -149,7 +149,7 @@ export class HoldingsGridLayoutsDialogNgComponent extends ContentComponentBaseNg
         this.close(false);
     }
 
-    private handleActiveTabChangedEvent(tab: TabListNgComponent.Tab, subFrameId: HoldingsGridLayoutsDialogNgComponent.SubFrameId) {
+    private handleActiveTabChangedEvent(tab: TabListNgComponent.Tab, subFrameId: HoldingsColumnLayoutsDialogNgComponent.SubFrameId) {
         if (tab.active) {
             this.setSubFrameId(subFrameId);
         }
@@ -184,21 +184,21 @@ export class HoldingsGridLayoutsDialogNgComponent extends ContentComponentBaseNg
                 caption: Strings[StringId.Holdings],
                 initialActive: true,
                 initialDisabled: false,
-                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, HoldingsGridLayoutsDialogNgComponent.SubFrameId.Holdings),
+                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, HoldingsColumnLayoutsDialogNgComponent.SubFrameId.Holdings),
             },
             {
                 caption: Strings[StringId.Balances],
                 initialActive: false,
                 initialDisabled: false,
-                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, HoldingsGridLayoutsDialogNgComponent.SubFrameId.Balances),
+                activeChangedEventer: (tab) => this.handleActiveTabChangedEvent(tab, HoldingsColumnLayoutsDialogNgComponent.SubFrameId.Balances),
             },
         ];
         this._tabListComponent.setTabs(tabDefinitions);
 
-        this.setSubFrameId(HoldingsGridLayoutsDialogNgComponent.SubFrameId.Holdings);
+        this.setSubFrameId(HoldingsColumnLayoutsDialogNgComponent.SubFrameId.Holdings);
     }
 
-    private recreateEditor(allowedFields: readonly AllowedGridField[], layoutDefinition: RevGridLayoutDefinition) {
+    private recreateEditor(allowedFields: readonly AllowedGridField[], layoutDefinition: RevColumnLayoutDefinition) {
         this.checkLoadLayoutFromEditor();
 
         if (this._editorComponent !== undefined) {
@@ -214,7 +214,7 @@ export class HoldingsGridLayoutsDialogNgComponent extends ContentComponentBaseNg
             useValue: allowedFields,
         };
 
-        const definitionColumnList = new EditableGridLayoutDefinitionColumnList();
+        const definitionColumnList = new EditableColumnLayoutDefinitionColumnList();
         definitionColumnList.load(allowedFields, layoutDefinition, 0);
         const columnListProvider: ValueProvider = {
             provide: definitionColumnListInjectionToken,
@@ -225,7 +225,7 @@ export class HoldingsGridLayoutsDialogNgComponent extends ContentComponentBaseNg
             providers: [openerProvider, allowedFieldsProvider, columnListProvider],
         });
 
-        const componentRef = this._editorContainer.createComponent(GridLayoutEditorNgComponent, { injector });
+        const componentRef = this._editorContainer.createComponent(ColumnLayoutEditorNgComponent, { injector });
         const component = componentRef.instance;
 
         return component;
@@ -239,12 +239,12 @@ export class HoldingsGridLayoutsDialogNgComponent extends ContentComponentBaseNg
                 throw new AssertInternalError('PGLEDNCCLLFEE33333');
             } else {
                 switch (activeSubFrameId) {
-                    case HoldingsGridLayoutsDialogNgComponent.SubFrameId.Holdings:
-                        this._holdingsLayoutDefinition = editorComponent.getGridLayoutDefinition();
+                    case HoldingsColumnLayoutsDialogNgComponent.SubFrameId.Holdings:
+                        this._holdingsLayoutDefinition = editorComponent.getColumnLayoutDefinition();
                         break;
 
-                    case HoldingsGridLayoutsDialogNgComponent.SubFrameId.Balances:
-                        this._balancesLayoutDefinition = editorComponent.getGridLayoutDefinition();
+                    case HoldingsColumnLayoutsDialogNgComponent.SubFrameId.Balances:
+                        this._balancesLayoutDefinition = editorComponent.getColumnLayoutDefinition();
                         break;
 
                     default:
@@ -257,7 +257,7 @@ export class HoldingsGridLayoutsDialogNgComponent extends ContentComponentBaseNg
     private close(ok: boolean) {
         if (ok) {
             this.checkLoadLayoutFromEditor();
-            const layouts: HoldingsDitemFrame.GridLayoutDefinitions = {
+            const layouts: HoldingsDitemFrame.ColumnLayoutDefinitions = {
                 holdings: this._holdingsLayoutDefinition,
                 balances: this._balancesLayoutDefinition,
             };
@@ -268,17 +268,17 @@ export class HoldingsGridLayoutsDialogNgComponent extends ContentComponentBaseNg
     }
 }
 
-export namespace HoldingsGridLayoutsDialogNgComponent {
+export namespace HoldingsColumnLayoutsDialogNgComponent {
     export const enum SubFrameId {
         Holdings,
         Balances,
     }
 
-    export type ClosePromise = Promise<HoldingsDitemFrame.GridLayoutDefinitions | undefined>;
+    export type ClosePromise = Promise<HoldingsDitemFrame.ColumnLayoutDefinitions | undefined>;
 
-    export const captionInjectionToken = new InjectionToken<string>('HoldingsGridLayoutsDialogNgComponent.caption');
-    export const holdingsAllowedFieldsInjectionToken = new InjectionToken<HoldingsDitemFrame.AllowedGridFields>('HoldingsGridLayoutsDialogNgComponent.allowedFields');
-    export const oldHoldingsGridLayoutDefinitionsInjectionToken = new InjectionToken<HoldingsDitemFrame.GridLayoutDefinitions>('HoldingsGridLayoutsDialogNgComponent.allowedFields');
+    export const captionInjectionToken = new InjectionToken<string>('HoldingsColumnLayoutsDialogNgComponent.caption');
+    export const holdingsAllowedFieldsInjectionToken = new InjectionToken<HoldingsDitemFrame.AllowedGridFields>('HoldingsColumnLayoutsDialogNgComponent.allowedFields');
+    export const oldHoldingsColumnLayoutDefinitionsInjectionToken = new InjectionToken<HoldingsDitemFrame.ColumnLayoutDefinitions>('HoldingsColumnLayoutsDialogNgComponent.allowedFields');
 
     export function open(
         container: ViewContainerRef,
@@ -301,7 +301,7 @@ export namespace HoldingsGridLayoutsDialogNgComponent {
             balances: allowedFieldsAndLayoutDefinition.balances.allowedFields,
         };
 
-        const gridLayoutDefinitions: HoldingsDitemFrame.GridLayoutDefinitions = {
+        const columnLayoutDefinitions: HoldingsDitemFrame.ColumnLayoutDefinitions = {
             holdings: allowedFieldsAndLayoutDefinition.holdings,
             balances: allowedFieldsAndLayoutDefinition.balances,
         };
@@ -311,14 +311,14 @@ export namespace HoldingsGridLayoutsDialogNgComponent {
             useValue: allowedFields,
         };
         const oldBidAskLayoutDefinitionProvider: ValueProvider = {
-            provide: oldHoldingsGridLayoutDefinitionsInjectionToken,
-            useValue: gridLayoutDefinitions,
+            provide: oldHoldingsColumnLayoutDefinitionsInjectionToken,
+            useValue: columnLayoutDefinitions,
         };
         const injector = Injector.create({
             providers: [openerProvider, captionProvider, allowedFieldsProvider, oldBidAskLayoutDefinitionProvider],
         });
 
-        const componentRef = container.createComponent(HoldingsGridLayoutsDialogNgComponent, { injector });
+        const componentRef = container.createComponent(HoldingsColumnLayoutsDialogNgComponent, { injector });
         const component = componentRef.instance;
 
         return component.open();
