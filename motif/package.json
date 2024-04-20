@@ -15,7 +15,7 @@
   ],
   "typings": "lib/public-api.d.ts",
   "scripts": {
-    "link-core": "npm link @xilytix/sysutils @xilytix/revgrid @xilytix/rev-data-source @motifmarkets/motif-core",
+    "link-core": "npm link @xilytix/sysutils @xilytix/revgrid @motifmarkets/motif-core",
     "postinstall": "generate-build-info.bat",
     "ng": "ng",
     "clean:cache": "npx del-cli .angular/cache",
@@ -63,7 +63,6 @@
     "@motifmarkets/motif-core": "^0.1.0",
     "@ng-select/ng-select": "^12.0.7",
     "@types/toastify-js": "^1.12.3",
-    "@xilytix/rev-data-source": "^0.0.2",
     "@xilytix/revgrid": "^0.9.0",
     "@xilytix/sysutils": "^0.0.3",
     "angular-split": "^17.2.0",
