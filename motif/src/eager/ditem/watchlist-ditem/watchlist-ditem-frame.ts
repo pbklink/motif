@@ -21,7 +21,7 @@ import {
     SymbolsService,
     TextFormatterService
 } from '@motifmarkets/motif-core';
-import { RevColumnLayout, RevColumnLayoutOrReferenceDefinition, RevDataSourceOrReferenceDefinition, RevFavouriteReferenceableColumnLayoutDefinitionsStoreService } from '@xilytix/rev-data-source';
+import { RevColumnLayout, RevColumnLayoutOrReferenceDefinition, RevDataSourceOrReferenceDefinition, RevFavouriteReferenceableColumnLayoutDefinitionsStoreService } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import {
     GridSourceFrame,

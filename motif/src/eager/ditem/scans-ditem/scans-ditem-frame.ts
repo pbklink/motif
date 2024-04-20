@@ -21,7 +21,7 @@ import {
     SymbolsService,
     logger
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { ScanListFrame } from 'content-internal-api';
 import { ScanFieldSetEditorFrame } from '../../content/scan/editor/section/formula/view/field-set/scan-field-set-editor-frame';

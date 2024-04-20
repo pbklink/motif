@@ -14,7 +14,7 @@ import {
     SettingsService,
     SymbolsService
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition } from '@xilytix/revgrid';
 import { TradesFrame } from 'content-internal-api';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
 import { DitemFrame } from '../ditem-frame';

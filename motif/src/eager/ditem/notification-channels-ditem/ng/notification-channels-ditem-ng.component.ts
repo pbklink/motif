@@ -28,7 +28,7 @@ import {
     delay1Tick,
     getErrorMessage
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/revgrid';
 import { AdiNgService, CommandRegisterNgService, CoreInjectionTokens, LockOpenListItemOpenerNgUseClass, NotificationChannelsNgService, SettingsNgService, SymbolsNgService, ToastNgService } from 'component-services-ng-api';
 import { LockOpenNotificationChannelPropertiesNgComponent, LockOpenNotificationChannelsGridNgComponent, NameableColumnLayoutEditorDialogNgComponent } from 'content-ng-api';
 import { ButtonInputNgComponent, IntegerEnumInputNgComponent, SvgButtonNgComponent } from 'controls-ng-api';

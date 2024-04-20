@@ -19,7 +19,7 @@ import {
     TopShareholder,
     TopShareholderTableRecordSource
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame, TableRecordSourceDefinitionFactoryService } from 'content-internal-api';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';

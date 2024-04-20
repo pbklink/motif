@@ -22,7 +22,7 @@ import {
     Strings,
     SymbolsService
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/revgrid';
 import { LockOpenNotificationChannelsGridFrame } from 'content-internal-api';
 import { ToastService } from '../../component-services/toast-service';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';

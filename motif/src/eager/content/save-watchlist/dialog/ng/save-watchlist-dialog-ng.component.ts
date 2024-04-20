@@ -6,9 +6,9 @@
 
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, InjectionToken, Injector, OnDestroy, ValueProvider, ViewContainerRef } from '@angular/core';
 import { LockOpenListItem } from '@motifmarkets/motif-core';
+import { RevDataSourceOrReferenceDefinition } from '@xilytix/revgrid';
 import { CoreInjectionTokens } from 'component-services-ng-api';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
-import { RevDataSourceOrReferenceDefinition } from '@xilytix/rev-data-source';
 
 @Component({
     selector: 'app-save-watchlist-dialog',

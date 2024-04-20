@@ -32,8 +32,7 @@ import {
     TableRecordSourceDefinition,
     TableRecordSourceFactory
 } from '@motifmarkets/motif-core';
-import { RevColumnLayout, RevColumnLayoutOrReferenceDefinition, RevRecordDataServer, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
-import { Subgrid } from '@xilytix/revgrid';
+import { RevColumnLayout, RevColumnLayoutOrReferenceDefinition, RevRecordDataServer, RevSourcedFieldCustomHeadingsService, Subgrid } from '@xilytix/revgrid';
 import { ToastService } from '../../component-services/toast-service';
 import { ContentFrame } from '../content-frame';
 import { TableRecordSourceDefinitionFactoryService } from '../table-record-source-definition-factory-service';

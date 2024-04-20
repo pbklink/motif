@@ -23,8 +23,7 @@ import {
     SymbolsService,
     TextFormatterService
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutDefinition, RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
-import { lowestValidServerNotificationId } from '@xilytix/revgrid';
+import { RevColumnLayoutDefinition, RevColumnLayoutOrReferenceDefinition, lowestValidServerNotificationId } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import {
     DepthFrame,

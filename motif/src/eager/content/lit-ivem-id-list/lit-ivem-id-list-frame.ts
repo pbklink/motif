@@ -19,8 +19,7 @@ import {
     TextRenderValueCellPainter,
     UiComparableList
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
-import { DatalessViewCell } from '@xilytix/revgrid';
+import { DatalessViewCell, RevColumnLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { DelayedBadnessGridSourceFrame } from '../delayed-badness-grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../table-record-source-definition-factory-service';

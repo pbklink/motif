@@ -26,7 +26,7 @@ import {
     SymbolsService,
     TextFormatterService
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutDefinition, RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition, RevColumnLayoutOrReferenceDefinition } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { BalancesFrame, HoldingsFrame } from 'content-internal-api';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';

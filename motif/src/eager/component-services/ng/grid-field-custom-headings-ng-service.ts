@@ -5,7 +5,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
 import { CoreNgService } from './core-ng.service';
 
 @Injectable({

@@ -46,7 +46,7 @@ import {
     UnreachableCaseError,
     WatchlistTableRecordSourceDefinition,
 } from '@motifmarkets/motif-core';
-import { RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
 
 /** @public */
 export class TableRecordSourceDefinitionFactoryService implements TableRecordSourceDefinitionFromJsonFactory {

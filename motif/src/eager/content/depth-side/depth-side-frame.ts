@@ -34,7 +34,7 @@ import {
     TextRenderValueCellPainter,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
-import { RevColumnLayout, RevColumnLayoutDefinition, RevRecordStore } from '@xilytix/rev-data-source';
+import { RevColumnLayout, RevColumnLayoutDefinition, RevRecordStore } from '@xilytix/revgrid';
 import { ContentFrame } from '../content-frame';
 
 export class DepthSideFrame extends ContentFrame {

@@ -17,7 +17,7 @@ import {
     UnreachableCaseError,
     delay1Tick
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/revgrid';
 import { CommandRegisterNgService, NotificationChannelsNgService, ToastNgService } from 'component-services-ng-api';
 import {
     IntegerEnumInputNgComponent, SvgButtonNgComponent

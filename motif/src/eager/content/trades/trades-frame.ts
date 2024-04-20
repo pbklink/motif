@@ -26,7 +26,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevColumnLayout, RevColumnLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayout, RevColumnLayoutDefinition } from '@xilytix/revgrid';
 import { ContentFrame } from '../content-frame';
 
 export class TradesFrame extends ContentFrame {

@@ -25,7 +25,7 @@ import {
     TableFieldSourceDefinitionCachingFactoryService,
     TextFormatterService
 } from '@motifmarkets/motif-core';
-import { RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
 
 @Injectable({
     providedIn: 'root'

@@ -11,7 +11,7 @@ import {
     UiComparableList,
     getErrorMessage,
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/revgrid';
 import { CommandRegisterNgService, CoreInjectionTokens, ToastNgService } from 'component-services-ng-api';
 import { SvgButtonNgComponent } from 'controls-ng-api';
 import { NameableColumnLayoutEditorDialogNgComponent } from '../../../nameable-grid-layout-editor-dialog/ng-api';

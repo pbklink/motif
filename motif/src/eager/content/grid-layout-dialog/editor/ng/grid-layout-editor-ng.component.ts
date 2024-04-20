@@ -20,7 +20,7 @@ import {
     EditableColumnLayoutDefinitionColumnList,
     Integer,
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutDefinition } from '@xilytix/revgrid';
 import { AngularSplitTypes } from 'controls-internal-api';
 import { ContentComponentBaseNgDirective } from '../../../ng/content-component-base-ng.directive';
 import { definitionColumnListInjectionToken } from '../../ng/grid-layout-dialog-ng-injection-tokens';

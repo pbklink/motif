@@ -21,7 +21,7 @@ import {
     TableFieldSourceDefinitionCachingFactoryService,
     UiComparableList
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/revgrid';
 import {
     CommandRegisterNgService, ToastNgService,
 } from 'component-services-ng-api';

@@ -5,7 +5,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { RevFavouriteReferenceableColumnLayoutDefinitionsStoreService } from '@xilytix/rev-data-source';
+import { RevFavouriteReferenceableColumnLayoutDefinitionsStoreService } from '@xilytix/revgrid';
 
 @Injectable({
     providedIn: 'root',

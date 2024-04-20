@@ -12,7 +12,7 @@ import {
     Strings,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/revgrid';
 import {
     CaptionLabelNgComponent,
     IntegerTextInputNgComponent

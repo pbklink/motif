@@ -5,7 +5,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { RevReferenceableDataSourceDefinitionsStoreService } from '@xilytix/rev-data-source';
+import { RevReferenceableDataSourceDefinitionsStoreService } from '@xilytix/revgrid';
 import { CoreNgService } from './core-ng.service';
 
 @Injectable({

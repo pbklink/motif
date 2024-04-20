@@ -23,8 +23,7 @@ import {
     TextRenderValueCellPainter,
     compareInteger
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition, RevDataSourceOrReferenceDefinition, RevRecordRowOrderDefinition } from '@xilytix/rev-data-source';
-import { DatalessViewCell } from '@xilytix/revgrid';
+import { DatalessViewCell, RevColumnLayoutOrReferenceDefinition, RevDataSourceOrReferenceDefinition, RevRecordRowOrderDefinition } from '@xilytix/revgrid';
 import { DelayedBadnessGridSourceFrame } from '../delayed-badness-grid-source/internal-api';
 
 export class WatchlistFrame extends DelayedBadnessGridSourceFrame {

@@ -29,8 +29,7 @@ import {
     UsableListChangeTypeId,
     delay1Tick
 } from '@motifmarkets/motif-core';
-import { RevRecord, RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
-import { DatalessViewCell } from '@xilytix/revgrid';
+import { DatalessViewCell, RevRecord, RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../../grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../../../table-record-source-definition-factory-service';

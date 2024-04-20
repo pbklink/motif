@@ -36,7 +36,7 @@ import {
     assigned,
     delay1Tick
 } from '@motifmarkets/motif-core';
-import { RevColumnLayout, RevReferenceableColumnLayoutDefinition } from '@xilytix/rev-data-source';
+import { RevColumnLayout, RevReferenceableColumnLayoutDefinition } from '@xilytix/revgrid';
 import {
     AdiNgService,
     CommandRegisterNgService,

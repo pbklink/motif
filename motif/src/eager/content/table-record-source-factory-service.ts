@@ -50,7 +50,7 @@ import {
     UnreachableCaseError,
     WatchmakerService
 } from '@motifmarkets/motif-core';
-import { RevSourcedFieldCustomHeadingsService } from '@xilytix/rev-data-source';
+import { RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
 import { LockOpenNotificationChannelListTableRecordSource, LockOpenNotificationChannelListTableRecordSourceDefinition } from './lock-open-notification-channels/internal-api';
 import {
     ScanEditorAttachedNotificationChannelComparableListTableRecordSource,

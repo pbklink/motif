@@ -19,8 +19,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/rev-data-source';
-import { CellEditor, DatalessViewCell, Subgrid, ViewCell } from '@xilytix/revgrid';
+import { CellEditor, DatalessViewCell, RevColumnLayoutOrReferenceDefinition, Subgrid, ViewCell } from '@xilytix/revgrid';
 import { GridSourceFrame } from '../../../../../../../grid-source/internal-api';
 import { ScanFieldEditorFrame } from '../field/internal-api';
 import { ScanFieldEditorFrameComparableListTableRecordSource } from './scan-field-editor-frame-comparable-list-table-record-source';
