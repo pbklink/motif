@@ -5,7 +5,6 @@
  */
 
 import {
-    AdaptedRevgrid,
     AdaptedRevgridBehavioredColumnSettings,
     AdiService,
     CellPainterFactoryService,
@@ -17,6 +16,7 @@ import {
     RenderValueRowDataArrayGridCellPainter,
     RowDataArrayGrid,
     SettingsService,
+    SourcedFieldGrid,
     StringRenderValue,
     SymbolsService,
     TextHeaderCellPainter,
@@ -49,7 +49,7 @@ export class SearchDitemFrame extends BuiltinDitemFrame {
             ditemComponentAccess, settingsService, commandRegisterService, desktopAccessService, symbolsService, adiService
         );
 
-        const customGridSettings: AdaptedRevgrid.CustomGridSettings = {
+        const customGridSettings: SourcedFieldGrid.CustomGridSettings = {
             mouseColumnSelectionEnabled: false,
             mouseRowSelectionEnabled: false,
             mouseAddToggleExtendSelectionAreaEnabled: false,

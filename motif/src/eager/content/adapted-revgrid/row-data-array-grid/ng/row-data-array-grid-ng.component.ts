@@ -5,8 +5,8 @@
  */
 
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { AdaptedRevgrid, AdaptedRevgridBehavioredColumnSettings, GridField, RowDataArrayGrid } from '@motifmarkets/motif-core';
-import { SingleHeadingDataRowArrayServerSet, Subgrid } from '@xilytix/revgrid';
+import { SourcedFieldGrid, AdaptedRevgridBehavioredColumnSettings, GridField, RowDataArrayGrid } from '@motifmarkets/motif-core';
+import { RevSingleHeadingDataRowArraySourcedFieldGrid, Subgrid } from '@xilytix/revgrid';
 import { SettingsNgService, TextFormatterNgService } from 'component-services-ng-api';
 import { AdaptedRevgridComponentNgDirective } from '../../ng/adapted-revgrid-component-ng.directive';
 
@@ -31,9 +31,9 @@ export class RowDataArrayGridNgComponent extends AdaptedRevgridComponentNgDirect
     }
 
     createGrid(
-        customGridSettings: AdaptedRevgrid.CustomGridSettings,
-        createFieldEventer: SingleHeadingDataRowArrayServerSet.CreateFieldEventer<GridField>,
-        customiseSettingsForNewColumnEventer: AdaptedRevgrid.CustomiseSettingsForNewColumnEventer,
+        customGridSettings: SourcedFieldGrid.CustomGridSettings,
+        createFieldEventer: RevSingleHeadingDataRowArraySourcedFieldGrid.CreateFieldEventer<GridField>,
+        customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer,
         getMainCellPainterEventer: Subgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
         getHeaderCellPainterEventer: Subgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
     ) {

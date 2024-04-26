@@ -5,7 +5,6 @@
  */
 
 import {
-    AdaptedRevgrid,
     AdaptedRevgridBehavioredColumnSettings,
     CellPainterFactoryService,
     GridField,
@@ -15,13 +14,14 @@ import {
     RowDataArrayGrid,
     ScanFormulaZenithEncoding,
     SettingsService,
+    SourcedFieldGrid,
     StringId,
     StringRenderValue,
     Strings,
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { DatalessViewCell, HorizontalAlignEnum, SingleHeadingDataRowArrayServerSet } from '@xilytix/revgrid';
+import { DatalessViewCell, HorizontalAlignEnum, RevDataRowArrayGrid } from '@xilytix/revgrid';
 
 export class ZenithScanFormulaViewDecodeProgressFrame {
     private _grid: RowDataArrayGrid;
@@ -106,7 +106,7 @@ export class ZenithScanFormulaViewDecodeProgressFrame {
     }
 
     private createGrid(gridHostElement: HTMLElement) {
-        const customGridSettings: AdaptedRevgrid.CustomGridSettings = {
+        const customGridSettings: SourcedFieldGrid.CustomGridSettings = {
         }
 
         const grid = new RowDataArrayGrid(
@@ -151,7 +151,7 @@ export class ZenithScanFormulaViewDecodeProgressFrame {
 }
 
 export namespace ZenithScanFormulaViewDecodeProgressFrame {
-    export interface DataRow extends SingleHeadingDataRowArrayServerSet.DataRow {
+    export interface DataRow extends RevDataRowArrayGrid.DataRow {
         readonly depth: string | IntegerRenderValue;
         readonly nodeType: string | StringRenderValue;
     }

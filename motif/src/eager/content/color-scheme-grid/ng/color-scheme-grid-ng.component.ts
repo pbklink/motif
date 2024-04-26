@@ -6,7 +6,6 @@
 
 import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy } from '@angular/core';
 import {
-    AdaptedRevgrid,
     CellPainterFactoryService,
     ColorScheme,
     ColorSchemeGridField,
@@ -15,6 +14,7 @@ import {
     RecordGrid,
     RenderValueRecordGridCellPainter,
     SettingsService,
+    SourcedFieldGrid,
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
@@ -129,7 +129,7 @@ export class ColorSchemeGridNgComponent extends ContentComponentBaseNgDirective 
     }
 
     private createGrid(gridHostElement: HTMLElement) {
-        const customGridSettings: AdaptedRevgrid.CustomGridSettings = {
+        const customGridSettings: SourcedFieldGrid.CustomGridSettings = {
             mouseColumnSelectionEnabled: false,
             mouseRowSelectionEnabled: false,
             mouseAddToggleExtendSelectionAreaEnabled: false,

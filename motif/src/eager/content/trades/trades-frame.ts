@@ -5,7 +5,6 @@
  */
 
 import {
-    AdaptedRevgrid,
     AdiService,
     AllowedSourcedFieldsColumnLayoutDefinition,
     AssertInternalError,
@@ -23,6 +22,7 @@ import {
     RecordGrid,
     RenderValueRecordGridCellPainter,
     SettingsService,
+    SourcedFieldGrid,
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
@@ -144,7 +144,7 @@ export class TradesFrame extends ContentFrame {
     }
 
     autoSizeAllColumnWidths(widenOnly: boolean) {
-        this._grid.autoSizeAllColumnWidths(widenOnly);
+        this._grid.autoSizeActiveColumnWidths(widenOnly);
     }
 
     // private handleRecordFocusEvent(newRecordIndex: Integer | undefined, oldRecordIndex: Integer | undefined) {
@@ -199,7 +199,7 @@ export class TradesFrame extends ContentFrame {
     }
 
     private createGrid(gridHostElement: HTMLElement) {
-        const customGridSettings: AdaptedRevgrid.CustomGridSettings = {
+        const customGridSettings: SourcedFieldGrid.CustomGridSettings = {
             sortOnClick: false,
             sortOnDoubleClick: false,
         }

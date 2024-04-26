@@ -5,7 +5,6 @@
  */
 
 import {
-    AdaptedRevgrid,
     AllowedGridField,
     AssertInternalError,
     CellPainterFactoryService,
@@ -30,6 +29,7 @@ import {
     SettingsService,
     ShortDepthSideGridField,
     ShortDepthSideGridRecordStore,
+    SourcedFieldGrid,
     TextHeaderCellPainter,
     TextRenderValueCellPainter,
     UnreachableCaseError
@@ -220,7 +220,7 @@ export class DepthSideFrame extends ContentFrame {
     }
 
     autoSizeAllColumnWidths(widenOnly: boolean) {
-        this._grid.autoSizeAllColumnWidths(widenOnly);
+        this._grid.autoSizeActiveColumnWidths(widenOnly);
     }
 
     handleRecordFocusEvent(newRecordIndex: Integer | undefined, oldRecordIndex: Integer | undefined) {
@@ -407,7 +407,7 @@ export class DepthSideFrame extends ContentFrame {
             this._grid.destroy();
         }
 
-        const customGridSettings: AdaptedRevgrid.CustomGridSettings = {
+        const customGridSettings: SourcedFieldGrid.CustomGridSettings = {
             sortOnClick: false,
             sortOnDoubleClick: false,
             gridRightAligned: this._sideId === OrderSideId.Bid,

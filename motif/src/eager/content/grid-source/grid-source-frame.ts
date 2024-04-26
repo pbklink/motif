@@ -5,7 +5,6 @@
  */
 
 import {
-    AdaptedRevgrid,
     AdaptedRevgridBehavioredColumnSettings,
     AssertInternalError,
     Badness,
@@ -13,6 +12,7 @@ import {
     ColumnLayoutOrReferenceDefinition,
     DataSourceOrReference,
     DataSourceOrReferenceDefinition,
+    Err,
     ErrorCode,
     GridField,
     Integer,
@@ -25,6 +25,7 @@ import {
     ReferenceableDataSourcesService,
     Result,
     SettingsService,
+    SourcedFieldGrid,
     StringId,
     Strings,
     TableFieldSourceDefinitionCachingFactoryService,
@@ -133,7 +134,7 @@ export abstract class GridSourceFrame extends ContentFrame {
             );
 
             if (createResult.isErr()) {
-                return createResult.createOuter(ErrorCode.GridSourceFrame_JsonDefinitionIsInvalid)
+                return createResult.createOuter(ErrorCode.DataSourceFrame_JsonDefinitionIsInvalid)
             } else {
                 return createResult;
             }
@@ -205,23 +206,29 @@ export abstract class GridSourceFrame extends ContentFrame {
             resolve = res;
         });
 
-        const openPromise = this._grid.tryOpenGridSource(definition, keepView);
+        const openPromise = this._grid.tryOpenDataSource(definition, keepView);
         openPromise.then(
             (openResult) => {
                 if (openResult.isErr()) {
+                    const lockErrorIdPlusTryError = openResult.error;
+                    const errorCode = DataSourceOrReference.LockErrorCode.fromId(lockErrorIdPlusTryError.errorId);
+                    const tryError = lockErrorIdPlusTryError.tryError;
+                    const error = tryError === undefined ? errorCode : `${errorCode}: ${tryError}`;
+
                     const badness: Badness = {
                         reasonId: Badness.ReasonId.LockError,
-                        reasonExtra: openResult.error,
+                        reasonExtra: error,
                     };
+
                     this.setBadness(badness);
-                    resolve(openResult);
+                    resolve(new Err(error));
                 } else {
                     this._openedTableBadnessChangeSubscriptionId = this._grid.subscribeBadnessChangedEvent(
                         () => this.handleGridBadnessChangeEvent()
                     );
                     this.hideBadnessWithVisibleDelay(Badness.notBad);
 
-                    resolve(openResult);
+                    resolve(new Ok(openResult.value));
                 }
             },
             (reason) => { throw AssertInternalError.createIfNotError(reason, 'GSFTOGS41444'); }
@@ -235,11 +242,11 @@ export abstract class GridSourceFrame extends ContentFrame {
             this._grid.unsubscribeBadnessChangedEvent(this._openedTableBadnessChangeSubscriptionId);
             this._openedTableBadnessChangeSubscriptionId = undefined;
         }
-        this._grid.closeGridSource(keepView);
+        this._grid.closeDataSource(keepView);
     }
 
     createGridSourceOrReferenceDefinition(): DataSourceOrReferenceDefinition {
-        return this._grid.createGridSourceOrReferenceDefinition();
+        return this._grid.createDataSourceOrReferenceDefinition();
     }
 
     createColumnLayoutOrReferenceDefinition() {
@@ -802,7 +809,7 @@ export abstract class GridSourceFrame extends ContentFrame {
     }*/
 
     autoSizeAllColumnWidths(widenOnly: boolean) {
-        this._grid.autoSizeAllColumnWidths(widenOnly);
+        this._grid.autoSizeActiveColumnWidths(widenOnly);
     }
 
     // loadDefaultLayout() {
@@ -865,8 +872,8 @@ export abstract class GridSourceFrame extends ContentFrame {
 
     protected createGrid(
         hostElement: HTMLElement,
-        customGridSettings: AdaptedRevgrid.CustomGridSettings,
-        customiseSettingsForNewColumnEventer: AdaptedRevgrid.CustomiseSettingsForNewColumnEventer,
+        customGridSettings: SourcedFieldGrid.CustomGridSettings,
+        customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer,
         getMainCellPainterEventer: Subgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
         getHeaderCellPainterEventer: Subgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
     ) {
@@ -877,7 +884,6 @@ export abstract class GridSourceFrame extends ContentFrame {
             this.tableRecordSourceDefinitionFactoryService,
             this._tableRecordSourceFactory,
             this._referenceableGridSourcesService,
-            this.cellPainterFactoryService,
             this.settingsService,
             hostElement,
             customGridSettings,
