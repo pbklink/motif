@@ -23,7 +23,7 @@ import {
     SymbolsService,
     TextFormatterService
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutDefinition, RevColumnLayoutOrReferenceDefinition, lowestValidServerNotificationId } from '@xilytix/revgrid';
+import { RevColumnLayoutDefinition, RevColumnLayoutOrReferenceDefinition, revLowestValidServerNotificationId } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import {
     DepthFrame,
@@ -71,7 +71,7 @@ export class DepthAndSalesDitemFrame extends BuiltinDitemFrame {
         this._tradesFrame = tradesFrame;
 
         this._depthFrame.openedPopulatedAndRenderedEvent = (lastBidServerNotificationId, lastAskServerNotificationId) => {
-            if (lastBidServerNotificationId >= lowestValidServerNotificationId && lastAskServerNotificationId >= lowestValidServerNotificationId) {
+            if (lastBidServerNotificationId >= revLowestValidServerNotificationId && lastAskServerNotificationId >= revLowestValidServerNotificationId) {
                 this.checkAutoAdjustOpenWidths();
             }
         }

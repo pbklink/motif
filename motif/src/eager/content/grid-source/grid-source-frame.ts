@@ -33,7 +33,7 @@ import {
     TableRecordSourceDefinition,
     TableRecordSourceFactory
 } from '@motifmarkets/motif-core';
-import { RevColumnLayout, RevColumnLayoutOrReferenceDefinition, RevRecordDataServer, RevSourcedFieldCustomHeadingsService, Subgrid } from '@xilytix/revgrid';
+import { RevColumnLayout, RevColumnLayoutOrReferenceDefinition, RevRecordDataServer, RevSourcedFieldCustomHeadingsService, RevSubgrid } from '@xilytix/revgrid';
 import { ToastService } from '../../component-services/toast-service';
 import { ContentFrame } from '../content-frame';
 import { TableRecordSourceDefinitionFactoryService } from '../table-record-source-definition-factory-service';
@@ -874,8 +874,8 @@ export abstract class GridSourceFrame extends ContentFrame {
         hostElement: HTMLElement,
         customGridSettings: SourcedFieldGrid.CustomGridSettings,
         customiseSettingsForNewColumnEventer: SourcedFieldGrid.CustomiseSettingsForNewColumnEventer,
-        getMainCellPainterEventer: Subgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
-        getHeaderCellPainterEventer: Subgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
+        getMainCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
+        getHeaderCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
     ) {
         const grid = new TableGrid(
             this.gridFieldCustomHeadingsService,

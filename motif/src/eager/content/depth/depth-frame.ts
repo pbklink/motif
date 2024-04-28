@@ -29,7 +29,7 @@ import {
     UnreachableCaseError,
     uniqueElementArraysOverlap
 } from '@motifmarkets/motif-core';
-import { ServerNotificationId } from '@xilytix/revgrid';
+import { RevServerNotificationId } from '@xilytix/revgrid';
 import { Decimal, logger } from '@xilytix/sysutils';
 import { ContentFrame } from '../content-frame';
 import { DepthSideFrame } from '../depth-side/depth-side-frame';
@@ -555,7 +555,7 @@ export namespace DepthFrame {
         this: void, bidActiveWidth: Integer | undefined, askActiveWidth: Integer | undefined
     ) => void;
 
-    export type OpenedPopulatedAndRenderedEvent = (this: void, lastBidServerNotificationId: ServerNotificationId, lastAskServerNotificationId: ServerNotificationId) => void;
+    export type OpenedPopulatedAndRenderedEvent = (this: void, lastBidServerNotificationId: RevServerNotificationId, lastAskServerNotificationId: RevServerNotificationId) => void;
 
     // type RenderedActiveWidthResolveFtn = (width: number) => void;
     // export type NextRenderedActiveWidthResolveFtns = RenderedActiveWidthResolveFtn[];

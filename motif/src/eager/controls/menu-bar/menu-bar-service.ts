@@ -12,6 +12,7 @@ import {
     CommandUiAction,
     CommaText,
     compareInteger,
+    ComparisonResult,
     ExtStringId,
     extStrings,
     Integer,
@@ -718,7 +719,7 @@ export namespace MenuBarService {
 
         private compareMenuItem(left: MenuItem, right: MenuItem) {
             let result = compareInteger(left.rank, right.rank);
-            if (result === 0) {
+            if (result === ComparisonResult.LeftEqualsRight) {
                 result = compareInteger(left.id, right.id);
             }
             return result;

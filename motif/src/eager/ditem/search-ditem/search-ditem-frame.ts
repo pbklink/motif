@@ -22,7 +22,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { DatalessViewCell, HorizontalAlignEnum } from '@xilytix/revgrid';
+import { RevDatalessViewCell, RevHorizontalAlignEnum } from '@xilytix/revgrid';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
 import { DitemFrame } from '../ditem-frame';
 
@@ -99,7 +99,7 @@ export class SearchDitemFrame extends BuiltinDitemFrame {
         const field = RowDataArrayGrid.createField(
             key,
             heading,
-            HorizontalAlignEnum.left,
+            RevHorizontalAlignEnum.left,
         );
         return field;
     }
@@ -108,11 +108,11 @@ export class SearchDitemFrame extends BuiltinDitemFrame {
         // no customisation
     }
 
-    private getGridHeaderCellPainter(_viewCell: DatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridHeaderCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridHeaderCellPainter;
     }
 
-    private getGridMainCellPainter(_viewCell: DatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridMainCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridMainCellPainter;
     }
 }

@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AdaptedRevgridBehavioredColumnSettings, AssertInternalError, GridField, Integer } from '@motifmarkets/motif-core';
-import { CellEditor, DataServer, DatalessViewCell } from '@xilytix/revgrid';
+import { RevCellEditor, RevDataServer, RevDatalessViewCell } from '@xilytix/revgrid';
 import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../../ng/control-component-base-ng.directive';
 import { NumberUiActionComponentBaseNgDirective } from '../../../ng/number-ui-action-component-base-ng.directive';
@@ -21,7 +21,7 @@ import { IntegerUiActionComponentBaseNgDirective } from '../../ng/integer-ui-act
 })
 export class IntegerTextInputNgComponent
 extends IntegerUiActionComponentBaseNgDirective
-implements OnInit, CellEditor<AdaptedRevgridBehavioredColumnSettings, GridField> {
+implements OnInit, RevCellEditor<AdaptedRevgridBehavioredColumnSettings, GridField> {
     private static typeInstanceCreateCount = 0;
 
     @Input() inputId: string;
@@ -31,8 +31,8 @@ implements OnInit, CellEditor<AdaptedRevgridBehavioredColumnSettings, GridField>
 
     declare rootHtmlElement: HTMLInputElement;
 
-    keyDownEventer: CellEditor.KeyDownEventer | undefined; // used by CellEditor
-    dataServer: DataServer<GridField> | undefined; // Used by Cell Editor
+    keyDownEventer: RevCellEditor.KeyDownEventer | undefined; // used by CellEditor
+    dataServer: RevDataServer<GridField> | undefined; // Used by Cell Editor
 
     private _numberInputElement: HTMLInputElement;
     private _oldText: string | undefined;
@@ -56,7 +56,7 @@ implements OnInit, CellEditor<AdaptedRevgridBehavioredColumnSettings, GridField>
     }
 
     // Used by Cell Editor
-    tryOpenCell(cell: DatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>, openingKeyDownEvent: KeyboardEvent | undefined, _openingClickEvent: MouseEvent | undefined) {
+    tryOpenCell(cell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>, openingKeyDownEvent: KeyboardEvent | undefined, _openingClickEvent: MouseEvent | undefined) {
         const dataServer = this.dataServer;
         if (dataServer === undefined) {
             throw new AssertInternalError('ITINCTOCDU10008')

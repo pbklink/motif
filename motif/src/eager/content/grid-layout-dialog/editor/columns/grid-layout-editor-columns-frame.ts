@@ -30,7 +30,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { CellEditor, CellPainter, DatalessViewCell, RevSourcedFieldCustomHeadingsService, Subgrid, ViewCell } from '@xilytix/revgrid';
+import { RevCellEditor, RevCellPainter, RevDatalessViewCell, RevSourcedFieldCustomHeadingsService, RevSubgrid, RevViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../../grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../../../table-record-source-definition-factory-service';
@@ -44,7 +44,7 @@ export class ColumnLayoutEditorColumnsFrame extends GridSourceFrame {
     private _gridMainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
     private _visibleCheckboxPainter: CheckboxRenderValueRecordGridCellPainter;
     private _visibleCheckboxEditor: CheckboxRenderValueRecordGridCellEditor;
-    private _widthEditor: CellEditor<AdaptedRevgridBehavioredColumnSettings, GridField>;
+    private _widthEditor: RevCellEditor<AdaptedRevgridBehavioredColumnSettings, GridField>;
 
     constructor(
         settingsService: SettingsService,
@@ -119,7 +119,7 @@ export class ColumnLayoutEditorColumnsFrame extends GridSourceFrame {
         return grid;
     }
 
-    setWidthEditor(value: CellEditor<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    setWidthEditor(value: RevCellEditor<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         this._widthEditor = value;
     }
 
@@ -271,12 +271,12 @@ export class ColumnLayoutEditorColumnsFrame extends GridSourceFrame {
         // no customisation
     }
 
-    private getGridHeaderCellPainter(_viewCell: DatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridHeaderCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridHeaderCellPainter;
     }
 
-    private getGridMainCellPainter(viewCell: DatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
-        let cellPainter: CellPainter<
+    private getGridMainCellPainter(viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+        let cellPainter: RevCellPainter<
             AdaptedRevgridBehavioredColumnSettings,
             GridField
         >;
@@ -292,14 +292,14 @@ export class ColumnLayoutEditorColumnsFrame extends GridSourceFrame {
     private getCellEditor(
         field: GridField,
         subgridRowIndex: Integer,
-        _subgrid: Subgrid<AdaptedRevgridBehavioredColumnSettings, GridField>,
+        _subgrid: RevSubgrid<AdaptedRevgridBehavioredColumnSettings, GridField>,
         readonly: boolean,
-        _viewCell: ViewCell<AdaptedRevgridBehavioredColumnSettings, GridField> | undefined
-    ): CellEditor<AdaptedRevgridBehavioredColumnSettings, GridField> | undefined {
+        _viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField> | undefined
+    ): RevCellEditor<AdaptedRevgridBehavioredColumnSettings, GridField> | undefined {
         return this.tryGetCellEditor(field.definition.sourcelessName, readonly, subgridRowIndex);
     }
 
-    private tryGetCellEditor(sourcelesFieldName: string, readonly: boolean, subgridRowIndex: Integer): CellEditor<AdaptedRevgridBehavioredColumnSettings, GridField> | undefined {
+    private tryGetCellEditor(sourcelesFieldName: string, readonly: boolean, subgridRowIndex: Integer): RevCellEditor<AdaptedRevgridBehavioredColumnSettings, GridField> | undefined {
         if (sourcelesFieldName === EditableColumnLayoutDefinitionColumn.FieldName.visible) {
             this._visibleCheckboxEditor.readonly = readonly || subgridRowIndex < this._recordList.anchoredRecordCount;
             return this._visibleCheckboxEditor;

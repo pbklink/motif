@@ -20,7 +20,7 @@ import {
     delay1Tick,
     numberToPixels
 } from '@motifmarkets/motif-core';
-import { Focus, Rectangle } from '@xilytix/revgrid';
+import { RevFocus, RevRectangle } from '@xilytix/revgrid';
 import { ComponentBaseNgDirective } from 'component-ng-api';
 
 @Directive()
@@ -122,7 +122,7 @@ export abstract class ControlComponentBaseNgDirective extends ComponentBaseNgDir
     }
 
     // used by Cell Editor
-    setBounds(bounds: Rectangle | undefined) {
+    setBounds(bounds: RevRectangle | undefined) {
         const htmlElement = this.rootHtmlElement;
         if (bounds === undefined) {
             htmlElement.style.visibility = 'hidden';
@@ -152,14 +152,14 @@ export abstract class ControlComponentBaseNgDirective extends ComponentBaseNgDir
 
     // used by Cell Editor
     protected canConsumeGridKey(key: string) {
-        switch (key) {
-            case Focus.ActionKeyboardKey.ArrowUp:
-            case Focus.ActionKeyboardKey.ArrowDown:
-            case Focus.ActionKeyboardKey.PageUp:
-            case Focus.ActionKeyboardKey.PageDown:
-            case Focus.ActionKeyboardKey.Tab:
-            case Focus.ActionKeyboardKey.Enter:
-            case Focus.ActionKeyboardKey.Escape:
+        switch (key as RevFocus.ActionKeyboardKey) {
+            case RevFocus.ActionKeyboardKey.ArrowUp:
+            case RevFocus.ActionKeyboardKey.ArrowDown:
+            case RevFocus.ActionKeyboardKey.PageUp:
+            case RevFocus.ActionKeyboardKey.PageDown:
+            case RevFocus.ActionKeyboardKey.Tab:
+            case RevFocus.ActionKeyboardKey.Enter:
+            case RevFocus.ActionKeyboardKey.Escape:
                 return false;
             default:
                 return true;
