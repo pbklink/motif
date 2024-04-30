@@ -4,19 +4,19 @@
  * License: motionite.trade/license/motif
  */
 
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     Integer,
     IntegerTableValue,
     MultiEvent,
-    RenderValue,
     ScanFieldBooleanOperationIdTableValue,
     StringTableValue,
     TableValue,
     TableValueSource,
+    TextFormattableValue,
     UnreachableCaseError,
     ValidTableValue
 } from '@motifmarkets/motif-core';
+import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import { ScanFieldEditorFrame } from '../field/scan-field-editor-frame';
 import { ScanFieldEditorFrameTableFieldSourceDefinition } from './scan-field-editor-frame-table-field-source-definition';
 
@@ -105,7 +105,7 @@ export class ScanFieldEditorFrameTableValueSource extends TableValueSource {
 
     private loadValue(id: ScanFieldEditorFrame.FieldId, value: TableValue) {
         if (!this._frame.valid) {
-            value.addRenderAttribute(RenderValue.DataCorrectnessAttribute.error);
+            value.addRenderAttribute(TextFormattableValue.DataCorrectnessAttribute.error);
         }
         switch (id) {
             case ScanFieldEditorFrame.FieldId.Name: {

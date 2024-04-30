@@ -12,15 +12,15 @@ import {
     GridField,
     IndexSignatureHack,
     Integer,
-    RenderValue,
-    RenderValueRowDataArrayGridCellPainter,
     RowDataArrayGrid,
     SettingsService,
-    StringRenderValue,
+    StringTextFormattableValue,
     SymbolsService,
+    TextFormattableValue,
+    TextFormattableValueRowDataArrayGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter,
-    TimeRenderValue
+    TextTextFormattableValueCellPainter,
+    TimeTextFormattableValue
 } from '@motifmarkets/motif-core';
 import { RevDatalessViewCell, RevHorizontalAlignId } from '@xilytix/revgrid';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
@@ -32,7 +32,7 @@ export class AlertsDitemFrame extends BuiltinDitemFrame {
     private readonly _grid: RowDataArrayGrid;
 
     private readonly _gridHeaderCellPainter: TextHeaderCellPainter;
-    private readonly _gridMainCellPainter: RenderValueRowDataArrayGridCellPainter<TextRenderValueCellPainter>;
+    private readonly _gridMainCellPainter: TextFormattableValueRowDataArrayGridCellPainter<TextTextFormattableValueCellPainter>;
 
     constructor(
         ditemComponentAccess: DitemFrame.ComponentAccess,
@@ -64,7 +64,7 @@ export class AlertsDitemFrame extends BuiltinDitemFrame {
         grid.mainClickEventer = (fieldIndex, rowIndex) => this.handleGridClickEvent(fieldIndex, rowIndex);
 
         this._gridHeaderCellPainter = cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = cellPainterFactoryService.createTextRenderValueRowDataArrayGrid(grid, grid.mainDataServer);
+        this._gridMainCellPainter = cellPainterFactoryService.createTextTextFormattableValueRowDataArrayGrid(grid, grid.mainDataServer);
 
         this._grid.setData(demoAlerts.slice(), false);
     }
@@ -107,9 +107,9 @@ export class AlertsDitemFrame extends BuiltinDitemFrame {
 }
 
 interface Alert {
-    code: string | StringRenderValue;
-    time: Date | string  | TimeRenderValue;
-    eventText: string | StringRenderValue;
+    code: string | StringTextFormattableValue;
+    time: Date | string  | TimeTextFormattableValue;
+    eventText: string | StringTextFormattableValue;
 }
 
 const demoAlerts: IndexSignatureHack<readonly Alert[]> = [
@@ -120,29 +120,29 @@ const demoAlerts: IndexSignatureHack<readonly Alert[]> = [
     },
     {
         code: 'BHP.AX',
-        time: new TimeRenderValue(new Date(2022, 1, 31, 12, 43)),
+        time: new TimeTextFormattableValue(new Date(2022, 1, 31, 12, 43)),
         eventText: 'BHP.AX last price dropped below 45',
     },
     {
-        code: createAdvertStringRenderValue('SPC.AD'),
-        time: createAdvertTimeRenderValue(new Date(2022, 1, 31, 11, 48)),
-        eventText: createAdvertStringRenderValue('New Arizona holiday package under $12000 announced'),
+        code: createAdvertStringTextFormattableValue('SPC.AD'),
+        time: createAdvertTimeTextFormattableValue(new Date(2022, 1, 31, 11, 48)),
+        eventText: createAdvertStringTextFormattableValue('New Arizona holiday package under $12000 announced'),
     },
     {
         code: 'CBA.AX',
-        time: new TimeRenderValue(new Date(2022, 1, 31, 11, 10)),
+        time: new TimeTextFormattableValue(new Date(2022, 1, 31, 11, 10)),
         eventText: 'CBA.AX moving average crossing',
     },
 ] as const;
 
-function createAdvertStringRenderValue(text: string) {
-    const result = new StringRenderValue(text);
-    result.addAttribute(RenderValue.advertAttribute);
+function createAdvertStringTextFormattableValue(text: string) {
+    const result = new StringTextFormattableValue(text);
+    result.addAttribute(TextFormattableValue.advertAttribute);
     return result;
 }
 
-function createAdvertTimeRenderValue(value: Date) {
-    const result = new TimeRenderValue(value);
-    result.addAttribute(RenderValue.advertAttribute);
+function createAdvertTimeTextFormattableValue(value: Date) {
+    const result = new TimeTextFormattableValue(value);
+    result.addAttribute(TextFormattableValue.advertAttribute);
     return result;
 }

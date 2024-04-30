@@ -15,11 +15,11 @@ import {
     LitIvemIdExecuteScanRankedLitIvemIdListDefinition,
     RankedLitIvemIdList,
     RankedLitIvemIdListTableRecordSource,
-    RenderValueRecordGridCellPainter,
     StringId,
     Strings,
+    TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter
+    TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
 import { RevDatalessViewCell } from '@xilytix/revgrid';
 import { DelayedBadnessGridSourceFrame } from '../../../delayed-badness-grid-source/internal-api';
@@ -31,7 +31,7 @@ export class ScanTestMatchesFrame extends DelayedBadnessGridSourceFrame {
     private _rankedLitIvemIdList: RankedLitIvemIdList;
 
     private _gridHeaderCellPainter: TextHeaderCellPainter;
-    private _gridMainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
+    private _gridMainCellPainter: TextFormattableValueRecordGridCellPainter<TextTextFormattableValueCellPainter>;
 
     private _showFull: boolean;
 
@@ -47,7 +47,7 @@ export class ScanTestMatchesFrame extends DelayedBadnessGridSourceFrame {
         );
 
         this._gridHeaderCellPainter = this.cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = this.cellPainterFactoryService.createTextRenderValueRecordGrid(grid, grid.mainDataServer);
+        this._gridMainCellPainter = this.cellPainterFactoryService.createTextTextFormattableValueRecordGrid(grid, grid.mainDataServer);
 
         return grid;
     }

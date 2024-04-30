@@ -4,7 +4,6 @@
  * License: motionite.trade/license/motif
  */
 
-import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     Integer,
@@ -12,13 +11,14 @@ import {
     MultiEvent,
     NotificationChannelSourceSettingsUrgencyIdTableValue,
     NumberTableValue,
-    RenderValue,
     StringTableValue,
     TableValue,
     TableValueSource,
+    TextFormattableValue,
     UnreachableCaseError,
     ValidTableValue
 } from '@motifmarkets/motif-core';
+import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import { LockerScanAttachedNotificationChannelTableFieldSourceDefinition } from './locker-scan-attached-notification-channel-table-field-source-definition';
 
 export class LockerScanAttachedNotificationChannelTableValueSource extends TableValueSource {
@@ -106,7 +106,7 @@ export class LockerScanAttachedNotificationChannelTableValueSource extends Table
 
     private loadValue(id: LockerScanAttachedNotificationChannel.FieldId, value: TableValue) {
         if (!this._channel.valid) {
-            value.addRenderAttribute(RenderValue.DataCorrectnessAttribute.error);
+            value.addRenderAttribute(TextFormattableValue.DataCorrectnessAttribute.error);
         }
         switch (id) {
             case LockerScanAttachedNotificationChannel.FieldId.ChannelId: {

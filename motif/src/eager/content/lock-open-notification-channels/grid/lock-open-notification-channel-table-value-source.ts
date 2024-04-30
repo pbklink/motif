@@ -13,10 +13,10 @@ import {
     LockOpenNotificationChannel,
     MultiEvent,
     NotificationDistributionMethodIdTableValue,
-    RenderValue,
     StringTableValue,
     TableValue,
     TableValueSource,
+    TextFormattableValue,
     UnreachableCaseError,
     ValidTableValue
 } from '@motifmarkets/motif-core';
@@ -108,7 +108,7 @@ export class LockOpenNotificationChannelTableValueSource extends TableValueSourc
 
     private loadValue(id: LockOpenNotificationChannel.FieldId, value: TableValue) {
         if (!this._channel.valid) {
-            value.addRenderAttribute(RenderValue.DataCorrectnessAttribute.error);
+            value.addRenderAttribute(TextFormattableValue.DataCorrectnessAttribute.error);
         }
         switch (id) {
             case LockOpenNotificationChannel.FieldId.Id:

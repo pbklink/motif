@@ -11,12 +11,12 @@ import {
     MarketInfo,
     ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
-    RenderValueRecordGridCellPainter,
     SettingsService,
     TableFieldSourceDefinitionCachingFactoryService,
     TableRecordSourceFactory,
+    TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter,
+    TextTextFormattableValueCellPainter,
     UiComparableList
 } from '@motifmarkets/motif-core';
 import { RevColumnLayoutOrReferenceDefinition, RevDatalessViewCell, RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
@@ -36,7 +36,7 @@ export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
     private _list: UiComparableList<LitIvemId>;
 
     private _gridHeaderCellPainter: TextHeaderCellPainter;
-    private _gridMainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
+    private _gridMainCellPainter: TextFormattableValueRecordGridCellPainter<TextTextFormattableValueCellPainter>;
 
     private _filterText = '';
     private _uppercaseFilterText = '';
@@ -107,7 +107,7 @@ export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
         );
 
         this._gridHeaderCellPainter = this.cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = this.cellPainterFactoryService.createTextRenderValueRecordGrid(grid, grid.mainDataServer);
+        this._gridMainCellPainter = this.cellPainterFactoryService.createTextTextFormattableValueRecordGrid(grid, grid.mainDataServer);
 
         grid.selectionChangedEventer = () => {
             if (this.selectionChangedEventer !== undefined) {

@@ -24,14 +24,14 @@ import {
     JsonElement,
     OrderSideId,
     RecordGrid,
-    RenderValueRecordGridCellPainter,
     SessionInfoService,
     SettingsService,
     ShortDepthSideGridField,
     ShortDepthSideGridRecordStore,
     SourcedFieldGrid,
+    TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter,
+    TextTextFormattableValueCellPainter,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
 import { RevColumnLayout, RevColumnLayoutDefinition, RevRecordStore } from '@xilytix/revgrid';
@@ -51,7 +51,7 @@ export class DepthSideFrame extends ContentFrame {
     // private _activeWidth = 0;
 
     private _gridHeaderCellPainter: TextHeaderCellPainter;
-    private _gridMainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
+    private _gridMainCellPainter: TextFormattableValueRecordGridCellPainter<TextTextFormattableValueCellPainter>;
 
     private _waitOpenPopulatedId = DepthSideFrame.initialWaitOpenPopulatedId;
     private _waitLastServerNotificationRenderedId = 0;
@@ -435,7 +435,7 @@ export class DepthSideFrame extends ContentFrame {
         this._grid = grid;
 
         this._gridHeaderCellPainter = this._cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = this._cellPainterFactoryService.createTextRenderValueRecordGrid(grid, grid.mainDataServer);
+        this._gridMainCellPainter = this._cellPainterFactoryService.createTextTextFormattableValueRecordGrid(grid, grid.mainDataServer);
 
         grid.activate();
 

@@ -9,17 +9,17 @@ import {
     CellPainterFactoryService,
     GridField,
     Integer,
-    IntegerRenderValue,
-    RenderValueRowDataArrayGridCellPainter,
+    IntegerTextFormattableValue,
     RowDataArrayGrid,
     ScanFormulaZenithEncoding,
     SettingsService,
     SourcedFieldGrid,
     StringId,
-    StringRenderValue,
+    StringTextFormattableValue,
     Strings,
+    TextFormattableValueRowDataArrayGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter
+    TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
 import { RevDataRowArrayGrid, RevDatalessViewCell, RevHorizontalAlignId } from '@xilytix/revgrid';
 
@@ -27,7 +27,7 @@ export class ZenithScanFormulaViewDecodeProgressFrame {
     private _grid: RowDataArrayGrid;
 
     private _gridHeaderCellPainter: TextHeaderCellPainter;
-    private _gridMainCellPainter: RenderValueRowDataArrayGridCellPainter<TextRenderValueCellPainter>;
+    private _gridMainCellPainter: TextFormattableValueRowDataArrayGridCellPainter<TextTextFormattableValueCellPainter>;
     private _dataBeenSet: boolean;
 
     constructor(
@@ -66,8 +66,8 @@ export class ZenithScanFormulaViewDecodeProgressFrame {
             for (let i = 0; i < count; i++) {
                 const node = nodes[i];
                 const row: ZenithScanFormulaViewDecodeProgressFrame.DataRow = {
-                    depth: new IntegerRenderValue(node.nodeDepth),
-                    nodeType: new StringRenderValue(node.tupleNodeType),
+                    depth: new IntegerTextFormattableValue(node.nodeDepth),
+                    nodeType: new StringTextFormattableValue(node.tupleNodeType),
                 };
                 rows[i + 1] = row;
             }
@@ -100,7 +100,7 @@ export class ZenithScanFormulaViewDecodeProgressFrame {
         grid.mainClickEventer = (fieldIndex, rowIndex) => this.handleGridClickEvent(fieldIndex, rowIndex);
 
         this._gridHeaderCellPainter = this._cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = this._cellPainterFactoryService.createTextRenderValueRowDataArrayGrid(grid, grid.mainDataServer);
+        this._gridMainCellPainter = this._cellPainterFactoryService.createTextTextFormattableValueRowDataArrayGrid(grid, grid.mainDataServer);
 
         return grid;
     }
@@ -152,7 +152,7 @@ export class ZenithScanFormulaViewDecodeProgressFrame {
 
 export namespace ZenithScanFormulaViewDecodeProgressFrame {
     export interface DataRow extends RevDataRowArrayGrid.DataRow {
-        readonly depth: string | IntegerRenderValue;
-        readonly nodeType: string | StringRenderValue;
+        readonly depth: string | IntegerTextFormattableValue;
+        readonly nodeType: string | StringTextFormattableValue;
     }
 }

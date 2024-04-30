@@ -9,8 +9,8 @@ import {
     AssertInternalError,
     Badness,
     CellPainterFactoryService,
-    CheckboxRenderValueRecordGridCellEditor,
-    CheckboxRenderValueRecordGridCellPainter,
+    CheckboxTextFormattableValueRecordGridCellEditor,
+    CheckboxTextFormattableValueRecordGridCellPainter,
     DataSourceDefinition,
     DataSourceOrReferenceDefinition,
     EditableColumnLayoutDefinitionColumn,
@@ -23,12 +23,12 @@ import {
     ModifierKeyId,
     ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
-    RenderValueRecordGridCellPainter,
     SettingsService,
     TableFieldSourceDefinitionCachingFactoryService,
     TableRecordSourceFactory,
+    TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter
+    TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
 import { RevCellEditor, RevCellPainter, RevDatalessViewCell, RevSourcedFieldCustomHeadingsService, RevSubgrid, RevViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
@@ -41,9 +41,9 @@ export class ColumnLayoutEditorColumnsFrame extends GridSourceFrame {
     private _recordList: EditableColumnLayoutDefinitionColumnList;
 
     private _gridHeaderCellPainter: TextHeaderCellPainter;
-    private _gridMainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
-    private _visibleCheckboxPainter: CheckboxRenderValueRecordGridCellPainter;
-    private _visibleCheckboxEditor: CheckboxRenderValueRecordGridCellEditor;
+    private _gridMainCellPainter: TextFormattableValueRecordGridCellPainter<TextTextFormattableValueCellPainter>;
+    private _visibleCheckboxPainter: CheckboxTextFormattableValueRecordGridCellPainter;
+    private _visibleCheckboxEditor: CheckboxTextFormattableValueRecordGridCellEditor;
     private _widthEditor: RevCellEditor<AdaptedRevgridBehavioredColumnSettings, GridField>;
 
     constructor(
@@ -101,9 +101,9 @@ export class ColumnLayoutEditorColumnsFrame extends GridSourceFrame {
         );
 
         this._gridHeaderCellPainter = this.cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = this.cellPainterFactoryService.createTextRenderValueRecordGrid(grid, grid.mainDataServer);
-        this._visibleCheckboxPainter = this.cellPainterFactoryService.createCheckboxRenderValueRecordGrid(grid, grid.mainDataServer);
-        this._visibleCheckboxEditor = new CheckboxRenderValueRecordGridCellEditor(this.settingsService, grid, grid.mainDataServer);
+        this._gridMainCellPainter = this.cellPainterFactoryService.createTextTextFormattableValueRecordGrid(grid, grid.mainDataServer);
+        this._visibleCheckboxPainter = this.cellPainterFactoryService.createCheckboxTextFormattableValueRecordGrid(grid, grid.mainDataServer);
+        this._visibleCheckboxEditor = new CheckboxTextFormattableValueRecordGridCellEditor(this.settingsService, grid, grid.mainDataServer);
 
         grid.selectionChangedEventer = () => this.handleGridSelectionChangedEventer();
 

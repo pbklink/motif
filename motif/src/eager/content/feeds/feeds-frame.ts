@@ -13,9 +13,9 @@ import {
     GridField,
     Integer,
     KeyedCorrectnessList,
-    RenderValueRecordGridCellPainter,
+    TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter
+    TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
 import { RevDatalessViewCell } from '@xilytix/revgrid';
 import { DelayedBadnessGridSourceFrame } from '../delayed-badness-grid-source/internal-api';
@@ -25,7 +25,7 @@ export class FeedsFrame extends DelayedBadnessGridSourceFrame {
     private _recordList: KeyedCorrectnessList<Feed>;
 
     private _gridHeaderCellPainter: TextHeaderCellPainter;
-    private _gridMainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
+    private _gridMainCellPainter: TextFormattableValueRecordGridCellPainter<TextTextFormattableValueCellPainter>;
 
     get recordList() { return this._recordList; }
 
@@ -39,7 +39,7 @@ export class FeedsFrame extends DelayedBadnessGridSourceFrame {
         );
 
         this._gridHeaderCellPainter = this.cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = this.cellPainterFactoryService.createTextRenderValueRecordGrid(grid, grid.mainDataServer);
+        this._gridMainCellPainter = this.cellPainterFactoryService.createTextTextFormattableValueRecordGrid(grid, grid.mainDataServer);
 
         return grid;
     }

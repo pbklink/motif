@@ -20,12 +20,12 @@ import {
     MultiEvent,
     ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
-    RenderValueRecordGridCellPainter,
     SettingsService,
     TableFieldSourceDefinitionCachingFactoryService,
     TableRecordSourceFactory,
+    TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter,
+    TextTextFormattableValueCellPainter,
     UsableListChangeTypeId,
     delay1Tick
 } from '@motifmarkets/motif-core';
@@ -40,7 +40,7 @@ export class ColumnLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
     private _records: readonly GridField[];
 
     private _gridHeaderCellPainter: TextHeaderCellPainter;
-    private _gridMainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
+    private _gridMainCellPainter: TextFormattableValueRecordGridCellPainter<TextTextFormattableValueCellPainter>;
 
     private _columnListChangeSubscriptionId: MultiEvent.SubscriptionId;
 
@@ -114,7 +114,7 @@ export class ColumnLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
         );
 
         this._gridHeaderCellPainter = this.cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = this.cellPainterFactoryService.createTextRenderValueRecordGrid(grid, grid.mainDataServer);
+        this._gridMainCellPainter = this.cellPainterFactoryService.createTextTextFormattableValueRecordGrid(grid, grid.mainDataServer);
 
         grid.selectionChangedEventer = () => this.handleGridSelectionChangedEventer();
 

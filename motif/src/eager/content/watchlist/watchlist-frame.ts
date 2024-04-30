@@ -17,10 +17,10 @@ import {
     RankedLitIvemIdList,
     RankedLitIvemIdListDefinition,
     RankedLitIvemIdListTableRecordSource,
-    RenderValueRecordGridCellPainter,
     ScanIdRankedLitIvemIdListDefinition,
+    TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter,
+    TextTextFormattableValueCellPainter,
     compareInteger
 } from '@motifmarkets/motif-core';
 import { RevColumnLayoutOrReferenceDefinition, RevDataSourceOrReferenceDefinition, RevDatalessViewCell, RevRecordRowOrderDefinition } from '@xilytix/revgrid';
@@ -37,7 +37,7 @@ export class WatchlistFrame extends DelayedBadnessGridSourceFrame {
     private _fixedRowCount: Integer | undefined;
 
     private _gridHeaderCellPainter: TextHeaderCellPainter;
-    private _gridMainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
+    private _gridMainCellPainter: TextFormattableValueRecordGridCellPainter<TextTextFormattableValueCellPainter>;
 
     get userCanAdd() { return this._litIvemIdList.userCanAdd; }
     get userCanReplace() { return this._litIvemIdList.userCanReplace; }
@@ -65,7 +65,7 @@ export class WatchlistFrame extends DelayedBadnessGridSourceFrame {
         );
 
         this._gridHeaderCellPainter = this.cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = this.cellPainterFactoryService.createTextRenderValueRecordGrid(grid, grid.mainDataServer);
+        this._gridMainCellPainter = this.cellPainterFactoryService.createTextTextFormattableValueRecordGrid(grid, grid.mainDataServer);
 
         return grid;
     }

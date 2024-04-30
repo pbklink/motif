@@ -12,11 +12,11 @@ import {
     ColorSchemeGridRecordStore,
     Integer,
     RecordGrid,
-    RenderValueRecordGridCellPainter,
     SettingsService,
     SourcedFieldGrid,
+    TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter
+    TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
 import { RevColumnLayout, RevRecord, RevRecordFieldIndex, RevRecordIndex } from '@xilytix/revgrid';
 import { CellPainterFactoryNgService, SettingsNgService } from 'component-services-ng-api';
@@ -41,7 +41,7 @@ export class ColorSchemeGridNgComponent extends ContentComponentBaseNgDirective 
 
     private _recordStore: ColorSchemeGridRecordStore;
     private _grid: RecordGrid;
-    private _mainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
+    private _mainCellPainter: TextFormattableValueRecordGridCellPainter<TextTextFormattableValueCellPainter>;
     private _headerCellPainter: TextHeaderCellPainter;
 
     private _filterActive = false;
@@ -59,7 +59,7 @@ export class ColorSchemeGridNgComponent extends ContentComponentBaseNgDirective 
         this._grid = this.createGrid(this.rootHtmlElement,);
 
         const grid = this._grid;
-        this._mainCellPainter = this._cellPainterFactoryService.createTextRenderValueRecordGrid(this._grid, grid.mainDataServer);
+        this._mainCellPainter = this._cellPainterFactoryService.createTextTextFormattableValueRecordGrid(this._grid, grid.mainDataServer);
         this._headerCellPainter = this._cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
 
         grid.activate();

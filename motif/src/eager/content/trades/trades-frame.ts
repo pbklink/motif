@@ -20,11 +20,11 @@ import {
     LitIvemId,
     MultiEvent,
     RecordGrid,
-    RenderValueRecordGridCellPainter,
     SettingsService,
     SourcedFieldGrid,
+    TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter
+    TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
 import { RevColumnLayout, RevColumnLayoutDefinition } from '@xilytix/revgrid';
 import { ContentFrame } from '../content-frame';
@@ -39,7 +39,7 @@ export class TradesFrame extends ContentFrame {
     private _dataItemDataCorrectnessId = CorrectnessId.Suspect;
 
     private _gridHeaderCellPainter: TextHeaderCellPainter;
-    private _gridMainCellPainter: RenderValueRecordGridCellPainter<TextRenderValueCellPainter>;
+    private _gridMainCellPainter: TextFormattableValueRecordGridCellPainter<TextTextFormattableValueCellPainter>;
 
     private _columnLayout: RevColumnLayout;
 
@@ -193,7 +193,7 @@ export class TradesFrame extends ContentFrame {
         const grid = this.createGrid(gridHostElement);
 
         this._gridHeaderCellPainter = this._cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = this._cellPainterFactoryService.createTextRenderValueRecordGrid(grid, grid.mainDataServer);
+        this._gridMainCellPainter = this._cellPainterFactoryService.createTextTextFormattableValueRecordGrid(grid, grid.mainDataServer);
 
         return grid;
     }

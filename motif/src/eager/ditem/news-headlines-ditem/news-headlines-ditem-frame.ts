@@ -9,18 +9,18 @@ import {
     AdiService,
     CellPainterFactoryService,
     CommandRegisterService,
-    DateTimeRenderValue,
+    DateTimeTextFormattableValue,
     GridField,
     IndexSignatureHack,
     Integer,
-    RenderValue,
-    RenderValueRowDataArrayGridCellPainter,
     RowDataArrayGrid,
     SettingsService,
-    StringRenderValue,
+    StringTextFormattableValue,
     SymbolsService,
+    TextFormattableValue,
+    TextFormattableValueRowDataArrayGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter
+    TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
 import { RevDatalessViewCell, RevHorizontalAlignId } from '@xilytix/revgrid';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
@@ -32,7 +32,7 @@ export class NewsHeadlinesDitemFrame extends BuiltinDitemFrame {
     private readonly _grid: RowDataArrayGrid;
 
     private readonly _gridHeaderCellPainter: TextHeaderCellPainter;
-    private readonly _gridMainCellPainter: RenderValueRowDataArrayGridCellPainter<TextRenderValueCellPainter>;
+    private readonly _gridMainCellPainter: TextFormattableValueRowDataArrayGridCellPainter<TextTextFormattableValueCellPainter>;
 
     constructor(
         ditemComponentAccess: DitemFrame.ComponentAccess,
@@ -64,7 +64,7 @@ export class NewsHeadlinesDitemFrame extends BuiltinDitemFrame {
         grid.mainClickEventer = (fieldIndex, rowIndex) => this.handleGridClickEvent(fieldIndex, rowIndex);
 
         this._gridHeaderCellPainter = cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = cellPainterFactoryService.createTextRenderValueRowDataArrayGrid(grid, grid.mainDataServer);
+        this._gridMainCellPainter = cellPainterFactoryService.createTextTextFormattableValueRowDataArrayGrid(grid, grid.mainDataServer);
 
         this._grid.setData(demoHeadlines.slice(), false);
     }
@@ -107,11 +107,11 @@ export class NewsHeadlinesDitemFrame extends BuiltinDitemFrame {
 }
 
 interface Headline {
-    code: string | StringRenderValue;
-    name: string | StringRenderValue;
-    text: string | StringRenderValue;
-    sensitive: string | StringRenderValue;
-    time: Date | string  | DateTimeRenderValue;
+    code: string | StringTextFormattableValue;
+    name: string | StringTextFormattableValue;
+    text: string | StringTextFormattableValue;
+    sensitive: string | StringTextFormattableValue;
+    time: Date | string  | DateTimeTextFormattableValue;
 }
 
 const demoHeadlines: IndexSignatureHack<readonly Headline[]> = [
@@ -158,11 +158,11 @@ const demoHeadlines: IndexSignatureHack<readonly Headline[]> = [
         time: new Date(2022, 1, 31, 13, 6),
     },
     {
-        code: createAdvertStringRenderValue('SPC.AD'),
-        name: createAdvertStringRenderValue('Spectaculix Travel'),
-        text: createAdvertStringRenderValue('New magical Arizona holiday now available'),
-        sensitive: createAdvertStringRenderValue(''),
-        time: createAdvertDateTimeRenderValue(new Date(2022, 1, 31, 13, 6)),
+        code: createAdvertStringTextFormattableValue('SPC.AD'),
+        name: createAdvertStringTextFormattableValue('Spectaculix Travel'),
+        text: createAdvertStringTextFormattableValue('New magical Arizona holiday now available'),
+        sensitive: createAdvertStringTextFormattableValue(''),
+        time: createAdvertDateTimeTextFormattableValue(new Date(2022, 1, 31, 13, 6)),
     },
     {
         code: 'SCP.AX',
@@ -264,20 +264,20 @@ const demoHeadlines: IndexSignatureHack<readonly Headline[]> = [
     },
 ] as const;
 
-function createAdvertStringRenderValue(text: string) {
-    const result = new StringRenderValue(text);
-    result.addAttribute(RenderValue.advertAttribute);
+function createAdvertStringTextFormattableValue(text: string) {
+    const result = new StringTextFormattableValue(text);
+    result.addAttribute(TextFormattableValue.advertAttribute);
     return result;
 }
 
-// function createAdvertIntegerRenderValue(value: Integer) {
-//     const result = new IntegerRenderValue(value);
-//     result.addAttribute(RenderValue.advertAttribute);
+// function createAdvertIntegerTextFormattableValue(value: Integer) {
+//     const result = new IntegerTextFormattableValue(value);
+//     result.addAttribute(TextFormattableValue.advertAttribute);
 //     return result;
 // }
 
-function createAdvertDateTimeRenderValue(value: Date) {
-    const result = new DateTimeRenderValue(value);
-    result.addAttribute(RenderValue.advertAttribute);
+function createAdvertDateTimeTextFormattableValue(value: Date) {
+    const result = new DateTimeTextFormattableValue(value);
+    result.addAttribute(TextFormattableValue.advertAttribute);
     return result;
 }

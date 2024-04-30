@@ -12,15 +12,15 @@ import {
     GridField,
     IndexSignatureHack,
     Integer,
-    RenderValue,
-    RenderValueRowDataArrayGridCellPainter,
     RowDataArrayGrid,
     SettingsService,
     SourcedFieldGrid,
-    StringRenderValue,
+    StringTextFormattableValue,
     SymbolsService,
+    TextFormattableValue,
+    TextFormattableValueRowDataArrayGridCellPainter,
     TextHeaderCellPainter,
-    TextRenderValueCellPainter
+    TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
 import { RevDatalessViewCell, RevHorizontalAlignId } from '@xilytix/revgrid';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
@@ -33,7 +33,7 @@ export class SearchDitemFrame extends BuiltinDitemFrame {
     private readonly _grid: RowDataArrayGrid;
 
     private readonly _gridHeaderCellPainter: TextHeaderCellPainter;
-    private readonly _gridMainCellPainter: RenderValueRowDataArrayGridCellPainter<TextRenderValueCellPainter>;
+    private readonly _gridMainCellPainter: TextFormattableValueRowDataArrayGridCellPainter<TextTextFormattableValueCellPainter>;
 
     constructor(
         ditemComponentAccess: DitemFrame.ComponentAccess,
@@ -75,7 +75,7 @@ export class SearchDitemFrame extends BuiltinDitemFrame {
         grid.mainClickEventer = (fieldIndex, rowIndex) => this.handleGridClickEvent(fieldIndex, rowIndex);
 
         this._gridHeaderCellPainter = cellPainterFactoryService.createTextHeader(grid, grid.headerDataServer);
-        this._gridMainCellPainter = cellPainterFactoryService.createTextRenderValueRowDataArrayGrid(grid, grid.mainDataServer);
+        this._gridMainCellPainter = cellPainterFactoryService.createTextTextFormattableValueRowDataArrayGrid(grid, grid.mainDataServer);
 
         this._grid.setData(demoSearchResults.slice(), false);
     }
@@ -118,10 +118,10 @@ export class SearchDitemFrame extends BuiltinDitemFrame {
 }
 
 interface SearchResult {
-    code: string | StringRenderValue;
-    company: string | StringRenderValue;
-    product: string  | StringRenderValue;
-    price: string | StringRenderValue;
+    code: string | StringTextFormattableValue;
+    company: string | StringTextFormattableValue;
+    product: string  | StringTextFormattableValue;
+    price: string | StringTextFormattableValue;
 }
 
 const demoSearchResults: IndexSignatureHack<readonly SearchResult[]> = [
@@ -132,27 +132,27 @@ const demoSearchResults: IndexSignatureHack<readonly SearchResult[]> = [
         price: 'Price',
     },
     {
-        code: createAdvertStringRenderValue('trav1.ad'),
-        company: createAdvertStringRenderValue('Example Travel Company 1'),
-        product: createAdvertStringRenderValue('See Arizona in style'),
-        price: createAdvertStringRenderValue('18,000'),
+        code: createAdvertStringTextFormattableValue('trav1.ad'),
+        company: createAdvertStringTextFormattableValue('Example Travel Company 1'),
+        product: createAdvertStringTextFormattableValue('See Arizona in style'),
+        price: createAdvertStringTextFormattableValue('18,000'),
     },
     {
-        code: createAdvertStringRenderValue('spc.ad'),
-        company: createAdvertStringRenderValue('Spectaculix Travel'),
-        product: createAdvertStringRenderValue('Magical Arizona'),
-        price: createAdvertStringRenderValue('11,999'),
+        code: createAdvertStringTextFormattableValue('spc.ad'),
+        company: createAdvertStringTextFormattableValue('Spectaculix Travel'),
+        product: createAdvertStringTextFormattableValue('Magical Arizona'),
+        price: createAdvertStringTextFormattableValue('11,999'),
     },
     {
-        code: createAdvertStringRenderValue('trav2.ad'),
-        company: createAdvertStringRenderValue('Example Travel Company 1'),
-        product: createAdvertStringRenderValue('The best of Arizona'),
-        price: createAdvertStringRenderValue('10,500'),
+        code: createAdvertStringTextFormattableValue('trav2.ad'),
+        company: createAdvertStringTextFormattableValue('Example Travel Company 1'),
+        product: createAdvertStringTextFormattableValue('The best of Arizona'),
+        price: createAdvertStringTextFormattableValue('10,500'),
     },
 ] as const;
 
-function createAdvertStringRenderValue(text: string) {
-    const result = new StringRenderValue(text);
-    result.addAttribute(RenderValue.advertAttribute);
+function createAdvertStringTextFormattableValue(text: string) {
+    const result = new StringTextFormattableValue(text);
+    result.addAttribute(TextFormattableValue.advertAttribute);
     return result;
 }
