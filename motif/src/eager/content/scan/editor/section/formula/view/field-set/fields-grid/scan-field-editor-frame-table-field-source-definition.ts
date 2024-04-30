@@ -23,6 +23,7 @@ import {
     TableValue,
     ValidTableValue
 } from '@motifmarkets/motif-core';
+import { RevHorizontalAlignId } from '@xilytix/revgrid';
 import { ScanFieldEditorFrame } from '../field/scan-field-editor-frame';
 
 export class ScanFieldEditorFrameTableFieldSourceDefinition extends TableFieldSourceDefinition {
@@ -61,7 +62,7 @@ export class ScanFieldEditorFrameTableFieldSourceDefinition extends TableFieldSo
             const sourcelessFieldName = ScanFieldEditorFrameTableFieldSourceDefinition.Field.getName(fieldIdx);
             const heading = ScanFieldEditorFrameTableFieldSourceDefinition.Field.getHeading(fieldIdx);
             const dataTypeId = ScanFieldEditorFrameTableFieldSourceDefinition.Field.getDataTypeId(fieldIdx);
-            const textAlign = FieldDataType.idIsNumber(dataTypeId) ? 'right' : 'left';
+            const textAlignId = FieldDataType.idIsNumber(dataTypeId) ? RevHorizontalAlignId.Right : RevHorizontalAlignId.Left;
             const [fieldConstructor, valueConstructor] =
                 ScanFieldEditorFrameTableFieldSourceDefinition.Field.getTableFieldValueConstructors(fieldIdx);
 
@@ -69,7 +70,7 @@ export class ScanFieldEditorFrameTableFieldSourceDefinition extends TableFieldSo
                 this,
                 sourcelessFieldName,
                 heading,
-                textAlign,
+                textAlignId,
                 fieldConstructor,
                 valueConstructor,
             );

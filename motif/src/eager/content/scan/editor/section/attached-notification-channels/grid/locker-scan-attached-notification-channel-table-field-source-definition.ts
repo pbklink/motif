@@ -24,6 +24,7 @@ import {
     TableValue,
     ValidTableValue
 } from '@motifmarkets/motif-core';
+import { RevHorizontalAlignId } from '@xilytix/revgrid';
 
 export class LockerScanAttachedNotificationChannelTableFieldSourceDefinition extends TableFieldSourceDefinition {
     declare readonly typeId: LockerScanAttachedNotificationChannelTableFieldSourceDefinition.TypeId;
@@ -61,7 +62,7 @@ export class LockerScanAttachedNotificationChannelTableFieldSourceDefinition ext
             const sourcelessFieldName = LockerScanAttachedNotificationChannelTableFieldSourceDefinition.Field.getName(fieldIdx);
             const heading = LockerScanAttachedNotificationChannelTableFieldSourceDefinition.Field.getHeading(fieldIdx);
             const dataTypeId = LockerScanAttachedNotificationChannelTableFieldSourceDefinition.Field.getDataTypeId(fieldIdx);
-            const textAlign = FieldDataType.idIsNumber(dataTypeId) ? 'right' : 'left';
+            const textAlignId = FieldDataType.idIsNumber(dataTypeId) ? RevHorizontalAlignId.Right : RevHorizontalAlignId.Left;
             const [fieldConstructor, valueConstructor] =
                 LockerScanAttachedNotificationChannelTableFieldSourceDefinition.Field.getTableFieldValueConstructors(fieldIdx);
 
@@ -69,7 +70,7 @@ export class LockerScanAttachedNotificationChannelTableFieldSourceDefinition ext
                 this,
                 sourcelessFieldName,
                 heading,
-                textAlign,
+                textAlignId,
                 fieldConstructor,
                 valueConstructor,
             );

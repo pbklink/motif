@@ -22,7 +22,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevDatalessViewCell, RevHorizontalAlignEnum } from '@xilytix/revgrid';
+import { RevDatalessViewCell, RevHorizontalAlignId } from '@xilytix/revgrid';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
 import { DitemFrame } from '../ditem-frame';
 
@@ -88,7 +88,7 @@ export class NewsHeadlinesDitemFrame extends BuiltinDitemFrame {
         const field = RowDataArrayGrid.createField(
             key,
             heading,
-            RevHorizontalAlignEnum.left,
+            RevHorizontalAlignId.Left,
         );
         return field;
     }

@@ -43,9 +43,9 @@ import {
     TextHasValueEqualsScanFieldCondition,
     UnreachableCaseError,
     UsableListChangeTypeId,
-    ValueRecentChangeTypeId,
     compareString
 } from '@motifmarkets/motif-core';
+import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import { ComponentInstanceId, RootAndNodeComponentInstanceIdPair } from 'component-internal-api';
 import {
     ContainsTextHasValueContainsScanFieldConditionEditorFrame,
@@ -151,7 +151,7 @@ export abstract class ScanFieldEditorFrame implements ScanField {
                 }
             }
             this._conditionsOperationId = value;
-            this.addFieldValueChange(ScanFieldEditorFrame.FieldId.ConditionsOperationId, ValueRecentChangeTypeId.Update);
+            this.addFieldValueChange(ScanFieldEditorFrame.FieldId.ConditionsOperationId, RevRecordValueRecentChangeTypeId.Update);
             this.endChanges();
         }
     }
@@ -249,11 +249,11 @@ export abstract class ScanFieldEditorFrame implements ScanField {
         if (newConditionCount !== this._conditionCount) {
             if (newConditionCount > this._conditionCount) {
                 this._conditionCount = newConditionCount;
-                this.addFieldValueChange(ScanFieldEditorFrame.FieldId.ConditionCount, ValueRecentChangeTypeId.Increase);
+                this.addFieldValueChange(ScanFieldEditorFrame.FieldId.ConditionCount, RevRecordValueRecentChangeTypeId.Increase);
             } else {
                 if (newConditionCount > this._conditionCount) {
                     this._conditionCount = newConditionCount;
-                    this.addFieldValueChange(ScanFieldEditorFrame.FieldId.ConditionCount, ValueRecentChangeTypeId.Decrease);
+                    this.addFieldValueChange(ScanFieldEditorFrame.FieldId.ConditionCount, RevRecordValueRecentChangeTypeId.Decrease);
                 }
             }
 
@@ -320,19 +320,19 @@ export abstract class ScanFieldEditorFrame implements ScanField {
                 if (errorText !== this._errorText) {
                     this.beginChanges(undefined);
                     this._errorText = errorText;
-                    this.addFieldValueChange(ScanFieldEditorFrame.FieldId.ErrorText, ValueRecentChangeTypeId.Update);
+                    this.addFieldValueChange(ScanFieldEditorFrame.FieldId.ErrorText, RevRecordValueRecentChangeTypeId.Update);
                     this.endChanges();
                 }
             }
         } else {
             this.beginChanges(undefined);
             this._valid = newValid;
-            this.addFieldValueChange(ScanFieldEditorFrame.FieldId.Valid, ValueRecentChangeTypeId.Update);
+            this.addFieldValueChange(ScanFieldEditorFrame.FieldId.Valid, RevRecordValueRecentChangeTypeId.Update);
             if (!newValid) {
                 const errorText = this.calculateErrorText();
                 if (errorText !== this._errorText) {
                     this._errorText = errorText;
-                    this.addFieldValueChange(ScanFieldEditorFrame.FieldId.ErrorText, ValueRecentChangeTypeId.Update);
+                    this.addFieldValueChange(ScanFieldEditorFrame.FieldId.ErrorText, RevRecordValueRecentChangeTypeId.Update);
                 }
             }
             this.endChanges();
@@ -355,7 +355,7 @@ export abstract class ScanFieldEditorFrame implements ScanField {
         }
     }
 
-    private addFieldValueChange(fieldId: ScanFieldEditorFrame.FieldId, recentChangeTypeId: ValueRecentChangeTypeId) {
+    private addFieldValueChange(fieldId: ScanFieldEditorFrame.FieldId, recentChangeTypeId: RevRecordValueRecentChangeTypeId) {
         const fieldValueChanges = this._fieldValueChanges;
         const count = fieldValueChanges.count;
         for (let i = 0; i < count; i++) {
@@ -791,7 +791,7 @@ export namespace ScanFieldEditorFrame {
 
         export interface ValueChange {
             fieldId: Id;
-            recentChangeTypeId: ValueRecentChangeTypeId;
+            recentChangeTypeId: RevRecordValueRecentChangeTypeId;
         }
 
         interface Info {

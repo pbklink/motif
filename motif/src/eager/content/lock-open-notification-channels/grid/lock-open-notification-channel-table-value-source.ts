@@ -18,9 +18,9 @@ import {
     TableValue,
     TableValueSource,
     UnreachableCaseError,
-    ValidTableValue,
-    ValueRecentChangeTypeId
+    ValidTableValue
 } from '@motifmarkets/motif-core';
+import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import { LockOpenNotificationChannelTableFieldSourceDefinition } from './lock-open-notification-channel-table-field-source-definition';
 
 export class LockOpenNotificationChannelTableValueSource extends TableValueSource {
@@ -78,7 +78,7 @@ export class LockOpenNotificationChannelTableValueSource extends TableValueSourc
             if (fieldIndex >= 0) {
                 const newValue = this.createTableValue(fieldIndex);
                 this.loadValue(fieldId, newValue);
-                valueChanges[foundCount++] = { fieldIndex, newValue, recentChangeTypeId: ValueRecentChangeTypeId.Update };
+                valueChanges[foundCount++] = { fieldIndex, newValue, recentChangeTypeId: RevRecordValueRecentChangeTypeId.Update };
             }
         }
 
@@ -90,7 +90,7 @@ export class LockOpenNotificationChannelTableValueSource extends TableValueSourc
                     const newValue = this.createTableValue(fieldIndex);
                     const fieldId = LockOpenNotificationChannelTableFieldSourceDefinition.Field.getId(fieldIndex);
                     this.loadValue(fieldId, newValue);
-                    valueChanges[elementCount++] = { fieldIndex, newValue, recentChangeTypeId: ValueRecentChangeTypeId.Update };
+                    valueChanges[elementCount++] = { fieldIndex, newValue, recentChangeTypeId: RevRecordValueRecentChangeTypeId.Update };
                 }
             }
         } else {

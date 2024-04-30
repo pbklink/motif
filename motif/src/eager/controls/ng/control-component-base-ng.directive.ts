@@ -153,13 +153,13 @@ export abstract class ControlComponentBaseNgDirective extends ComponentBaseNgDir
     // used by Cell Editor
     protected canConsumeGridKey(key: string) {
         switch (key as RevFocus.ActionKeyboardKey) {
-            case RevFocus.ActionKeyboardKey.ArrowUp:
-            case RevFocus.ActionKeyboardKey.ArrowDown:
-            case RevFocus.ActionKeyboardKey.PageUp:
-            case RevFocus.ActionKeyboardKey.PageDown:
-            case RevFocus.ActionKeyboardKey.Tab:
-            case RevFocus.ActionKeyboardKey.Enter:
-            case RevFocus.ActionKeyboardKey.Escape:
+            case RevFocus.ActionKeyboardKey.arrowUp:
+            case RevFocus.ActionKeyboardKey.arrowDown:
+            case RevFocus.ActionKeyboardKey.pageUp:
+            case RevFocus.ActionKeyboardKey.pageDown:
+            case RevFocus.ActionKeyboardKey.tab:
+            case RevFocus.ActionKeyboardKey.enter:
+            case RevFocus.ActionKeyboardKey.escape:
                 return false;
             default:
                 return true;

@@ -4,6 +4,7 @@
  * License: motionite.trade/license/motif
  */
 
+import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     Integer,
     IntegerTableValue,
@@ -14,8 +15,7 @@ import {
     TableValue,
     TableValueSource,
     UnreachableCaseError,
-    ValidTableValue,
-    ValueRecentChangeTypeId
+    ValidTableValue
 } from '@motifmarkets/motif-core';
 import { ScanFieldEditorFrame } from '../field/scan-field-editor-frame';
 import { ScanFieldEditorFrameTableFieldSourceDefinition } from './scan-field-editor-frame-table-field-source-definition';
@@ -87,7 +87,7 @@ export class ScanFieldEditorFrameTableValueSource extends TableValueSource {
                     const newValue = this.createTableValue(fieldIndex);
                     const fieldId = ScanFieldEditorFrameTableFieldSourceDefinition.Field.getId(fieldIndex);
                     this.loadValue(fieldId, newValue);
-                    valueChanges[elementCount++] = { fieldIndex, newValue, recentChangeTypeId: ValueRecentChangeTypeId.Update };
+                    valueChanges[elementCount++] = { fieldIndex, newValue, recentChangeTypeId: RevRecordValueRecentChangeTypeId.Update };
                 }
             }
         } else {

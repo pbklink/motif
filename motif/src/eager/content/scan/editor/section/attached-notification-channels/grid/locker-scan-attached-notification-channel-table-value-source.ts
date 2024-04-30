@@ -4,6 +4,7 @@
  * License: motionite.trade/license/motif
  */
 
+import { RevRecordValueRecentChangeTypeId } from '@xilytix/revgrid';
 import {
     AssertInternalError,
     Integer,
@@ -16,8 +17,7 @@ import {
     TableValue,
     TableValueSource,
     UnreachableCaseError,
-    ValidTableValue,
-    ValueRecentChangeTypeId
+    ValidTableValue
 } from '@motifmarkets/motif-core';
 import { LockerScanAttachedNotificationChannelTableFieldSourceDefinition } from './locker-scan-attached-notification-channel-table-field-source-definition';
 
@@ -76,7 +76,7 @@ export class LockerScanAttachedNotificationChannelTableValueSource extends Table
             if (fieldIndex >= 0) {
                 const newValue = this.createTableValue(fieldIndex);
                 this.loadValue(fieldId, newValue);
-                valueChanges[foundCount++] = { fieldIndex, newValue, recentChangeTypeId: ValueRecentChangeTypeId.Update };
+                valueChanges[foundCount++] = { fieldIndex, newValue, recentChangeTypeId: RevRecordValueRecentChangeTypeId.Update };
             }
         }
 
@@ -88,7 +88,7 @@ export class LockerScanAttachedNotificationChannelTableValueSource extends Table
                     const newValue = this.createTableValue(fieldIndex);
                     const fieldId = LockerScanAttachedNotificationChannelTableFieldSourceDefinition.Field.getId(fieldIndex);
                     this.loadValue(fieldId, newValue);
-                    valueChanges[elementCount++] = { fieldIndex, newValue, recentChangeTypeId: ValueRecentChangeTypeId.Update };
+                    valueChanges[elementCount++] = { fieldIndex, newValue, recentChangeTypeId: RevRecordValueRecentChangeTypeId.Update };
                 }
             }
         } else {

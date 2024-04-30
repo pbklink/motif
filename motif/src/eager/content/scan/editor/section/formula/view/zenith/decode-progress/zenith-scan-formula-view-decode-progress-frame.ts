@@ -21,7 +21,7 @@ import {
     TextHeaderCellPainter,
     TextRenderValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevDataRowArrayGrid, RevDatalessViewCell, RevHorizontalAlignEnum } from '@xilytix/revgrid';
+import { RevDataRowArrayGrid, RevDatalessViewCell, RevHorizontalAlignId } from '@xilytix/revgrid';
 
 export class ZenithScanFormulaViewDecodeProgressFrame {
     private _grid: RowDataArrayGrid;
@@ -126,7 +126,7 @@ export class ZenithScanFormulaViewDecodeProgressFrame {
         const field = RowDataArrayGrid.createField(
             key,
             heading,
-            RevHorizontalAlignEnum.left,
+            RevHorizontalAlignId.Left,
         );
         return field;
     }
