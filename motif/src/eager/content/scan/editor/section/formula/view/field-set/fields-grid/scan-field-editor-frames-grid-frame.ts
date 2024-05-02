@@ -19,7 +19,7 @@ import {
     TextHeaderCellPainter,
     TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevCellEditor, RevColumnLayoutOrReferenceDefinition, RevDatalessViewCell, RevSubgrid, RevViewCell } from '@xilytix/revgrid';
+import { RevCellEditor, RevColumnLayoutOrReferenceDefinition, RevSubgrid, RevViewCell } from '@xilytix/revgrid';
 import { GridSourceFrame } from '../../../../../../../grid-source/internal-api';
 import { ScanFieldEditorFrame } from '../field/internal-api';
 import { ScanFieldEditorFrameComparableListTableRecordSource } from './scan-field-editor-frame-comparable-list-table-record-source';
@@ -117,11 +117,11 @@ export class ScanFieldEditorFramesGridFrame extends GridSourceFrame {
         // no customisation
     }
 
-    private getGridHeaderCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridHeaderCellPainter(_viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridHeaderCellPainter;
     }
 
-    private getGridMainCellPainter(viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridMainCellPainter(viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridMainCellPainter;
     }
 

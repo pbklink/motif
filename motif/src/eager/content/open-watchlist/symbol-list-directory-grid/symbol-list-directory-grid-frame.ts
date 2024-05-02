@@ -29,7 +29,7 @@ import {
     TextHeaderCellPainter,
     TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition, RevDatalessViewCell, RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
+import { RevColumnLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService, RevViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../../table-record-source-definition-factory-service';
@@ -158,11 +158,11 @@ export class SymbolListDirectoryGridFrame extends GridSourceFrame {
         // no customisation
     }
 
-    private getGridHeaderCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridHeaderCellPainter(_viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridHeaderCellPainter;
     }
 
-    private getGridMainCellPainter(viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridMainCellPainter(viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridMainCellPainter;
     }
 }

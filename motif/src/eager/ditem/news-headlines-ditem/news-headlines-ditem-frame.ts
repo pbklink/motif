@@ -22,7 +22,7 @@ import {
     TextHeaderCellPainter,
     TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevDatalessViewCell, RevHorizontalAlignId } from '@xilytix/revgrid';
+import { RevHorizontalAlignId, RevViewCell } from '@xilytix/revgrid';
 import { BuiltinDitemFrame } from '../builtin-ditem-frame';
 import { DitemFrame } from '../ditem-frame';
 
@@ -97,11 +97,11 @@ export class NewsHeadlinesDitemFrame extends BuiltinDitemFrame {
         // no customisation
     }
 
-    private getGridHeaderCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridHeaderCellPainter(_viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridHeaderCellPainter;
     }
 
-    private getGridMainCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridMainCellPainter(_viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridMainCellPainter;
     }
 }

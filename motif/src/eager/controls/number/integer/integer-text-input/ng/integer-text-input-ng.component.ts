@@ -6,7 +6,7 @@
 
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AdaptedRevgridBehavioredColumnSettings, AssertInternalError, GridField, Integer } from '@motifmarkets/motif-core';
-import { RevCellEditor, RevDataServer, RevDatalessViewCell } from '@xilytix/revgrid';
+import { RevCellEditor, RevDataServer, RevViewCell } from '@xilytix/revgrid';
 import { SettingsNgService } from 'component-services-ng-api';
 import { ControlComponentBaseNgDirective } from '../../../../ng/control-component-base-ng.directive';
 import { NumberUiActionComponentBaseNgDirective } from '../../../ng/number-ui-action-component-base-ng.directive';
@@ -56,7 +56,7 @@ implements OnInit, RevCellEditor<AdaptedRevgridBehavioredColumnSettings, GridFie
     }
 
     // Used by Cell Editor
-    tryOpenCell(cell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>, openingKeyDownEvent: KeyboardEvent | undefined, _openingClickEvent: MouseEvent | undefined) {
+    tryOpenCell(cell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>, openingKeyDownEvent: KeyboardEvent | undefined, _openingClickEvent: MouseEvent | undefined) {
         const dataServer = this.dataServer;
         if (dataServer === undefined) {
             throw new AssertInternalError('ITINCTOCDU10008')

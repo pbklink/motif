@@ -19,7 +19,7 @@ import {
     TextTextFormattableValueCellPainter,
     UiComparableList
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition, RevDatalessViewCell, RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
+import { RevColumnLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService, RevViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { DelayedBadnessGridSourceFrame } from '../delayed-badness-grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../table-record-source-definition-factory-service';
@@ -168,11 +168,11 @@ export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
         // no customisation
     }
 
-    private getGridHeaderCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridHeaderCellPainter(_viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridHeaderCellPainter;
     }
 
-    private getGridMainCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridMainCellPainter(_viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridMainCellPainter;
     }
 

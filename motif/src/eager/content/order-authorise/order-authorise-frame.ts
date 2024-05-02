@@ -18,7 +18,7 @@ import {
     TextHeaderCellPainter,
     TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevDatalessViewCell } from '@xilytix/revgrid';
+import { RevViewCell } from '@xilytix/revgrid';
 import { DelayedBadnessGridSourceFrame } from '../delayed-badness-grid-source/internal-api';
 
 export class OrderAuthoriseFrame extends DelayedBadnessGridSourceFrame {
@@ -109,11 +109,11 @@ export class OrderAuthoriseFrame extends DelayedBadnessGridSourceFrame {
         // no customisation
     }
 
-    private getGridHeaderCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridHeaderCellPainter(_viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridHeaderCellPainter;
     }
 
-    private getGridMainCellPainter(viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridMainCellPainter(viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridMainCellPainter;
     }
 }

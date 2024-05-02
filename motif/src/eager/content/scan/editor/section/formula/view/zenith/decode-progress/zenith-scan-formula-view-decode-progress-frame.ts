@@ -21,7 +21,7 @@ import {
     TextHeaderCellPainter,
     TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevDataRowArrayGrid, RevDatalessViewCell, RevHorizontalAlignId } from '@xilytix/revgrid';
+import { RevDataRowArrayGrid, RevHorizontalAlignId, RevViewCell } from '@xilytix/revgrid';
 
 export class ZenithScanFormulaViewDecodeProgressFrame {
     private _grid: RowDataArrayGrid;
@@ -135,11 +135,11 @@ export class ZenithScanFormulaViewDecodeProgressFrame {
         // no customisation
     }
 
-    private getGridHeaderCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridHeaderCellPainter(_viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridHeaderCellPainter;
     }
 
-    private getGridMainCellPainter(_viewCell: RevDatalessViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
+    private getGridMainCellPainter(_viewCell: RevViewCell<AdaptedRevgridBehavioredColumnSettings, GridField>) {
         return this._gridMainCellPainter;
     }
 
