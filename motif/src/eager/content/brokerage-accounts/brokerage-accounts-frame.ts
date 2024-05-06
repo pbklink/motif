@@ -63,8 +63,8 @@ export class BrokerageAccountsFrame extends DelayedBadnessGridSourceFrame {
 
     private createDefaultLayoutGridSourceOrReferenceDefinition() {
         const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createBrokerageAccount();
-        const gridSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
-        return new DataSourceOrReferenceDefinition(gridSourceDefinition);
+        const dataSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
+        return new DataSourceOrReferenceDefinition(dataSourceDefinition);
     }
 
     private customiseSettingsForNewGridColumn(_columnSettings: AdaptedRevgridBehavioredColumnSettings) {

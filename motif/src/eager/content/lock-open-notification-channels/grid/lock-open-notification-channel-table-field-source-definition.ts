@@ -21,7 +21,7 @@ import {
     StringTableValue,
     TableField,
     TableFieldSourceDefinition,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableValue,
     ValidTableValue
 } from '@motifmarkets/motif-core';
@@ -195,7 +195,7 @@ export namespace LockOpenNotificationChannelTableFieldSourceDefinition {
         id: LockOpenNotificationChannel.FieldId;
     }
 
-    export function get(cachingFactoryService: TableFieldSourceDefinitionCachingFactoryService): LockOpenNotificationChannelTableFieldSourceDefinition {
+    export function get(cachingFactoryService: TableFieldSourceDefinitionCachingFactory): LockOpenNotificationChannelTableFieldSourceDefinition {
         return cachingFactoryService.get(typeId) as LockOpenNotificationChannelTableFieldSourceDefinition;
     }
 }

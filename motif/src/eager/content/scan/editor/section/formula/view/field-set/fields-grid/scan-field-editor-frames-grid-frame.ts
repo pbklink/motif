@@ -23,7 +23,6 @@ import { RevCellEditor, RevColumnLayoutOrReferenceDefinition, RevSubgrid, RevVie
 import { GridSourceFrame } from '../../../../../../../grid-source/internal-api';
 import { ScanFieldEditorFrame } from '../field/internal-api';
 import { ScanFieldEditorFrameComparableListTableRecordSource } from './scan-field-editor-frame-comparable-list-table-record-source';
-import { ScanFieldEditorFrameComparableListTableRecordSourceDefinition } from './scan-field-editor-frame-comparable-list-table-record-source-definition';
 
 export class ScanFieldEditorFramesGridFrame extends GridSourceFrame {
     recordFocusedEventer: ScanFieldEditorFramesGridFrame.RecordFocusedEventer | undefined
@@ -104,13 +103,9 @@ export class ScanFieldEditorFramesGridFrame extends GridSourceFrame {
     }
 
     private createListGridSourceOrReferenceDefinition(list: BadnessComparableList<ScanFieldEditorFrame>, layoutDefinition: RevColumnLayoutOrReferenceDefinition | undefined) {
-        const tableRecordSourceDefinition = new ScanFieldEditorFrameComparableListTableRecordSourceDefinition(
-            this.gridFieldCustomHeadingsService,
-            this.tableFieldSourceDefinitionCachingFactoryService,
-            list,
-        );
-        const gridSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, layoutDefinition, undefined);
-        return new DataSourceOrReferenceDefinition(gridSourceDefinition);
+        const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createScanFieldEditorFrameComparableList(list);
+        const dataSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, layoutDefinition, undefined);
+        return new DataSourceOrReferenceDefinition(dataSourceDefinition);
     }
 
     private customiseSettingsForNewGridColumn(_columnSettings: AdaptedRevgridBehavioredColumnSettings) {

@@ -21,7 +21,7 @@ import {
     SymbolsService,
     TextFormatterService
 } from '@motifmarkets/motif-core';
-import { RevColumnLayout, RevColumnLayoutOrReferenceDefinition, RevDataSourceOrReferenceDefinition, RevFavouriteReferenceableColumnLayoutDefinitionsStoreService } from '@xilytix/revgrid';
+import { RevColumnLayout, RevColumnLayoutOrReferenceDefinition, RevDataSourceOrReferenceDefinition, RevFavouriteReferenceableColumnLayoutDefinitionsStore } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import {
     GridSourceFrame,
@@ -46,7 +46,7 @@ export class WatchlistDitemFrame extends BuiltinDitemFrame {
         symbolsService: SymbolsService,
         adiService: AdiService,
         private readonly _textFormatterService: TextFormatterService,
-        private readonly _favouriteNamedColumnLayoutDefinitionReferencesService: RevFavouriteReferenceableColumnLayoutDefinitionsStoreService,
+        private readonly _favouriteNamedColumnLayoutDefinitionReferencesService: RevFavouriteReferenceableColumnLayoutDefinitionsStore,
         private readonly _toastService: ToastService,
         private readonly _gridSourceOpenedEventer: WatchlistDitemFrame.GridSourceOpenedEventer,
         private readonly _recordFocusedEventer: WatchlistDitemFrame.RecordFocusedEventer,

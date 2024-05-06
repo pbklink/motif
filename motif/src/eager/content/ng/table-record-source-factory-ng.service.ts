@@ -20,7 +20,7 @@ export class TableRecordSourceFactoryNgService {
         tableFieldSourceDefinitionCachingFactoryNgService: TableFieldSourceDefinitionCachingFactoryNgService,
     ) {
         const coreService = coreNgService.service;
-        const tableFieldSourceDefinitionCachingFactoryService = tableFieldSourceDefinitionCachingFactoryNgService.service;
+        const tableFieldSourceDefinitionCachingFactory = tableFieldSourceDefinitionCachingFactoryNgService.service;
 
         this._service = new TableRecordSourceFactoryService(
             coreService.adiService,
@@ -30,11 +30,11 @@ export class TableRecordSourceFactoryNgService {
             coreService.notificationChannelsService,
             coreService.scansService,
             coreService.textFormatterService,
-            coreService.gridFieldCustomHeadingsService,
-            tableFieldSourceDefinitionCachingFactoryService, // Do NOT get directly from core service.  Make sure dependent on TableFieldSourceDefinitionCachingFactory
+            coreService.customHeadingsService,
+            tableFieldSourceDefinitionCachingFactory, // Do NOT get directly from core service.  Make sure dependent on TableFieldSourceDefinitionCachingFactory
         );
 
-        coreService.setTableRecordSourceFactory(this._service, tableFieldSourceDefinitionCachingFactoryService.definitionFactory);
+        coreService.setTableRecordSourceFactory(this._service, tableFieldSourceDefinitionCachingFactory.definitionFactory);
     }
 
     get service() { return this._service; }

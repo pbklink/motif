@@ -5,7 +5,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { TableFieldSourceDefinitionCachingFactoryService } from '@motifmarkets/motif-core';
+import { TableFieldSourceDefinitionCachingFactory } from '@motifmarkets/motif-core';
 import { CoreNgService } from '../../component-services/ng/core-ng.service';
 import { TableFieldSourceDefinitionFactoryService } from '../table-field-source-definition-factory-service';
 
@@ -13,7 +13,7 @@ import { TableFieldSourceDefinitionFactoryService } from '../table-field-source-
     providedIn: 'root',
 })
 export class TableFieldSourceDefinitionCachingFactoryNgService {
-    private _service: TableFieldSourceDefinitionCachingFactoryService;
+    private _service: TableFieldSourceDefinitionCachingFactory;
 
     constructor(coreNgService: CoreNgService) {
         const coreService = coreNgService.service;

@@ -16,7 +16,6 @@ import {
     EditableColumnLayoutDefinitionColumn,
     EditableColumnLayoutDefinitionColumnList,
     EditableColumnLayoutDefinitionColumnTableRecordSource,
-    EditableColumnLayoutDefinitionColumnTableRecordSourceDefinition,
     GridField,
     Integer,
     ModifierKey,
@@ -24,13 +23,13 @@ import {
     ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
     SettingsService,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableRecordSourceFactory,
     TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
     TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevCellEditor, RevCellPainter, RevSourcedFieldCustomHeadingsService, RevSubgrid, RevViewCell } from '@xilytix/revgrid';
+import { RevCellEditor, RevCellPainter, RevSubgrid, RevViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../../grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../../../table-record-source-definition-factory-service';
@@ -48,9 +47,8 @@ export class ColumnLayoutEditorColumnsFrame extends GridSourceFrame {
 
     constructor(
         settingsService: SettingsService,
-        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         namedColumnLayoutsService: ReferenceableColumnLayoutsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,
         tableRecordSourceFactory: TableRecordSourceFactory,
         namedGridSourcesService: ReferenceableDataSourcesService,
@@ -60,9 +58,8 @@ export class ColumnLayoutEditorColumnsFrame extends GridSourceFrame {
     ) {
         super(
             settingsService,
-            gridFieldCustomHeadingsService,
             namedColumnLayoutsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            tableFieldSourceDefinitionCachingFactory,
             tableRecordSourceDefinitionFactoryService,
             tableRecordSourceFactory,
             namedGridSourcesService,
@@ -223,13 +220,9 @@ export class ColumnLayoutEditorColumnsFrame extends GridSourceFrame {
     }
 
     private createDefaultLayoutGridSourceOrReferenceDefinition() {
-        const tableRecordSourceDefinition = new EditableColumnLayoutDefinitionColumnTableRecordSourceDefinition(
-            this.gridFieldCustomHeadingsService,
-            this.tableFieldSourceDefinitionCachingFactoryService,
-            this._columnList,
-        )
-        const gridSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
-        return new DataSourceOrReferenceDefinition(gridSourceDefinition);
+        const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createEditableColumnLayoutDefinitionColumn(this._columnList);
+        const dataSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
+        return new DataSourceOrReferenceDefinition(dataSourceDefinition);
     }
 
     private handleGridSelectionChangedEventer() {

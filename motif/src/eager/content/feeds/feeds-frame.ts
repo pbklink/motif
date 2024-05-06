@@ -46,8 +46,8 @@ export class FeedsFrame extends DelayedBadnessGridSourceFrame {
 
     createDefaultLayoutGridSourceOrReferenceDefinition() {
         const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createFeed();
-        const gridSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
-        return new DataSourceOrReferenceDefinition(gridSourceDefinition);
+        const dataSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
+        return new DataSourceOrReferenceDefinition(dataSourceDefinition);
     }
 
     protected override getDefaultGridSourceOrReferenceDefinition() {

@@ -5,8 +5,8 @@
  */
 
 import { Injectable } from '@angular/core';
-import { TableRecordSourceDefinitionFactoryService } from '../table-record-source-definition-factory-service';
 import { CoreNgService } from 'component-services-ng-api';
+import { TableRecordSourceDefinitionFactoryService } from '../table-record-source-definition-factory-service';
 import { TableFieldSourceDefinitionCachingFactoryNgService } from './table-field-source-definition-caching-factory-ng.service';
 
 @Injectable({
@@ -23,8 +23,8 @@ export class TableRecordSourceDefinitionFactoryNgService {
 
         this._service = new TableRecordSourceDefinitionFactoryService(
             coreService.rankedLitIvemIdListDefinitionFactoryService,
-            coreService.gridFieldCustomHeadingsService,
-            tableFieldSourceDefinitionCachingFactoryNgService.service, // Do NOT get directly from core service.  Make sure dependent on TableFieldSourceDefinitionCachingFactory
+            coreService.customHeadingsService,
+            tableFieldSourceDefinitionCachingFactoryNgService.service, // Do NOT get directly from core service.  Make sure dependent on TableFieldSourceDefinitionCachingFactoryNgService
         );
     }
 

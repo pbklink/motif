@@ -15,12 +15,12 @@ import {
     Ok,
     Result,
     TableFieldSourceDefinition,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableRecord,
     TextFormatterService,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
-import { RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
+import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import { LockOpenNotificationChannelListTableRecordSourceDefinition } from './lock-open-notification-channel-list-table-record-source-definition';
 import { LockOpenNotificationChannelTableRecordDefinition } from './lock-open-notification-channel-table-record-definition';
 import { LockOpenNotificationChannelTableValueSource } from './lock-open-notification-channel-table-value-source';
@@ -31,15 +31,15 @@ export class LockOpenNotificationChannelListTableRecordSource extends LockOpenLi
     constructor(
         private readonly _notificationChannelsService: NotificationChannelsService,
         textFormatterService: TextFormatterService,
-        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadings,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         correctnessBadness: CorrectnessBadness,
         definition: LockOpenNotificationChannelListTableRecordSourceDefinition,
     ) {
         super(
             textFormatterService,
             gridFieldCustomHeadingsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            tableFieldSourceDefinitionCachingFactory,
             correctnessBadness,
             definition,
             definition.allowedFieldSourceDefinitionTypeIds,
@@ -48,8 +48,8 @@ export class LockOpenNotificationChannelListTableRecordSource extends LockOpenLi
 
     override createDefinition(): LockOpenNotificationChannelListTableRecordSourceDefinition {
         return LockOpenNotificationChannelListTableRecordSourceDefinition.create(
-            this._gridFieldCustomHeadingsService,
-            this._tableFieldSourceDefinitionCachingFactoryService,
+            this.customHeadings,
+            this.tableFieldSourceDefinitionCachingFactory,
         )
     }
 

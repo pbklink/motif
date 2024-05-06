@@ -40,7 +40,7 @@ import {
     ScanTestTableRecordSourceDefinition,
     ScansService,
     SymbolDetailCacheService,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableRecordSource,
     TableRecordSourceDefinition,
     TableRecordSourceFactory,
@@ -50,7 +50,7 @@ import {
     UnreachableCaseError,
     WatchmakerService
 } from '@motifmarkets/motif-core';
-import { RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
+import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import { LockOpenNotificationChannelListTableRecordSource, LockOpenNotificationChannelListTableRecordSourceDefinition } from './lock-open-notification-channels/internal-api';
 import {
     ScanEditorAttachedNotificationChannelComparableListTableRecordSource,
@@ -69,8 +69,8 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
         private readonly _notificationChannelsService: NotificationChannelsService,
         private readonly _scansService: ScansService,
         private readonly _textFormatterService: TextFormatterService,
-        private readonly _gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
-        private readonly _tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        private readonly _gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadings,
+        private readonly _tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
     ) { }
 
     create(definition: TableRecordSourceDefinition): TableRecordSource {
@@ -117,7 +117,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._symbolDetailCacheService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -132,7 +132,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._adiService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -149,7 +149,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._rankedLitIvemIdListFactoryService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition,
             );
@@ -164,7 +164,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._adiService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -179,7 +179,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._adiService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -194,7 +194,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._adiService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -209,7 +209,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._adiService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -224,7 +224,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._adiService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -239,7 +239,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._adiService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -254,7 +254,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._adiService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -268,7 +268,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
             return new EditableColumnLayoutDefinitionColumnTableRecordSource(
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -283,7 +283,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._scansService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -297,7 +297,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
             return new RankedLitIvemIdListDirectoryItemTableRecordSource(
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -311,7 +311,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
             return new GridFieldTableRecordSource(
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition
             );
@@ -328,7 +328,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._rankedLitIvemIdListFactoryService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition,
             );
@@ -342,7 +342,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
             return new ScanFieldEditorFrameComparableListTableRecordSource(
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition,
             );
@@ -356,7 +356,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
             return new ScanEditorAttachedNotificationChannelComparableListTableRecordSource(
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition,
             );
@@ -371,7 +371,7 @@ export class TableRecordSourceFactoryService implements TableRecordSourceFactory
                 this._notificationChannelsService,
                 this._textFormatterService,
                 this._gridFieldCustomHeadingsService,
-                this._tableFieldSourceDefinitionCachingFactoryService,
+                this._tableFieldSourceDefinitionCachingFactory,
                 this.createCorrectnessState(),
                 definition,
             );

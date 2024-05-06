@@ -104,8 +104,8 @@ export class TopShareholdersDitemFrame extends BuiltinDitemFrame {
                 this._historicalDate,
                 this._compareDate
             );
-            const gridSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
-            const gridSourceOrReferenceDefinition = new DataSourceOrReferenceDefinition(gridSourceDefinition);
+            const dataSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
+            const gridSourceOrReferenceDefinition = new DataSourceOrReferenceDefinition(dataSourceDefinition);
             const openPromise = this._gridSourceFrame.tryOpenGridSource(gridSourceOrReferenceDefinition, false);
             openPromise.then(
                 (openResult) => {

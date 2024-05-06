@@ -12,14 +12,14 @@ import {
     ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
     SettingsService,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableRecordSourceFactory,
     TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
     TextTextFormattableValueCellPainter,
     UiComparableList
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService, RevViewCell } from '@xilytix/revgrid';
+import { RevColumnLayoutOrReferenceDefinition, RevViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { DelayedBadnessGridSourceFrame } from '../delayed-badness-grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../table-record-source-definition-factory-service';
@@ -43,9 +43,8 @@ export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
 
     constructor(
         settingsService: SettingsService,
-        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         referenceableColumnLayoutsService: ReferenceableColumnLayoutsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,
         tableRecordSourceFactory: TableRecordSourceFactory,
         referenceableGridSourcesService: ReferenceableDataSourcesService,
@@ -55,9 +54,8 @@ export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
     ) {
         super(
             settingsService,
-            gridFieldCustomHeadingsService,
             referenceableColumnLayoutsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            tableFieldSourceDefinitionCachingFactory,
             tableRecordSourceDefinitionFactoryService,
             tableRecordSourceFactory,
             referenceableGridSourcesService,
@@ -178,8 +176,8 @@ export class LitIvemIdListFrame extends DelayedBadnessGridSourceFrame {
 
     private createListGridSourceOrReferenceDefinition(list: UiComparableList<LitIvemId>, layoutDefinition: RevColumnLayoutOrReferenceDefinition | undefined) {
         const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createLitIvemIdComparableList(list);
-        const gridSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, layoutDefinition, undefined);
-        return new DataSourceOrReferenceDefinition(gridSourceDefinition);
+        const dataSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, layoutDefinition, undefined);
+        return new DataSourceOrReferenceDefinition(dataSourceDefinition);
     }
 
     private filterItems(litIvemId: LitIvemId) {

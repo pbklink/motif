@@ -28,12 +28,12 @@ import {
     SourcedFieldGrid,
     StringId,
     Strings,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableGrid,
     TableRecordSourceDefinition,
     TableRecordSourceFactory
 } from '@motifmarkets/motif-core';
-import { RevColumnLayout, RevColumnLayoutOrReferenceDefinition, RevRecordDataServer, RevSourcedFieldCustomHeadingsService, RevSubgrid } from '@xilytix/revgrid';
+import { RevColumnLayout, RevColumnLayoutOrReferenceDefinition, RevRecordDataServer, RevSubgrid } from '@xilytix/revgrid';
 import { ToastService } from '../../component-services/toast-service';
 import { ContentFrame } from '../content-frame';
 import { TableRecordSourceDefinitionFactoryService } from '../table-record-source-definition-factory-service';
@@ -54,9 +54,8 @@ export abstract class GridSourceFrame extends ContentFrame {
 
     constructor(
         protected readonly settingsService: SettingsService,
-        protected readonly gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         private readonly _referenceableColumnLayoutsService: ReferenceableColumnLayoutsService,
-        protected readonly tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        protected readonly tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         protected readonly tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,
         private readonly _tableRecordSourceFactory: TableRecordSourceFactory,
         private readonly _referenceableGridSourcesService: ReferenceableDataSourcesService,
@@ -878,9 +877,8 @@ export abstract class GridSourceFrame extends ContentFrame {
         getHeaderCellPainterEventer: RevSubgrid.GetCellPainterEventer<AdaptedRevgridBehavioredColumnSettings, GridField>,
     ) {
         const grid = new TableGrid(
-            this.gridFieldCustomHeadingsService,
             this._referenceableColumnLayoutsService,
-            this.tableFieldSourceDefinitionCachingFactoryService,
+            this.tableFieldSourceDefinitionCachingFactory,
             this.tableRecordSourceDefinitionFactoryService,
             this._tableRecordSourceFactory,
             this._referenceableGridSourcesService,

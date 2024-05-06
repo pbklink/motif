@@ -8,27 +8,27 @@ import {
     LockOpenNotificationChannel,
     PickEnum,
     TableFieldSourceDefinition,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableRecordSourceDefinition
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
+import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import { LockOpenNotificationChannelTableFieldSourceDefinition } from './lock-open-notification-channel-table-field-source-definition';
 
 export class LockOpenNotificationChannelListTableRecordSourceDefinition extends TableRecordSourceDefinition {
     constructor(
-        customHeadingsService: RevSourcedFieldCustomHeadingsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        customHeadings: RevSourcedFieldCustomHeadings | undefined,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
     ) {
         super(
-            customHeadingsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            customHeadings,
+            tableFieldSourceDefinitionCachingFactory,
             TableRecordSourceDefinition.TypeId.LockOpenNotificationChannelList,
             LockOpenNotificationChannelListTableRecordSourceDefinition.allowedFieldSourceDefinitionTypeIds,
         );
     }
 
     override createDefaultLayoutDefinition(): RevColumnLayoutDefinition {
-        const notificationChannelTableFieldSourceDefinition = LockOpenNotificationChannelTableFieldSourceDefinition.get(this.tableFieldSourceDefinitionCachingFactoryService);
+        const notificationChannelTableFieldSourceDefinition = LockOpenNotificationChannelTableFieldSourceDefinition.get(this.tableFieldSourceDefinitionCachingFactory);
 
         const fieldNames = new Array<string>();
 
@@ -82,7 +82,7 @@ export namespace LockOpenNotificationChannelListTableRecordSourceDefinition {
 
     // export function tryCreateDefinition(
     //     customHeadingsService: RevSourcedFieldCustomHeadingsService,
-    //     tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+    //     tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
     //     element: JsonElement,
     // ): Result<ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition> {
     //     const listCreateResult = tryCreateListFromElement(element);
@@ -91,23 +91,23 @@ export namespace LockOpenNotificationChannelListTableRecordSourceDefinition {
     //         return listCreateResult.createOuter(errorCode);
     //     } else {
     //         const list = listCreateResult.value;
-    //         const definition = new ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition(customHeadingsService, tableFieldSourceDefinitionCachingFactoryService, list);
+    //         const definition = new ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition(customHeadingsService, tableFieldSourceDefinitionCachingFactory, list);
     //         return new Ok(definition);
     //     }
     // }
 
     export function create(
-        customHeadingsService: RevSourcedFieldCustomHeadingsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        customHeadingsService: RevSourcedFieldCustomHeadings | undefined,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
     ) {
         return new LockOpenNotificationChannelListTableRecordSourceDefinition(
             customHeadingsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            tableFieldSourceDefinitionCachingFactory,
         );
     }
 
     export function createLayoutDefinition(
-        fieldSourceDefinitionRegistryService: TableFieldSourceDefinitionCachingFactoryService,
+        fieldSourceDefinitionRegistryService: TableFieldSourceDefinitionCachingFactory,
         fieldIds: FieldId[],
     ): RevColumnLayoutDefinition {
         return fieldSourceDefinitionRegistryService.createLayoutDefinition(fieldIds);

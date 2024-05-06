@@ -9,10 +9,10 @@ import {
     BadnessListTableRecordSourceDefinition,
     PickEnum,
     TableFieldSourceDefinition,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableRecordSourceDefinition
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
+import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import { ScanFieldEditorFrame } from '../field/internal-api';
 import { ScanFieldEditorFrameTableFieldSourceDefinition } from './scan-field-editor-frame-table-field-source-definition';
 
@@ -20,13 +20,13 @@ export class ScanFieldEditorFrameComparableListTableRecordSourceDefinition exten
     declare list: BadnessComparableList<ScanFieldEditorFrame>;
 
     constructor(
-        customHeadingsService: RevSourcedFieldCustomHeadingsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        customHeadingsService: RevSourcedFieldCustomHeadings | undefined,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         list: BadnessComparableList<ScanFieldEditorFrame>,
     ) {
         super(
             customHeadingsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            tableFieldSourceDefinitionCachingFactory,
             TableRecordSourceDefinition.TypeId.ScanFieldEditorFrame,
             ScanFieldEditorFrameComparableListTableRecordSourceDefinition.allowedFieldSourceDefinitionTypeIds,
             list,
@@ -34,7 +34,7 @@ export class ScanFieldEditorFrameComparableListTableRecordSourceDefinition exten
     }
 
     override createDefaultLayoutDefinition(): RevColumnLayoutDefinition {
-        const scanFieldEditorFrameFieldSourceDefinition = ScanFieldEditorFrameTableFieldSourceDefinition.get(this.tableFieldSourceDefinitionCachingFactoryService);
+        const scanFieldEditorFrameFieldSourceDefinition = ScanFieldEditorFrameTableFieldSourceDefinition.get(this.tableFieldSourceDefinitionCachingFactory);
 
         const fieldNames = new Array<string>();
 
@@ -88,7 +88,7 @@ export namespace ScanFieldEditorFrameComparableListTableRecordSourceDefinition {
 
     // export function tryCreateDefinition(
     //     customHeadingsService: RevSourcedFieldCustomHeadingsService,
-    //     tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+    //     tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
     //     element: JsonElement,
     // ): Result<ScanFieldEditorFrameComparableListTableRecordSourceDefinition> {
     //     const listCreateResult = tryCreateListFromElement(element);
@@ -97,25 +97,25 @@ export namespace ScanFieldEditorFrameComparableListTableRecordSourceDefinition {
     //         return listCreateResult.createOuter(errorCode);
     //     } else {
     //         const list = listCreateResult.value;
-    //         const definition = new ScanFieldEditorFrameComparableListTableRecordSourceDefinition(customHeadingsService, tableFieldSourceDefinitionCachingFactoryService, list);
+    //         const definition = new ScanFieldEditorFrameComparableListTableRecordSourceDefinition(customHeadingsService, tableFieldSourceDefinitionCachingFactory, list);
     //         return new Ok(definition);
     //     }
     // }
 
     export function create(
-        customHeadingsService: RevSourcedFieldCustomHeadingsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        customHeadingsService: RevSourcedFieldCustomHeadings | undefined,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         list: BadnessComparableList<ScanFieldEditorFrame>,
     ) {
         return new ScanFieldEditorFrameComparableListTableRecordSourceDefinition(
             customHeadingsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            tableFieldSourceDefinitionCachingFactory,
             list,
         );
     }
 
     export function createLayoutDefinition(
-        fieldSourceDefinitionRegistryService: TableFieldSourceDefinitionCachingFactoryService,
+        fieldSourceDefinitionRegistryService: TableFieldSourceDefinitionCachingFactory,
         fieldIds: FieldId[],
     ): RevColumnLayoutDefinition {
         return fieldSourceDefinitionRegistryService.createLayoutDefinition(fieldIds);

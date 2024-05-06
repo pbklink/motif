@@ -82,8 +82,8 @@ export class OrderAuthoriseFrame extends DelayedBadnessGridSourceFrame {
 
     createDefaultLayoutGridSourceOrReferenceDefinition(brokerageAccountGroup: BrokerageAccountGroup) {
         const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createOrder(brokerageAccountGroup);
-        const gridSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
-        return new DataSourceOrReferenceDefinition(gridSourceDefinition);
+        const dataSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
+        return new DataSourceOrReferenceDefinition(dataSourceDefinition);
     }
 
     protected override getDefaultGridSourceOrReferenceDefinition() {

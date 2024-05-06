@@ -5,17 +5,17 @@
  */
 
 import { Injectable } from '@angular/core';
-import { RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
+import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import { CoreNgService } from './core-ng.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class GridFieldCustomHeadingsNgService {
-    private _service: RevSourcedFieldCustomHeadingsService;
+    private _service: RevSourcedFieldCustomHeadings;
 
     constructor(coreNgService: CoreNgService) {
-        this._service = coreNgService.gridFieldCustomHeadingsService;
+        this._service = coreNgService.customHeadingsService;
     }
 
     get service() { return this._service; }

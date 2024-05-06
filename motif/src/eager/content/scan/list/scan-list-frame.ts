@@ -99,8 +99,8 @@ export class ScanListFrame extends DelayedBadnessGridSourceFrame {
 
     private createDefaultLayoutGridSourceOrReferenceDefinition() {
         const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createScan();
-        const gridSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
-        return new DataSourceOrReferenceDefinition(gridSourceDefinition);
+        const dataSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
+        return new DataSourceOrReferenceDefinition(dataSourceDefinition);
     }
 
     private filterItems(scan: Scan) {

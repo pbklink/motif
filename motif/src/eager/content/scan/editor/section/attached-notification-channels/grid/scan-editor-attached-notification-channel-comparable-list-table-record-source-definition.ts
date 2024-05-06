@@ -10,23 +10,23 @@ import {
     LockerScanAttachedNotificationChannelList,
     PickEnum,
     TableFieldSourceDefinition,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableRecordSourceDefinition
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
+import { RevColumnLayoutDefinition, RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import { LockerScanAttachedNotificationChannelTableFieldSourceDefinition } from './locker-scan-attached-notification-channel-table-field-source-definition';
 
 export class ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition extends BadnessListTableRecordSourceDefinition<LockerScanAttachedNotificationChannel> {
     declare list: LockerScanAttachedNotificationChannelList;
 
     constructor(
-        customHeadingsService: RevSourcedFieldCustomHeadingsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        customHeadingsService: RevSourcedFieldCustomHeadings | undefined,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         list: LockerScanAttachedNotificationChannelList,
     ) {
         super(
             customHeadingsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            tableFieldSourceDefinitionCachingFactory,
             TableRecordSourceDefinition.TypeId.ScanEditorAttachedNotificationChannel,
             ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition.allowedFieldSourceDefinitionTypeIds,
             list,
@@ -34,7 +34,7 @@ export class ScanEditorAttachedNotificationChannelComparableListTableRecordSourc
     }
 
     override createDefaultLayoutDefinition(): RevColumnLayoutDefinition {
-        const notificationChannelTableFieldSourceDefinition = LockerScanAttachedNotificationChannelTableFieldSourceDefinition.get(this.tableFieldSourceDefinitionCachingFactoryService);
+        const notificationChannelTableFieldSourceDefinition = LockerScanAttachedNotificationChannelTableFieldSourceDefinition.get(this.tableFieldSourceDefinitionCachingFactory);
 
         const fieldNames = new Array<string>();
 
@@ -88,7 +88,7 @@ export namespace ScanEditorAttachedNotificationChannelComparableListTableRecordS
 
     // export function tryCreateDefinition(
     //     customHeadingsService: RevSourcedFieldCustomHeadingsService,
-    //     tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+    //     tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
     //     element: JsonElement,
     // ): Result<ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition> {
     //     const listCreateResult = tryCreateListFromElement(element);
@@ -97,25 +97,25 @@ export namespace ScanEditorAttachedNotificationChannelComparableListTableRecordS
     //         return listCreateResult.createOuter(errorCode);
     //     } else {
     //         const list = listCreateResult.value;
-    //         const definition = new ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition(customHeadingsService, tableFieldSourceDefinitionCachingFactoryService, list);
+    //         const definition = new ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition(customHeadingsService, tableFieldSourceDefinitionCachingFactory, list);
     //         return new Ok(definition);
     //     }
     // }
 
     export function create(
-        customHeadingsService: RevSourcedFieldCustomHeadingsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        customHeadingsService: RevSourcedFieldCustomHeadings | undefined,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         list: LockerScanAttachedNotificationChannelList,
     ) {
         return new ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition(
             customHeadingsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            tableFieldSourceDefinitionCachingFactory,
             list,
         );
     }
 
     export function createLayoutDefinition(
-        fieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        fieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactory,
         fieldIds: FieldId[],
     ): RevColumnLayoutDefinition {
         return fieldSourceDefinitionCachingFactoryService.createLayoutDefinition(fieldIds);

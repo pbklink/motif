@@ -18,7 +18,7 @@ import {
     StringUiAction,
     Strings,
     TableFieldSourceDefinition,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     UiComparableList
 } from '@motifmarkets/motif-core';
 import { RevColumnLayoutOrReferenceDefinition } from '@xilytix/revgrid';
@@ -47,7 +47,7 @@ export abstract class LitIvemIdListEditorNgDirective extends ContentComponentBas
 
     readonly list: UiComparableList<LitIvemId>;
 
-    private readonly _fieldSourceDefinitionRegistryService: TableFieldSourceDefinitionCachingFactoryService;
+    private readonly _fieldSourceDefinitionRegistryService: TableFieldSourceDefinitionCachingFactory;
 
     private readonly _addLitIvemIdUiAction: LitIvemIdUiAction;
     private readonly _selectAllUiAction: IconButtonUiAction;

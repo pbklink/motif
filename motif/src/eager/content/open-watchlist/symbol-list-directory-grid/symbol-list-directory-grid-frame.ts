@@ -16,20 +16,19 @@ import {
     LockOpenListItem,
     RankedLitIvemIdListDirectory,
     RankedLitIvemIdListDirectoryItemTableRecordSource,
-    RankedLitIvemIdListDirectoryItemTableRecordSourceDefinition,
     ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
     ScansService,
     SettingsService,
     StringId,
     Strings,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableRecordSourceFactory,
     TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
     TextTextFormattableValueCellPainter
 } from '@motifmarkets/motif-core';
-import { RevColumnLayoutOrReferenceDefinition, RevSourcedFieldCustomHeadingsService, RevViewCell } from '@xilytix/revgrid';
+import { RevColumnLayoutOrReferenceDefinition, RevViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../../table-record-source-definition-factory-service';
@@ -45,9 +44,8 @@ export class SymbolListDirectoryGridFrame extends GridSourceFrame {
     constructor(
         settingsService: SettingsService,
         private readonly _scansService: ScansService,
-        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         referenceableColumnLayoutsService: ReferenceableColumnLayoutsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,
         tableRecordSourceFactory: TableRecordSourceFactory,
         referenceableGridSourcesService: ReferenceableDataSourcesService,
@@ -57,9 +55,8 @@ export class SymbolListDirectoryGridFrame extends GridSourceFrame {
     ) {
         super(
             settingsService,
-            gridFieldCustomHeadingsService,
             referenceableColumnLayoutsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            tableFieldSourceDefinitionCachingFactory,
             tableRecordSourceDefinitionFactoryService,
             tableRecordSourceFactory,
             referenceableGridSourcesService,
@@ -145,13 +142,9 @@ export class SymbolListDirectoryGridFrame extends GridSourceFrame {
             list: this._scansService.scanList,
         }
         const listDirectory = new RankedLitIvemIdListDirectory([namedSourceList], this._frameOpener);
-        const tableRecordSourceDefinition = new RankedLitIvemIdListDirectoryItemTableRecordSourceDefinition(
-            this.gridFieldCustomHeadingsService,
-            this.tableFieldSourceDefinitionCachingFactoryService,
-            listDirectory
-        );
-        const gridSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, layoutDefinition, undefined);
-        return new DataSourceOrReferenceDefinition(gridSourceDefinition);
+        const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createRankedLitIvemIdListDirectoryItem(listDirectory);
+        const dataSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, layoutDefinition, undefined);
+        return new DataSourceOrReferenceDefinition(dataSourceDefinition);
     }
 
     private customiseSettingsForNewGridColumn(_columnSettings: AdaptedRevgridBehavioredColumnSettings) {

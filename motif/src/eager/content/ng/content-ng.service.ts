@@ -44,7 +44,6 @@ export class ContentNgService {
             coreNgService.notificationChannelsService,
             coreNgService.scansService,
             coreNgService.textFormatterService,
-            coreNgService.gridFieldCustomHeadingsService,
             coreNgService.referenceableColumnLayoutsService,
             coreNgService.tableFieldSourceDefinitionCachingFactoryService,
             tableRecordSourceDefinitionFactoryNgService.service,

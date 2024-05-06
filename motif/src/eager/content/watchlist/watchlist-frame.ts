@@ -88,12 +88,12 @@ export class WatchlistFrame extends DelayedBadnessGridSourceFrame {
         const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createRankedLitIvemIdList(
             listDefinition
         );
-        const gridSourceDefinition = new DataSourceDefinition(
+        const dataSourceDefinition = new DataSourceDefinition(
             tableRecordSourceDefinition,
             columnLayoutOrReferenceDefinition,
             rowOrderDefinition,
         );
-        return new DataSourceOrReferenceDefinition(gridSourceDefinition);
+        return new DataSourceOrReferenceDefinition(dataSourceDefinition);
     }
 
     async saveGridSourceAs(as: RevDataSourceOrReferenceDefinition.SaveAsDefinition): Promise<void> {

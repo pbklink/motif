@@ -10,12 +10,12 @@ import {
     CorrectnessBadness,
     Integer,
     TableFieldSourceDefinition,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableRecord,
     TextFormatterService,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
-import { RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
+import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import { ScanFieldEditorFrame } from '../field/scan-field-editor-frame';
 import { ScanFieldEditorFrameComparableListTableRecordSourceDefinition } from './scan-field-editor-frame-comparable-list-table-record-source-definition';
 import { ScanFieldEditorFrameTableRecordDefinition } from './scan-field-editor-frame-table-record-definition';
@@ -27,15 +27,15 @@ export class ScanFieldEditorFrameComparableListTableRecordSource extends Badness
 
     constructor(
         textFormatterService: TextFormatterService,
-        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        customHeadingsService: RevSourcedFieldCustomHeadings,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         correctnessBadness: CorrectnessBadness,
         definition: ScanFieldEditorFrameComparableListTableRecordSourceDefinition,
     ) {
         super(
             textFormatterService,
-            gridFieldCustomHeadingsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            customHeadingsService,
+            tableFieldSourceDefinitionCachingFactory,
             correctnessBadness,
             definition,
             definition.allowedFieldSourceDefinitionTypeIds,
@@ -46,8 +46,8 @@ export class ScanFieldEditorFrameComparableListTableRecordSource extends Badness
 
     override createDefinition(): ScanFieldEditorFrameComparableListTableRecordSourceDefinition {
         return ScanFieldEditorFrameComparableListTableRecordSourceDefinition.create(
-            this._gridFieldCustomHeadingsService,
-            this._tableFieldSourceDefinitionCachingFactoryService,
+            this.customHeadings,
+            this.tableFieldSourceDefinitionCachingFactory,
             this.list.clone()
         )
     }

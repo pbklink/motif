@@ -19,7 +19,7 @@ import {
     StringTableValue,
     TableField,
     TableFieldSourceDefinition,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableValue,
     ValidTableValue
 } from '@motifmarkets/motif-core';
@@ -179,7 +179,7 @@ export namespace ScanFieldEditorFrameTableFieldSourceDefinition {
         id: ScanFieldEditorFrame.FieldId;
     }
 
-    export function get(cachingFactoryService: TableFieldSourceDefinitionCachingFactoryService): ScanFieldEditorFrameTableFieldSourceDefinition {
+    export function get(cachingFactoryService: TableFieldSourceDefinitionCachingFactory): ScanFieldEditorFrameTableFieldSourceDefinition {
         return cachingFactoryService.get(typeId) as ScanFieldEditorFrameTableFieldSourceDefinition;
     }
 }

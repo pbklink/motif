@@ -11,12 +11,12 @@ import {
     LockerScanAttachedNotificationChannel,
     LockerScanAttachedNotificationChannelList,
     TableFieldSourceDefinition,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableRecord,
     TextFormatterService,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
-import { RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
+import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 import { LockerScanAttachedNotificationChannelTableRecordDefinition } from './locker-scan-attached-notification-channel-table-record-definition';
 import { LockerScanAttachedNotificationChannelTableValueSource } from './locker-scan-attached-notification-channel-table-value-source';
 import { ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition } from './scan-editor-attached-notification-channel-comparable-list-table-record-source-definition';
@@ -27,15 +27,15 @@ export class ScanEditorAttachedNotificationChannelComparableListTableRecordSourc
 
     constructor(
         textFormatterService: TextFormatterService,
-        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        customHeadingsService: RevSourcedFieldCustomHeadings,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         correctnessBadness: CorrectnessBadness,
         definition: ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition,
     ) {
         super(
             textFormatterService,
-            gridFieldCustomHeadingsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            customHeadingsService,
+            tableFieldSourceDefinitionCachingFactory,
             correctnessBadness,
             definition,
             definition.allowedFieldSourceDefinitionTypeIds,
@@ -46,8 +46,8 @@ export class ScanEditorAttachedNotificationChannelComparableListTableRecordSourc
 
     override createDefinition(): ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition {
         return ScanEditorAttachedNotificationChannelComparableListTableRecordSourceDefinition.create(
-            this._gridFieldCustomHeadingsService,
-            this._tableFieldSourceDefinitionCachingFactoryService,
+            this.customHeadings,
+            this.tableFieldSourceDefinitionCachingFactory,
             this.list.clone()
         )
     }

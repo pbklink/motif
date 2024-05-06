@@ -21,7 +21,7 @@ import {
     ReferenceableColumnLayoutsService,
     ReferenceableDataSourcesService,
     SettingsService,
-    TableFieldSourceDefinitionCachingFactoryService,
+    TableFieldSourceDefinitionCachingFactory,
     TableRecordSourceFactory,
     TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
@@ -29,7 +29,7 @@ import {
     UsableListChangeTypeId,
     delay1Tick
 } from '@motifmarkets/motif-core';
-import { RevRecord, RevSourcedFieldCustomHeadingsService, RevViewCell } from '@xilytix/revgrid';
+import { RevRecord, RevViewCell } from '@xilytix/revgrid';
 import { ToastService } from 'component-services-internal-api';
 import { GridSourceFrame } from '../../../grid-source/internal-api';
 import { TableRecordSourceDefinitionFactoryService } from '../../../table-record-source-definition-factory-service';
@@ -46,9 +46,8 @@ export class ColumnLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
 
     constructor(
         settingsService: SettingsService,
-        gridFieldCustomHeadingsService: RevSourcedFieldCustomHeadingsService,
         namedColumnLayoutsService: ReferenceableColumnLayoutsService,
-        tableFieldSourceDefinitionCachingFactoryService: TableFieldSourceDefinitionCachingFactoryService,
+        tableFieldSourceDefinitionCachingFactory: TableFieldSourceDefinitionCachingFactory,
         tableRecordSourceDefinitionFactoryService: TableRecordSourceDefinitionFactoryService,
         tableRecordSourceFactory: TableRecordSourceFactory,
         namedGridSourcesService: ReferenceableDataSourcesService,
@@ -59,9 +58,8 @@ export class ColumnLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
     ) {
         super(
             settingsService,
-            gridFieldCustomHeadingsService,
             namedColumnLayoutsService,
-            tableFieldSourceDefinitionCachingFactoryService,
+            tableFieldSourceDefinitionCachingFactory,
             tableRecordSourceDefinitionFactoryService,
             tableRecordSourceFactory,
             namedGridSourcesService,
@@ -176,8 +174,8 @@ export class ColumnLayoutEditorAllowedFieldsFrame extends GridSourceFrame {
 
     private createDefaultLayoutGridSourceOrReferenceDefinition() {
         const tableRecordSourceDefinition = this.tableRecordSourceDefinitionFactoryService.createGridField(this._allowedFields.slice());
-        const gridSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
-        return new DataSourceOrReferenceDefinition(gridSourceDefinition);
+        const dataSourceDefinition = new DataSourceDefinition(tableRecordSourceDefinition, undefined, undefined);
+        return new DataSourceOrReferenceDefinition(dataSourceDefinition);
     }
 
     private handleGridSelectionChangedEventer() {

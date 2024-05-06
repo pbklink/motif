@@ -20,12 +20,12 @@ import {
     ReferenceableDataSourcesService,
     ScansService,
     SettingsService,
+    StandardTableFieldSourceDefinitionCachingFactoryService,
     SymbolDetailCacheService,
     SymbolsService,
-    TableFieldSourceDefinitionCachingFactoryService,
     TextFormatterService
 } from '@motifmarkets/motif-core';
-import { RevSourcedFieldCustomHeadingsService } from '@xilytix/revgrid';
+import { RevSourcedFieldCustomHeadings } from '@xilytix/revgrid';
 
 @Injectable({
     providedIn: 'root'
@@ -51,8 +51,8 @@ export class CoreNgService implements OnDestroy {
     get scansService(): ScansService { return this._service.scansService; }
 
     get textFormatterService(): TextFormatterService { return this._service.textFormatterService; }
-    get gridFieldCustomHeadingsService(): RevSourcedFieldCustomHeadingsService { return this._service.gridFieldCustomHeadingsService; }
-    get tableFieldSourceDefinitionCachingFactoryService(): TableFieldSourceDefinitionCachingFactoryService {
+    get customHeadingsService(): RevSourcedFieldCustomHeadings { return this._service.customHeadingsService; }
+    get tableFieldSourceDefinitionCachingFactoryService(): StandardTableFieldSourceDefinitionCachingFactoryService {
         return this._service.tableFieldSourceDefinitionCachingFactoryService;
     }
     get referenceableColumnLayoutsService(): ReferenceableColumnLayoutsService { return this._service.referenceableColumnLayoutsService; }
