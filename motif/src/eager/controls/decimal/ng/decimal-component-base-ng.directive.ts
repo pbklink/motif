@@ -5,7 +5,7 @@
  */
 
 import { Directive } from '@angular/core';
-import { Decimal, DecimalUiAction, MultiEvent, UiAction } from '@motifmarkets/motif-core';
+import { DecimalUiAction, MultiEvent, SysDecimal, UiAction } from '@motifmarkets/motif-core';
 import { ControlComponentBaseNgDirective } from '../../ng/control-component-base-ng.directive';
 
 @Directive()
@@ -18,7 +18,7 @@ export abstract class DecimalComponentBaseNgDirective extends ControlComponentBa
 
     public override get uiAction() { return super.uiAction as DecimalUiAction; }
 
-    protected applyValue(_value: Decimal | undefined, _edited: boolean) {
+    protected applyValue(_value: SysDecimal | undefined, _edited: boolean) {
         this.markForCheck();
     }
 
@@ -34,7 +34,7 @@ export abstract class DecimalComponentBaseNgDirective extends ControlComponentBa
         super.pushSettings();
     }
 
-    protected commitValue(value: Decimal | undefined, typeId: UiAction.CommitTypeId) {
+    protected commitValue(value: SysDecimal | undefined, typeId: UiAction.CommitTypeId) {
         this.uiAction.commitValue(value, typeId);
     }
 
@@ -56,7 +56,7 @@ export abstract class DecimalComponentBaseNgDirective extends ControlComponentBa
         super.finalise();
     }
 
-    private handleValuePushEvent(value: Decimal | undefined, edited: boolean) {
+    private handleValuePushEvent(value: SysDecimal | undefined, edited: boolean) {
         this.applyValue(value, edited);
     }
 

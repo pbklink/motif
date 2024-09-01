@@ -10,7 +10,6 @@ import {
     CellPainterFactoryService,
     ColumnLayoutDefinition,
     DataItem,
-    Decimal,
     DepthDataItem,
     DepthLevelsDataItem,
     DepthRecord,
@@ -29,6 +28,7 @@ import {
     ShortDepthSideGridField,
     ShortDepthSideGridRecordStore,
     SourcedFieldGrid,
+    SysDecimal,
     TextFormattableValueRecordGridCellPainter,
     TextHeaderCellPainter,
     TextTextFormattableValueCellPainter,
@@ -178,7 +178,7 @@ export class DepthSideFrame extends ContentFrame {
     //     return this._grid.getRenderedActiveWidth();
     // }
 
-    setAuctionQuantity(value: Decimal | undefined) {
+    setAuctionQuantity(value: SysDecimal | undefined) {
         if (this._activeStore !== undefined) {
             this._activeStore.setAuctionQuantity(value);
         }

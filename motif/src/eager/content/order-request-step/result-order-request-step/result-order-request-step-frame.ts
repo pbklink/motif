@@ -8,7 +8,6 @@ import {
     AdiService,
     AssertInternalError,
     Badness,
-    Decimal,
     EnumInfoOutOfOrderError,
     Integer,
     MultiEvent,
@@ -24,6 +23,7 @@ import {
     OrdersDataMessage,
     StringId,
     Strings,
+    SysDecimal,
     UnreachableCaseError
 } from '@motifmarkets/motif-core';
 import { OrderRequestStepFrame } from '../order-request-step-frame';
@@ -39,9 +39,9 @@ export class ResultOrderRequestStepFrame extends OrderRequestStepFrame {
     private _incubationError: string | undefined;
     private _order: OrdersDataMessage.AddUpdateChange | undefined;
     private _errors: OrderRequestError[] | undefined;
-    private _estimatedBrokerage: Decimal | undefined;
-    private _estimatedTax: Decimal | undefined;
-    private _estimatedValue: Decimal | undefined;
+    private _estimatedBrokerage: SysDecimal | undefined;
+    private _estimatedTax: SysDecimal | undefined;
+    private _estimatedValue: SysDecimal | undefined;
 
     private _dataItemBadnessChangeSubscriptionId: MultiEvent.SubscriptionId;
     private _dataItemCorrectnessChangeSubscriptionId: MultiEvent.SubscriptionId;

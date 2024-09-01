@@ -30,7 +30,7 @@ import {
     uniqueElementArraysOverlap
 } from '@motifmarkets/motif-core';
 import { RevServerNotificationId } from '@xilytix/revgrid';
-import { Decimal, logger } from '@xilytix/sysutils';
+import { SysDecimal, logger } from '@xilytix/sysutils';
 import { ContentFrame } from '../content-frame';
 import { DepthSideFrame } from '../depth-side/depth-side-frame';
 
@@ -518,7 +518,7 @@ export class DepthFrame extends ContentFrame {
         this._askDepthSideFrame.deactivateFilter();
     }
 
-    private processAuctionQuantityChanged(newValue: Decimal | undefined) {
+    private processAuctionQuantityChanged(newValue: SysDecimal | undefined) {
         this._bidDepthSideFrame.setAuctionQuantity(newValue);
         this._askDepthSideFrame.setAuctionQuantity(newValue);
     }

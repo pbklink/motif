@@ -7,12 +7,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {
     AssertInternalError,
-    Decimal,
     DecimalUiAction,
     Integer,
     IntlNumberFormatCharParts,
     StringId,
     Strings,
+    SysDecimal,
     UiAction,
     UnreachableCaseError,
     calculateIntlNumberFormatCharParts,
@@ -89,7 +89,7 @@ export class DecimalInputNgComponent extends DecimalComponentBaseNgDirective imp
         this.uiAction.cancelEdit();
     }
 
-    protected override applyValue(value: Decimal | undefined, edited: boolean) {
+    protected override applyValue(value: SysDecimal | undefined, edited: boolean) {
         if (!edited) {
             super.applyValue(value, edited);
 
@@ -192,7 +192,7 @@ export class DecimalInputNgComponent extends DecimalComponentBaseNgDirective imp
     private input(text: string) {
         let valid: boolean;
         let missing: boolean;
-        let value: Decimal | undefined;
+        let value: SysDecimal | undefined;
         let errorText: string | undefined;
         if (text !== DecimalInputNgComponent.emptyNumberStr) {
             const parseResult = this.parseString(text);
@@ -237,7 +237,7 @@ export namespace DecimalInputNgComponent {
     export const emptyNumberStr = '';
 
     export interface ParseStringResult {
-        parsedDecimal?: Decimal | undefined;
+        parsedDecimal?: SysDecimal | undefined;
         errorText?: string;
     }
 }

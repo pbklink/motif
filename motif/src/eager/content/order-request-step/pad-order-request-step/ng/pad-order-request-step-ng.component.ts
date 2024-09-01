@@ -13,7 +13,6 @@ import {
     BrokerageAccountId,
     ColorScheme,
     DateUiAction,
-    Decimal,
     DecimalUiAction,
     Integer,
     IntegerExplicitElementsEnumUiAction,
@@ -40,6 +39,7 @@ import {
     StringId,
     StringUiAction,
     Strings,
+    SysDecimal,
     TimeInForce,
     TimeInForceId, UiAction,
     UnreachableCaseError,
@@ -312,7 +312,7 @@ export class PadOrderRequestStepNgComponent extends OrderRequestStepComponentNgD
         }
     }
 
-    pushTriggerValue(uiActionStateId: UiAction.StateId, title: string | undefined, triggerValue: Decimal | undefined) {
+    pushTriggerValue(uiActionStateId: UiAction.StateId, title: string | undefined, triggerValue: SysDecimal | undefined) {
         this._triggerValueUiAction.pushValue(triggerValue);
         this._triggerValueUiAction.pushState(uiActionStateId, title);
     }
@@ -334,7 +334,7 @@ export class PadOrderRequestStepNgComponent extends OrderRequestStepComponentNgD
         this._orderTypeUiAction.pushState(uiActionStateId, title);
     }
 
-    pushLimitValue(uiActionStateId: UiAction.StateId, title: string | undefined, limitValue: Decimal | undefined) {
+    pushLimitValue(uiActionStateId: UiAction.StateId, title: string | undefined, limitValue: SysDecimal | undefined) {
         this._limitValueUiAction.pushValue(limitValue);
         this._limitValueUiAction.pushState(uiActionStateId, title);
     }

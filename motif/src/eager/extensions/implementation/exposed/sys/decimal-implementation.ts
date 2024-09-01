@@ -4,11 +4,11 @@
  * License: motionite.trade/license/motif
  */
 
-import { Decimal } from '@motifmarkets/motif-core';
+import { SysDecimal } from '@motifmarkets/motif-core';
 import { Decimal as DecimalApi } from '../../../api/extension-api';
 
 export class DecimalImplementation implements DecimalApi {
-    constructor(private readonly _actual: Decimal) { }
+    constructor(private readonly _actual: SysDecimal) { }
 
     get actual() { return this._actual; }
 
@@ -529,7 +529,7 @@ export class DecimalImplementation implements DecimalApi {
      *
      * The maximum error is 1 ulp (unit in last place).
      *
-     * @param y {number|string|Decimal} The power to which to raise this Decimal.
+     * @param y {number|string|SysDecimal} The power to which to raise this Decimal.
      *
      */
     toPower(y: DecimalApi.Numeric) {
@@ -546,7 +546,7 @@ export class DecimalImplementation implements DecimalApi {
      *
      * The maximum error is 1 ulp (unit in last place).
      *
-     * @param y {number|string|Decimal} The power to which to raise this Decimal.
+     * @param y {number|string|SysDecimal} The power to which to raise this Decimal.
      *
      */
     pow(y: DecimalApi.Numeric) {
@@ -640,7 +640,7 @@ export class DecimalImplementation implements DecimalApi {
 }
 
 export namespace DecimalImplementation {
-    export function toApi(value: Decimal) {
+    export function toApi(value: SysDecimal) {
         return new DecimalImplementation(value);
     }
 

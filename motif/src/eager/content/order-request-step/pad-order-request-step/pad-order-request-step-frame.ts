@@ -8,7 +8,6 @@ import {
     Account,
     BrokerageAccountGroup,
     BrokerageAccountId,
-    Decimal,
     Integer,
     LitIvemId,
     MovementId,
@@ -25,6 +24,7 @@ import {
     StringId,
     Strings,
     SymbolsService,
+    SysDecimal,
     TimeInForceId,
     UiAction,
     UnreachableCaseError
@@ -99,9 +99,9 @@ export class PadOrderRequestStepFrame extends OrderRequestStepFrame {
     set route(value: OrderRoute) { this._orderPad.route = value; }
     set totalQuantity(value: Integer | undefined) { this._orderPad.totalQuantity = value; }
     set orderTypeId(value: OrderTypeId | undefined) { this._orderPad.orderTypeId = value; }
-    set limitValue(value: Decimal | undefined) { this._orderPad.limitValue = value; }
+    set limitValue(value: SysDecimal | undefined) { this._orderPad.limitValue = value; }
     set triggerTypeId(value: OrderTriggerTypeId | undefined) { this._orderPad.triggerTypeId = value; }
-    set triggerValue(value: Decimal | undefined) { this._orderPad.triggerValue = value; }
+    set triggerValue(value: SysDecimal | undefined) { this._orderPad.triggerValue = value; }
     set triggerField(value: PriceOrderTrigger.FieldId | undefined) { this._orderPad.triggerFieldId = value; }
     set triggerMovement(value: MovementId | undefined) { this._orderPad.triggerMovementId = value; }
     set timeInForceId(value: TimeInForceId | undefined) { this._orderPad.timeInForceId = value; }
@@ -446,14 +446,14 @@ export namespace PadOrderRequestStepFrame {
         pushTotalQuantity(uiActionStateId: UiAction.StateId, title: string | undefined, quantity: Integer | undefined): void;
         pushTriggerType(uiActionStateId: UiAction.StateId, title: string | undefined, triggerTypeId: OrderTriggerTypeId | undefined,
             allowedTriggerTypeIds: readonly OrderTriggerTypeId[]): void;
-        pushTriggerValue(uiActionStateId: UiAction.StateId, title: string | undefined, triggerValue: Decimal | undefined): void;
+        pushTriggerValue(uiActionStateId: UiAction.StateId, title: string | undefined, triggerValue: SysDecimal | undefined): void;
         pushTriggerField(uiActionStateId: UiAction.StateId, title: string | undefined,
             triggerFieldId: PriceOrderTrigger.FieldId | undefined): void;
         pushTriggerMovement(uiActionStateId: UiAction.StateId, title: string | undefined,
             triggerMovementId: MovementId | undefined): void;
         pushOrderType(uiActionStateId: UiAction.StateId, title: string | undefined, orderTypeId: OrderTypeId | undefined,
             allowedOrderTypeIds: readonly OrderTypeId[]): void;
-        pushLimitValue(uiActionStateId: UiAction.StateId, title: string | undefined, limitValue: Decimal | undefined): void;
+        pushLimitValue(uiActionStateId: UiAction.StateId, title: string | undefined, limitValue: SysDecimal | undefined): void;
         pushLimitUnit(uiActionStateId: UiAction.StateId, title: string | undefined, limitUnitId: OrderPad.PriceUnitId | undefined): void;
         pushTimeInForce(uiActionStateId: UiAction.StateId, title: string | undefined, timeInForceId: TimeInForceId | undefined,
             allowedTimeInForceIds: readonly TimeInForceId[]): void;
